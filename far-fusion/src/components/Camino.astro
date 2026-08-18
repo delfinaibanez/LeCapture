@@ -1,0 +1,124 @@
+---
+import { Image } from 'astro:assets';
+import embarazo from '../assets/images/home/camino/01-embarazo.jpg';
+import recienNacido from '../assets/images/home/camino/02-recien-nacido.jpg';
+import miniBaby from '../assets/images/home/camino/03-mini-baby.jpg';
+import primerAnito from '../assets/images/home/camino/04-primer-anito.jpg';
+import infantiles from '../assets/images/home/camino/05-infantiles.jpg';
+
+const etapas = [
+  { nombre: 'Embarazo', img: embarazo, href: '/sesiones/embarazo' },
+  { nombre: 'Recién Nacido', img: recienNacido, href: '/sesiones/recien-nacidos' },
+  { nombre: 'Mini Baby', img: miniBaby, href: '/sesiones/mini-baby' },
+  { nombre: 'Primer Añito', img: primerAnito, href: '/sesiones/primer-anito' },
+  { nombre: 'Infantiles', img: infantiles, href: '/sesiones/infantiles' },
+];
+---
+
+<section class="w-full py-16 md:py-24 px-6 bg-sand/30">
+  <p class="text-forest text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
+    Sesiones
+  </p>
+  <h2 class="text-2xl md:text-4xl font-semibold text-center text-choco mb-4">
+    Un camino, una historia
+  </h2>
+  <p class="text-choco/70 text-center max-w-lg mx-auto mb-12 md:mb-16">
+    Acompañamos cada etapa, desde la panza hasta los primeros pasos.
+  </p>
+
+  <!-- MOBILE: carrusel horizontal con flechas -->
+  <div class="md:hidden relative px-6">
+    <div
+      id="camino-scroll"
+      class="flex gap-6 overflow-x-auto snap-x snap-mandatory py-3 scrollbar-hide"
+    >
+      {etapas.map((etapa, i) => (
+        <a
+          href={etapa.href}
+          class="group flex flex-col items-center text-center snap-center shrink-0 w-28"
+        >
+          <div class="relative w-24 h-24 rounded-full overflow-hidden ring-4 ring-sage-button/60 shadow-md bg-gray-100">
+            <Image
+              src={etapa.img}
+              alt={etapa.nombre}
+              width={256}
+              height={256}
+              format="webp"
+              quality={80}
+              loading="lazy"
+              class="w-full h-full object-cover"
+            />
+            <span class="absolute -top-1 -right-1 bg-gray-900 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+              {i + 1}
+            </span>
+          </div>
+          <span class="mt-3 text-sm font-medium text-choco">
+            {etapa.nombre}
+          </span>
+        </a>
+      ))}
+    </div>
+
+    <!-- Degradados en ambos bordes -->
+    <div class="pointer-events-none absolute top-0 left-0 h-full w-14 bg-gradient-to-r from-sand/60 via-sand/20 to-transparent"></div>
+    <div class="pointer-events-none absolute top-0 right-0 h-full w-14 bg-gradient-to-l from-sand/60 via-sand/20 to-transparent"></div>
+
+    <!-- Flechas sin fondo -->
+    <button
+      id="camino-prev"
+      aria-label="Ver anterior"
+      class="absolute left-0 top-10 text-choco/40 text-3xl leading-none px-1"
+    >
+      ‹
+    </button>
+    <button
+      id="camino-next"
+      aria-label="Ver siguiente"
+      class="absolute right-0 top-10 text-choco/40 text-3xl leading-none px-1"
+    >
+      ›
+    </button>
+  </div>
+
+  <script>
+    const scrollEl = document.getElementById('camino-scroll');
+    const nextBtn = document.getElementById('camino-next');
+    const prevBtn = document.getElementById('camino-prev');
+
+    nextBtn?.addEventListener('click', () => {
+      scrollEl?.scrollBy({ left: 140, behavior: 'smooth' });
+    });
+
+    prevBtn?.addEventListener('click', () => {
+      scrollEl?.scrollBy({ left: -140, behavior: 'smooth' });
+    });
+  </script>
+
+  <!-- DESKTOP: línea horizontal (como ya estaba) -->
+  <div class="hidden md:flex relative items-start justify-between max-w-5xl mx-auto gap-4">
+    <div class="absolute top-16 left-0 h-0.5 w-full bg-gray-200 -z-10"></div>
+
+    {etapas.map((etapa) => (
+      <a
+        href={etapa.href}
+        class="group flex flex-col items-center text-center w-1/5"
+      >
+        <div class="relative w-32 h-32 rounded-full overflow-hidden ring-4 ring-sage-button/60 shadow-md group-hover:scale-105 transition-transform duration-300 bg-gray-100">
+          <Image
+            src={etapa.img}
+            alt={etapa.nombre}
+            width={256}
+            height={256}
+            format="webp"
+            quality={80}
+            loading="lazy"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <span class="mt-4 font-medium text-choco">
+          {etapa.nombre}
+        </span>
+      </a>
+    ))}
+  </div>
+</section>

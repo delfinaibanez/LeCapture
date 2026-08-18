@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+
+const todas = await getCollection('sesionesEspeciales');
+const activa = todas.find((s: (typeof todas)[number]) => s.data.activa);
+---
+
+{activa && (
+  <section class="w-full py-16 md:py-24 px-4 md:px-6 bg-cream">
+    <div class="max-w-4xl mx-auto relative">
+
+      <div class="bg-sand/50 rounded-[2.5rem] shadow-[0_0_0_6px_#fff8ec,0_0_0_9px_rgba(220,204,172,0.7)] overflow-hidden">
+        <div class="flex flex-col md:flex-row items-center">
+
+          <!-- Foto ovalada con etiqueta colgante -->
+          <div class="relative w-full md:w-1/2 p-8 md:p-10 flex justify-center">
+            <div class="relative w-64 h-64 md:w-72 md:h-72 rounded-full overflow-hidden shadow-lg rotate-[-3deg] border-8 border-cream">
+              <Image
+                src={activa.data.imagen}
+                alt={activa.data.titulo}
+                width={500}
+                height={500}
+                format="webp"
+                quality={85}
+                loading="lazy"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <!-- Etiqueta colgante -->
+            <div class="absolute top-4 right-6 md:right-10 bg-cream border border-choco/20 rounded-sm px-3 py-1.5 shadow-md rotate-[8deg] text-xs text-choco font-semibold">
+              🎄 LeCapture
+            </div>
+          </div>
+
+          <!-- Texto -->
+          <div class="w-full md:w-1/2 p-8 md:pr-12 text-center md:text-left">
+            <span class="inline-block bg-forest text-cream text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+              🎄 Sesión especial
+            </span>
+            <h2 class="font-script text-2xl md:text-4xl font-normal text-choco mb-2">
+              {activa.data.titulo}
+            </h2>
+            <p class="text-choco/70 text-base md:text-lg mb-6">
+              {activa.data.subtitulo}
+            </p>
+            <a
+          href={`https://wa.me/549XXXXXXXXXX?text=${encodeURIComponent(activa.data.whatsappTexto)}`}
+          target="_blank"
+          style="color: white;"
+          class="inline-block bg-sage-button text-white px-7 py-3.5 rounded-full font-semibold hover:scale-105 transition-transform duration-300"
+        >
+          Reservar por WhatsApp 🐣
+        </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Estrellitas decorativas sueltas -->
+      <span class="hidden md:block absolute -top-4 left-10 text-3xl rotate-[-15deg]">✨</span>
+      <span class="hidden md:block absolute -bottom-4 right-16 text-3xl rotate-[15deg]">⭐</span>
+
+    </div>
+  </section>
+)}

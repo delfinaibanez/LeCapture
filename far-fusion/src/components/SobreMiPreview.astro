@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import fotoPerfil from '../assets/images/home/sobre-mi.jpg';
+---
+
+<section class="w-full py-16 md:py-24 px-6 bg-sand/40">
+  <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-16">
+
+    <!-- Foto -->
+    <div class="w-56 h-56 md:w-72 md:h-72 rounded-full overflow-hidden shadow-lg shrink-0">
+      <Image
+        src={fotoPerfil}
+        alt="Fotógrafa de LeCapture"
+        width={400}
+        height={400}
+        format="webp"
+        quality={85}
+        loading="lazy"
+        class="w-full h-full object-cover"
+      />
+    </div>
+
+    <!-- Texto -->
+    <div class="text-center md:text-left">
+      <h2 class="font-script text-2xl md:text-4xl font-normal text-choco mb-4">Sobre mí</h2>
+      <p class="text-choco/70 leading-relaxed mb-6 max-w-md">
+        Soy fotógrafa especializada en capturar los momentos más tiernos de la
+        maternidad y la infancia. Cada sesión es única, pensada para que vos y
+        tu familia se sientan cómodos y el resultado sea 100% natural.
+      </p>
+      <a
+      href="/sobre-mi"
+      style="color: white;"
+      class="inline-block bg-sage-button text-white px-7 py-3 rounded-full font-semibold hover:scale-105 transition-transform duration-300"
+    >
+      Conocé más
+    </a>
+    </div>
+
+  </div>
+</section>

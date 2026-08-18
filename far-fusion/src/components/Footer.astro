@@ -1,0 +1,69 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
+
+const instagramUser = 'lecapture.fotografia'; // reemplazá por el usuario real
+const whatsapp = '549XXXXXXXXXX'; // reemplazá por el número real
+const email = 'contacto@lecapture.com'; // reemplazá por el mail real
+
+const paginas = [
+  { href: '/', label: 'Home' },
+  { href: '/sobre-mi', label: 'Sobre mí' },
+  { href: '/sesiones', label: 'Sesiones' },
+  { href: '/contacto', label: 'Contacto' },
+];
+---
+
+<footer class="w-full bg-forest text-cream pt-8 pb-5 px-6 md:px-12">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-6 md:gap-6">
+
+    <!-- Logo + tagline -->
+    <div class="flex flex-col items-center md:items-start gap-2 text-center md:text-left">
+      <Image
+        src={logo}
+        alt="LeCapture Fotografía"
+        inferSize
+        format="webp"
+        quality={90}
+        class="h-9 md:h-11 w-auto"
+      />
+      <p class="text-cream/70 text-sm max-w-[220px]">
+        Fotografía de bebés e infancia, con mucho amor 🤍
+      </p>
+    </div>
+
+    <!-- Navegación + Contacto: agrupados en mobile, separados en desktop -->
+    <div class="flex flex-row gap-12 md:gap-6 md:contents">
+
+      <!-- Navegación -->
+      <div class="flex flex-col items-start gap-2 text-left">
+        <p class="text-cream/50 text-xs uppercase tracking-widest mb-1">Navegación</p>
+        {paginas.map((pagina) => (
+          <a href={pagina.href} class="text-sm hover:text-sand transition-colors">
+            {pagina.label}
+          </a>
+        ))}
+      </div>
+
+      <!-- Contacto -->
+      <div class="flex flex-col items-start gap-2 text-left">
+        <p class="text-cream/50 text-xs uppercase tracking-widest mb-1">Contacto</p>
+        <a href={`https://instagram.com/${instagramUser}`} target="_blank" class="text-sm hover:text-sand transition-colors">
+          Instagram
+        </a>
+        <a href={`https://wa.me/${whatsapp}`} target="_blank" class="text-sm hover:text-sand transition-colors">
+          WhatsApp
+        </a>
+        <a href={`mailto:${email}`} class="text-sm hover:text-sand transition-colors">
+          Email
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <p class="text-center text-cream/50 text-xs mt-8">
+    © {new Date().getFullYear()} LeCapture — Todos los derechos reservados
+  </p>
+</footer>

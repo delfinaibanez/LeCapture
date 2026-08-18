@@ -1,0 +1,154 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import retrato from '../assets/images/sobre-mi/retrato.jpg';
+import detrasCamara1 from '../assets/images/sobre-mi/detras-camara/foto1.jpg';
+import detrasCamara2 from '../assets/images/sobre-mi/detras-camara/foto2.jpg';
+import detrasCamara3 from '../assets/images/sobre-mi/detras-camara/foto3.jpg';
+
+import estudio1 from '../assets/images/sobre-mi/estudio/foto1.jpg';
+import estudio2 from '../assets/images/sobre-mi/estudio/foto2.jpg';
+import estudio3 from '../assets/images/sobre-mi/estudio/foto3.jpg';
+import estudio4 from '../assets/images/sobre-mi/estudio/foto4.jpg';
+import estudio5 from '../assets/images/sobre-mi/estudio/foto5.jpg';
+import CTAFinal from '../components/CTAFinal.astro';
+---
+<Layout title="Sobre mí">
+
+  <!-- INTRO -->
+  <section class="w-full py-16 md:py-24 px-6 bg-cream">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-10 md:gap-16">
+
+      <!-- Foto vertical con proporción fija -->
+      <div class="w-64 md:w-80 aspect-[3/4] rounded-[2rem] overflow-hidden shadow-lg shrink-0 mx-auto md:mx-0">
+        <Image
+          src={retrato}
+          alt="Fotógrafa de LeCapture"
+          width={500}
+          height={650}
+          format="webp"
+          quality={85}
+          loading="eager"
+          class="w-full h-full object-cover"
+        />
+      </div>
+
+      <!-- Texto -->
+      <div class="text-center md:text-left md:pt-4">
+        <p class="text-forest text-xs md:text-sm font-semibold tracking-widest uppercase mb-2">
+          Conóceme
+        </p>
+        <h1 class="font-script text-3xl md:text-5xl font-normal text-choco mb-5">
+          Hola, soy [Nombre]
+        </h1>
+        <p class="text-choco/70 leading-relaxed mb-4 max-w-md">
+          [Acá va el texto más largo sobre su historia: cómo empezó en la
+          fotografía, qué la llevó a especializarse en bebés e infancia,
+          cuánto tiempo lleva trabajando en esto.]
+        </p>
+        <p class="text-choco/70 leading-relaxed max-w-md">
+          [Un segundo párrafo sobre su enfoque: cómo trabaja con las
+          familias, qué las hace sentir cómodas, su filosofía sobre
+          capturar momentos naturales y genuinos.]
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DETRÁS DE CÁMARA -->
+  <section class="w-full py-16 md:py-24 px-6 bg-sand/30">
+    <div class="max-w-5xl mx-auto">
+
+      <p class="text-forest text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
+        Mi trabajo
+      </p>
+      <h2 class="text-2xl md:text-4xl font-semibold text-center text-choco mb-4">
+        Detrás de cámara
+      </h2>
+      <p class="text-choco/70 text-center max-w-lg mx-auto mb-12 md:mb-16">
+        Así es un día de sesión: mucha paciencia, juego y momentos espontáneos.
+      </p>
+
+      <!-- Mosaico: foto grande + 2 chicas, con altura total fija -->
+      <div class="grid grid-cols-2 grid-rows-2 gap-4 md:gap-6 h-[380px] md:h-[480px]">
+        <div class="row-span-2 rounded-[1.5rem] overflow-hidden shadow-md">
+          <Image
+            src={detrasCamara1}
+            alt="Sesión de fotos en proceso"
+            width={600}
+            height={800}
+            format="webp"
+            quality={85}
+            loading="lazy"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div class="rounded-[1.5rem] overflow-hidden shadow-md">
+          <Image
+            src={detrasCamara2}
+            alt="Sesión de fotos en proceso"
+            width={500}
+            height={380}
+            format="webp"
+            quality={85}
+            loading="lazy"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div class="rounded-[1.5rem] overflow-hidden shadow-md">
+          <Image
+            src={detrasCamara3}
+            alt="Sesión de fotos en proceso"
+            width={500}
+            height={380}
+            format="webp"
+            quality={85}
+            loading="lazy"
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EL ESTUDIO -->
+  <section class="w-full py-16 md:py-24 px-6 bg-cream">
+    <div class="max-w-5xl mx-auto">
+
+      <p class="text-forest text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
+        El espacio
+      </p>
+      <h2 class="text-2xl md:text-4xl font-semibold text-center text-choco mb-4">
+        Conocé el estudio
+      </h2>
+      <p class="text-choco/70 text-center max-w-lg mx-auto mb-12 md:mb-16">
+        Un espacio pensado para que vos y tu familia se sientan como en casa.
+      </p>
+
+      <!-- Carrusel horizontal -->
+      <div class="flex gap-5 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide">
+        {[estudio1, estudio2, estudio3, estudio4, estudio5].map((foto, i) => (
+          <div class="snap-center shrink-0 w-72 md:w-96 rounded-[1.5rem] overflow-hidden shadow-md">
+            <Image
+              src={foto}
+              alt={`Estudio de fotografía - imagen ${i + 1}`}
+              width={500}
+              height={380}
+              format="webp"
+              quality={85}
+              loading="lazy"
+              class="w-full h-64 md:h-80 object-cover"
+            />
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <CTAFinal />
+
+</Layout>
