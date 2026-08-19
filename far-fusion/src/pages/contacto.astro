@@ -1,0 +1,102 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const whatsapp = '549XXXXXXXXXX'; // reemplazar por el real
+const email = 'contacto@lecapture.com'; // reemplazar por el real
+const zona = 'Mendoza, Argentina'; // reemplazar por la zona real
+---
+
+<Layout title="Contacto">
+
+  <!-- INTRO con cuadrillé -->
+  <section
+    class="w-full py-16 md:py-20 px-6 text-center overflow-hidden"
+    style="
+      background-color: #fff8ec;
+      background-image:
+        repeating-linear-gradient(90deg, transparent, transparent 18px, rgba(220,204,172,0.6) 18px, rgba(220,204,172,0.6) 30px, transparent 30px, transparent 48px),
+        repeating-linear-gradient(0deg, transparent, transparent 18px, rgba(220,204,172,0.6) 18px, rgba(220,204,172,0.6) 30px, transparent 30px, transparent 48px);
+    "
+  >
+    <h1 class="font-heading text-3xl md:text-4xl font-bold text-choco mb-3 uppercase tracking-wide">
+      Contacto
+    </h1>
+    <p class="text-choco/70 max-w-lg mx-auto">
+      Contame sobre la sesión que estás buscando y coordinamos todo juntas ✨
+    </p>
+  </section>
+
+  <!-- TARJETAS + MAPA -->
+  <section class="w-full py-16 md:py-20 px-6 bg-cream">
+    <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-10">
+
+      <!-- Columna izquierda: 3 tarjetas -->
+      <div class="w-full md:w-1/3 flex flex-col gap-4">
+
+        <!-- WhatsApp -->
+        <a
+          href={`https://wa.me/${whatsapp}?text=Hola!%20Quiero%20consultar%20por%20una%20sesión`}
+          target="_blank"
+          class="bg-white rounded-2xl p-4 flex items-center gap-4 shadow-md hover:shadow-lg transition-shadow duration-300"
+        >
+          <div class="w-11 h-11 shrink-0 rounded-full bg-orange-200/60 flex items-center justify-center">
+            <span class="text-xl">💬</span>
+          </div>
+          <div class="text-left">
+            <p class="text-choco/45 text-[11px] font-semibold uppercase tracking-wider mb-0.5">
+              WhatsApp
+            </p>
+            <p class="text-choco font-bold text-base">Respuesta más rápida</p>
+          </div>
+        </a>
+
+        <!-- Email -->
+          <a
+          href={`mailto:${email}`}
+          class="bg-white rounded-2xl p-4 flex items-center gap-4 shadow-md hover:shadow-lg transition-shadow duration-300"
+        >
+          <div class="w-11 h-11 shrink-0 rounded-full bg-purple-200/60 flex items-center justify-center">
+            <span class="text-xl">📧</span>
+          </div>
+          <div class="text-left min-w-0">
+            <p class="text-choco/45 text-[11px] font-semibold uppercase tracking-wider mb-0.5">
+              Email
+            </p>
+            <p class="text-choco font-bold text-base truncate">{email}</p>
+          </div>
+        </a>
+
+        <!-- Ubicación -->
+        <div class="bg-white rounded-2xl p-4 flex items-center gap-4 shadow-md">
+          <div class="w-11 h-11 shrink-0 rounded-full bg-rose flex items-center justify-center">
+            <span class="text-xl">📍</span>
+          </div>
+          <div class="text-left">
+            <p class="text-choco/45 text-[11px] font-semibold uppercase tracking-wider mb-0.5">
+              Zona
+            </p>
+            <p class="text-choco font-bold text-base">{zona}</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Columna derecha: mapa -->
+      <div class="w-full md:w-2/3">
+        <div class="rounded-[1.5rem] overflow-hidden shadow-[0_0_0_5px_#fff8ec,0_0_0_8px_rgba(220,204,172,0.7)]">
+          <iframe
+            src={`https://www.google.com/maps?q=${encodeURIComponent(zona)}&z=12&output=embed`}
+            width="100%"
+            height="340"
+            style="border:0; display: block;"
+            allowfullscreen={false}
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</Layout>

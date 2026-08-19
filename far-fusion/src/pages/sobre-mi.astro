@@ -19,18 +19,24 @@ import CTAFinal from '../components/CTAFinal.astro';
   <section class="w-full py-16 md:py-24 px-6 bg-cream">
     <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-10 md:gap-16">
 
-      <!-- Foto vertical con proporción fija -->
-      <div class="w-64 md:w-80 aspect-[3/4] rounded-[2rem] overflow-hidden shadow-lg shrink-0 mx-auto md:mx-0">
-        <Image
-          src={retrato}
-          alt="Fotógrafa de LeCapture"
-          width={500}
-          height={650}
-          format="webp"
-          quality={85}
-          loading="eager"
-          class="w-full h-full object-cover"
-        />
+      <!-- Foto vertical con proporción fija + tarjetita -->
+        <div class="relative w-72 md:w-[26rem] shrink-0 mx-auto md:mx-0">
+        <div class="aspect-[3/4] rounded-[2rem] overflow-hidden shadow-lg">
+          <Image
+            src={retrato}
+            alt="Fotógrafa de LeCapture"
+            width={500}
+            height={650}
+            format="webp"
+            quality={85}
+            loading="eager"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div class="absolute -bottom-4 -right-4 bg-cream border border-choco/20 rounded-2xl px-4 py-2.5 shadow-md rotate-[-4deg] text-center">
+          <p class="text-choco font-bold text-lg leading-none">+500</p>
+          <p class="text-choco/70 text-xs">familias felices 🤍</p>
+        </div>
       </div>
 
       <!-- Texto -->
@@ -38,14 +44,15 @@ import CTAFinal from '../components/CTAFinal.astro';
         <p class="text-forest text-xs md:text-sm font-semibold tracking-widest uppercase mb-2">
           Conóceme
         </p>
-        <h1 class="font-script text-3xl md:text-5xl font-normal text-choco mb-5">
-          Hola, soy Candela 
+        <h1 class="font-script text-3xl md:text-5xl font-normal text-choco mb-5 relative inline-block">
+          Hola, soy Candela
+
         </h1>
-          <p class="text-choco/70 leading-relaxed mb-4 max-w-md">
+        <p class="text-choco/70 leading-relaxed mb-4 max-w-md">
           Hace más de 10 años que mi cámara y yo somos inseparables. En este tiempo tuve el privilegio de retratar a más de 500 bebés y familias, tras haberme formado en España en fotografía de recién nacidos y haber llevado mi pasión por distintos rincones de Europa. Me mueve una constante búsqueda de armonía y belleza: desde los detalles de un escenario hasta la estética de la vida cotidiana, porque estoy convencida de que cada color y textura aportan magia al resultado final.
         </p>
         <p class="text-choco/70 leading-relaxed max-w-md">
-          Me apasiona crear : diseño, decoro y hasta construyo mis propias escenografías para que cada sesión sea única. Detrás de cada toma hay mucho más que técnica; hay dedicación, amor por lo visual y la firme convicción de que tus recuerdos merecen ser tan lindos y auténticos como la historia que están contando.
+          Me apasiona crear: diseño, decoro y hasta construyo mis propias escenografías para que cada sesión sea única. Detrás de cada toma hay mucho más que técnica; hay dedicación, amor por lo visual y la firme convicción de que tus recuerdos merecen ser tan lindos y auténticos como la historia que están contando.
         </p>
       </div>
 
@@ -68,7 +75,7 @@ import CTAFinal from '../components/CTAFinal.astro';
 
       <!-- Mosaico: foto grande + 2 chicas, con altura total fija -->
       <div class="grid grid-cols-2 grid-rows-2 gap-4 md:gap-6 h-[380px] md:h-[480px]">
-        <div class="row-span-2 rounded-[1.5rem] overflow-hidden shadow-md">
+        <div class="row-span-2 rounded-[1.5rem] overflow-hidden shadow-md group">
           <Image
             src={detrasCamara1}
             alt="Sesión de fotos en proceso"
@@ -77,10 +84,10 @@ import CTAFinal from '../components/CTAFinal.astro';
             format="webp"
             quality={85}
             loading="lazy"
-            class="w-full h-full object-cover"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
           />
         </div>
-        <div class="rounded-[1.5rem] overflow-hidden shadow-md">
+        <div class="rounded-[1.5rem] overflow-hidden shadow-md group">
           <Image
             src={detrasCamara2}
             alt="Sesión de fotos en proceso"
@@ -89,10 +96,10 @@ import CTAFinal from '../components/CTAFinal.astro';
             format="webp"
             quality={85}
             loading="lazy"
-            class="w-full h-full object-cover"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
           />
         </div>
-        <div class="rounded-[1.5rem] overflow-hidden shadow-md">
+        <div class="rounded-[1.5rem] overflow-hidden shadow-md group">
           <Image
             src={detrasCamara3}
             alt="Sesión de fotos en proceso"
@@ -101,7 +108,7 @@ import CTAFinal from '../components/CTAFinal.astro';
             format="webp"
             quality={85}
             loading="lazy"
-            class="w-full h-full object-cover"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
           />
         </div>
       </div>
@@ -123,26 +130,65 @@ import CTAFinal from '../components/CTAFinal.astro';
         Un espacio pensado para que vos y tu familia se sientan como en casa.
       </p>
 
-      <!-- Carrusel horizontal -->
-      <div class="flex gap-5 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide">
-        {[estudio1, estudio2, estudio3, estudio4, estudio5].map((foto, i) => (
-          <div class="snap-center shrink-0 w-72 md:w-96 rounded-[1.5rem] overflow-hidden shadow-md">
-            <Image
-              src={foto}
-              alt={`Estudio de fotografía - imagen ${i + 1}`}
-              width={500}
-              height={380}
-              format="webp"
-              quality={85}
-              loading="lazy"
-              class="w-full h-64 md:h-80 object-cover"
-            />
-          </div>
-        ))}
+      <!-- Carrusel horizontal con flechas -->
+      <div class="relative">
+        <div
+          id="estudio-scroll"
+          class="flex gap-5 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide"
+        >
+          {[estudio1, estudio2, estudio3, estudio4, estudio5].map((foto, i) => (
+            <div class="snap-center shrink-0 w-72 md:w-96 rounded-[1.5rem] overflow-hidden shadow-md group">
+              <Image
+                src={foto}
+                alt={`Estudio de fotografía - imagen ${i + 1}`}
+                width={500}
+                height={380}
+                format="webp"
+                quality={85}
+                loading="lazy"
+                class="w-full h-64 md:h-80 object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+            </div>
+          ))}
+        </div>
+
+        <!-- Degradados en ambos bordes -->
+        <div class="pointer-events-none absolute top-0 left-0 h-[calc(100%-1rem)] w-16 bg-gradient-to-r from-sand/70 via-sand/25 to-transparent"></div>
+        <div class="pointer-events-none absolute top-0 right-0 h-[calc(100%-1rem)] w-16 bg-gradient-to-l from-sand/70 via-sand/25 to-transparent"></div>
+
+        <!-- Flechas -->
+        <button
+          id="estudio-prev"
+          aria-label="Ver anterior"
+          class="absolute left-0 top-1/2 -translate-y-1/2 text-choco/50 hover:text-choco text-4xl leading-none px-2 transition-colors"
+        >
+          ‹
+        </button>
+        <button
+          id="estudio-next"
+          aria-label="Ver siguiente"
+          class="absolute right-0 top-1/2 -translate-y-1/2 text-choco/50 hover:text-choco text-4xl leading-none px-2 transition-colors"
+        >
+          ›
+        </button>
       </div>
 
     </div>
   </section>
+
+  <script>
+    const scrollEl = document.getElementById('estudio-scroll');
+    const nextBtn = document.getElementById('estudio-next');
+    const prevBtn = document.getElementById('estudio-prev');
+
+    nextBtn?.addEventListener('click', () => {
+      scrollEl?.scrollBy({ left: 320, behavior: 'smooth' });
+    });
+
+    prevBtn?.addEventListener('click', () => {
+      scrollEl?.scrollBy({ left: -320, behavior: 'smooth' });
+    });
+  </script>
 
   <!-- CTA FINAL -->
   <CTAFinal />
