@@ -1,5 +1,5 @@
 ---
-titulo: "Sesión de Recién Nacido"
+titulo: "Recién Nacido"
 slug: "recien-nacidos"
 descripcion: " Las sesiones newborn se realizan en las primeras dos semanas de vida y duran entre 2 y 3 horas, sin apuros y al ritmo del bebé. En un espacio cálido y seguro, utilizamos poses naturales y accesorios delicados para lograr recuerdos atemporales y entrañables."
 imagenHero: "./recien-nacidos-hero.jpg"
