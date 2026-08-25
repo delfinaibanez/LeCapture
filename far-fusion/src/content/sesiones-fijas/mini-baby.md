@@ -1,7 +1,7 @@
 ---
 titulo: "Mini Baby 3-6 meses"
 slug: "mini-baby"
-descripcion: "A partir de los tres meses de vida, los bebés comienzan a descubrir el mundo con una curiosidad diferente. Ya pueden levantar y sostener su cabecita, regalan sonrisas más conscientes y sus ojitos siguen cada detalle con atención. Esta etapa es perfecta para capturar sus primeras expresiones despiertas y toda su ternura en pleno crecimiento. Las imágenes reflejan dulzura, conexión y momentos únicos que se convierten en recuerdos inolvidables para la familia."
+descripcion: "A partir de los tres meses, los bebés ya sostienen su cabecita y regalan sonrisas conscientes. Es el momento ideal para capturar su ternura, sus expresiones despiertas y crear recuerdos inolvidables.."
 imagenHero: "./mini-baby-hero.jpg"
 packs:
   - nombre: "Digital"

@@ -1,7 +1,7 @@
 ---
 titulo: "Sesión de Recién Nacido"
 slug: "recien-nacidos"
-descripcion: "Las sesiones de recién nacidos en estudio se realizan durante las primeras dos semanas de vida y suelen durar entre 2 y 3 horas, ya que trabajamos sin apuro, siguiendo siempre el ritmo del bebé. El espacio está preparado para brindar calor, comodidad y seguridad, cuidando cada detalle para que tanto el recién nacido como la familia se sientan relajados. Utilizo poses naturales y accesorios delicados, priorizando siempre el bienestar del bebé para lograr recuerdos únicos y atemporales."
+descripcion: " Las sesiones newborn se realizan en las primeras dos semanas de vida y duran entre 2 y 3 horas, sin apuros y al ritmo del bebé. En un espacio cálido y seguro, utilizamos poses naturales y accesorios delicados para lograr recuerdos atemporales y entrañables."
 imagenHero: "./recien-nacidos-hero.jpg"
 packs:
   - nombre: "Digital"

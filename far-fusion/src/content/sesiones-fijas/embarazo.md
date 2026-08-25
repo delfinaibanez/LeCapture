@@ -1,7 +1,7 @@
 ---
 titulo: "Sesión de Embarazo"
 slug: "embarazo"
-descripcion: "Tu embarazo es un momento único, lleno de cambios, ilusión y ternura. En esta sesión busco capturar esa conexión tan especial entre vos, tu bebé y tu familia. Cada detalle está pensado para que te sientas cómoda, tranquila y radiante, en un ambiente cálido y cuidado. Podés elegir entre fotos íntimas y delicadas en estudio, o imágenes naturales al aire libre, con luz suave y escenarios que realzan tu esencia. El resultado son recuerdos auténticos, elegantes y atemporales que te acompañarán toda la vida."
+descripcion: "Tu embarazo es un momento único, lleno de cambios, ilusión y ternura. En esta sesión busco capturar esa conexión tan especial entre vos, tu bebé y tu familia. El resultado son recuerdos auténticos, elegantes y atemporales que te acompañarán toda la vida."
 imagenHero: "./embarazo-hero.jpg"
 packs:
   - nombre: "Digital"

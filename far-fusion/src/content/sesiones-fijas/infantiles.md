@@ -1,7 +1,7 @@
 ---
 titulo: "Infantiles en Exterior"
 slug: "infantiles"
-descripcion: "Nuestras sesiones de fotos infantiles al aire libre son ideales para capturar a tus hijos en su esencia más auténtica: jugando, corriendo y explorando. La fotografía infantil en exteriores aprovecha la luz natural y la frescura del entorno para crear recuerdos únicos de la infancia. Cada sesión está pensada para que los niños se sientan libres y cómodos, logrando imágenes naturales y llenas de vida que podrás atesorar por siempre."
+descripcion: "Nuestras sesiones de fotos infantiles al aire libre son ideales para capturar a tus hijos en su esencia más auténtica: jugando, corriendo y explorando. Cada sesión está pensada para que los niños se sientan libres y cómodos, logrando imágenes naturales y llenas de vida que podrás atesorar por siempre."
 imagenHero: "./infantiles-hero.jpg"
 packs:
   - nombre: "Digital"

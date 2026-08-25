@@ -1,7 +1,7 @@
 ---
 titulo: "Primer Añito"
 slug: "primer-anito"
-descripcion: "Cumplir un año es un hito único y lleno de emociones. Las sesiones para bebés de 1 año son la forma perfecta de celebrar esta etapa tan especial. Con escenografías temáticas y personalizadas, logramos reflejar la alegría, la ternura y la energía de tu pequeño en su primer gran festejo. Creamos un ambiente cuidado y divertido, donde tu bebé puede explorar, jugar y sonreír libremente. Así conseguimos fotografías auténticas, llenas de color y espontaneidad, que se convierten en un recuerdo inolvidable de su primer cumpleaños."
+descripcion: "¡Tu bebé cumple un año! Celebramos esta etapa con escenografías temáticas y personalizadas en un ambiente divertido. Capturamos su alegría y espontaneidad para crear recuerdos coloridos e inolvidables de su primer gran festejo."
 imagenHero: "./primer-anito-hero.jpg"
 packs:
   - nombre: "Digital"
