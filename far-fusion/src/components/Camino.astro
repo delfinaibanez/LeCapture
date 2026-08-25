@@ -37,7 +37,7 @@ const etapas = [
           href={etapa.href}
           class="group flex flex-col items-center text-center snap-center shrink-0 w-28"
         >
-          <div class="relative w-24 h-24 rounded-full overflow-hidden ring-4 ring-sage-button/60 shadow-md bg-gray-100">
+          <div class="relative w-24 h-24 rounded-full overflow-hidden ring-4 ring-sage-button/60 shadow-sm bg-gray-100">
             <Image
               src={etapa.img}
               alt={etapa.nombre}
@@ -59,24 +59,21 @@ const etapas = [
       ))}
     </div>
 
-    <!-- Degradados en ambos bordes -->
-    <div class="pointer-events-none absolute top-0 left-0 h-full w-14 bg-gradient-to-r from-sand/60 via-sand/20 to-transparent"></div>
-    <div class="pointer-events-none absolute top-0 right-0 h-full w-14 bg-gradient-to-l from-sand/60 via-sand/20 to-transparent"></div>
-
-    <!-- Flechas sin fondo -->
+  
+    <!-- Flechas: botones circulares sutiles -->
     <button
       id="camino-prev"
       aria-label="Ver anterior"
-      class="absolute left-0 top-10 text-choco/40 text-3xl leading-none px-1"
+      class="absolute left-1 top-9 w-8 h-8 rounded-full bg-white/90 shadow-md flex items-center justify-center text-choco/60 hover:text-choco hover:bg-white transition-colors"
     >
-      ‹
+      <span class="text-lg leading-none -mt-0.5">‹</span>
     </button>
     <button
       id="camino-next"
       aria-label="Ver siguiente"
-      class="absolute right-0 top-10 text-choco/40 text-3xl leading-none px-1"
+      class="absolute right-1 top-9 w-8 h-8 rounded-full bg-white/90 shadow-md flex items-center justify-center text-choco/60 hover:text-choco hover:bg-white transition-colors"
     >
-      ›
+      <span class="text-lg leading-none -mt-0.5">›</span>
     </button>
   </div>
 

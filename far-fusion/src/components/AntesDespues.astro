@@ -1,0 +1,102 @@
+---
+import { Image } from 'astro:assets';
+import sinEditar from '../assets/images/home/edicion/sin-editar.jpg';
+import editada from '../assets/images/home/edicion/editada.jpg';
+---
+
+<section class="w-full py-16 md:py-24 px-6 bg-cream">
+  <p class="text-forest text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
+    El detrás de escena
+  </p>
+  <h2 class="text-2xl md:text-4xl font-semibold text-center text-choco mb-4">
+    La magia de la edición
+  </h2>
+  <p class="text-choco/70 text-center max-w-lg mx-auto mb-10 md:mb-14">
+    Deslizá para ver la transformación 
+  </p>
+
+  <div class="max-w-lg mx-auto">
+    <div
+      id="comparador"
+      class="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden shadow-lg select-none cursor-ew-resize"
+    >
+      <!-- Foto editada: fondo, siempre completa, tamaño fijo -->
+      <Image
+        src={editada}
+        alt="Foto editada"
+        width={800}
+        height={600}
+        format="webp"
+        quality={85}
+        loading="lazy"
+        class="absolute inset-0 w-full h-full object-cover pointer-events-none"
+      />
+
+      <!-- Foto sin editar: mismo tamaño exacto, se recorta con clip-path -->
+      <div
+        id="comparador-original"
+        class="absolute inset-0 w-full h-full pointer-events-none"
+        style="clip-path: inset(0 50% 0 0);"
+      >
+        <Image
+          src={sinEditar}
+          alt="Foto sin editar"
+          width={800}
+          height={600}
+          format="webp"
+          quality={85}
+          loading="lazy"
+          class="absolute inset-0 w-full h-full object-cover"
+        />
+      </div>
+
+      <!-- Etiquetas -->
+      <span class="absolute top-4 left-4 bg-choco/70 text-white text-xs font-semibold px-3 py-1 rounded-full pointer-events-none">
+        Sin editar
+      </span>
+      <span class="absolute top-4 right-4 bg-forest/80 text-white text-xs font-semibold px-3 py-1 rounded-full pointer-events-none">
+        Editada
+      </span>
+
+      <!-- Línea + manija -->
+      <div id="comparador-linea" class="absolute top-0 bottom-0 w-1 bg-white shadow-md pointer-events-none" style="left: 50%;">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center">
+          <span class="text-choco text-sm">↔</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const comparador = document.getElementById('comparador');
+  const original = document.getElementById('comparador-original');
+  const linea = document.getElementById('comparador-linea');
+
+  let dragging = false;
+
+  function mover(clientX: number) {
+    if (!comparador || !original || !linea) return;
+    const rect = comparador.getBoundingClientRect();
+    let pos = ((clientX - rect.left) / rect.width) * 100;
+    pos = Math.max(0, Math.min(100, pos));
+    original.style.clipPath = `inset(0 ${100 - pos}% 0 0)`;
+    linea.style.left = `${pos}%`;
+  }
+
+  comparador?.addEventListener('mousedown', () => (dragging = true));
+  window.addEventListener('mouseup', () => (dragging = false));
+  window.addEventListener('mousemove', (e) => {
+    if (dragging) mover(e.clientX);
+  });
+
+  comparador?.addEventListener('touchstart', () => (dragging = true));
+  window.addEventListener('touchend', () => (dragging = false));
+  window.addEventListener('touchmove', (e) => {
+    if (dragging && e.touches[0]) mover(e.touches[0].clientX);
+  });
+
+  comparador?.addEventListener('click', (e) => {
+    mover((e as MouseEvent).clientX);
+  });
+</script>
