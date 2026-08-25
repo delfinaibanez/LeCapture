@@ -12,4 +12,26 @@ const sesionesEspeciales = defineCollection({
   }),
 });
 
-export const collections = { sesionesEspeciales };
+const sesionesFijas = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/sesiones-fijas' }),
+  schema: ({ image }) => z.object({
+    titulo: z.string(),
+    slug: z.string(),
+    descripcion: z.string(),
+    imagenHero: image(),
+    packs: z.array(z.object({
+      nombre: z.string(),
+      tagline: z.string(),
+      items: z.array(z.string()),
+      precio: z.string(),
+      precioCuotas: z.string().optional(),
+      linkReserva: z.string(),
+    })),
+    faqs: z.array(z.object({
+      pregunta: z.string(),
+      respuesta: z.string(),
+    })),
+  }),
+});
+
+export const collections = { sesionesEspeciales, sesionesFijas };

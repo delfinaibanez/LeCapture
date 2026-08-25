@@ -8,8 +8,16 @@ const links = [
   { href: '/sesiones', label: 'Sesiones' },
   { href: '/contacto', label: 'Contacto' },
 ];
+
+const sesiones = [
+  { href: '/sesiones/embarazo', label: 'Embarazo' },
+  { href: '/sesiones/recien-nacidos', label: 'Recién Nacidos' },
+  { href: '/sesiones/mini-baby', label: 'Mini Baby' },
+  { href: '/sesiones/primer-anito', label: 'Primer Añito' },
+  { href: '/sesiones/infantiles', label: 'Infantiles' },
+];
 ---
-<header class="w-full py-4 px-6 flex items-center justify-between bg-white shadow-sm">
+<header class="relative z-50 w-full py-4 px-6 flex items-center justify-between bg-white shadow-sm">
 <a href="/">
 <Image
   src={logo}
@@ -23,34 +31,99 @@ const links = [
 </a>
 
   <!-- Menú desktop -->
-<nav class="hidden md:flex gap-8">
+<nav class="hidden md:flex gap-8 items-center">
   {links.map((link) => (
-    <a href={link.href} class="text-lg md:text-xl text-choco hover:scale-110 transition-all duration-300 inline-block">
-      {link.label}
-    </a>
+    link.label === 'Sesiones' ? (
+      <div class="relative group">
+        <span class="text-lg md:text-xl text-choco hover:scale-110 transition-all duration-300 inline-block cursor-default">
+          {link.label}
+        </span>
+        <div class="absolute top-full left-1/2 -translate-x-1/2 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+          <div class="bg-white rounded-2xl shadow-lg border border-choco/10 py-2 min-w-[180px]">
+            {sesiones.map((sesion) => (
+              <a
+                href={sesion.href}
+                class="block px-5 py-2.5 text-sm text-choco hover:bg-sand/40 hover:text-forest transition-colors"
+              >
+                {sesion.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    ) : (
+      <a href={link.href} class="text-lg md:text-xl text-choco hover:scale-110 transition-all duration-300 inline-block">
+        {link.label}
+      </a>
+    )
   ))}
 </nav>
 
   <!-- Botón hamburguesa (mobile) -->
-  <button id="menu-btn" class="md:hidden text-2xl" aria-label="Abrir menú">
+  <button id="menu-btn" class="md:hidden text-2xl text-choco" aria-label="Abrir menú">
     ☰
   </button>
 </header>
 
 <!-- Menú mobile desplegable -->
-<nav id="mobile-menu" class="hidden md:hidden flex-col bg-white px-6 pb-4 gap-4">
-  {links.map((link) => (
-    <a href={link.href} class="text-lg text-choco py-2 border-b border-gray-100">
-      {link.label}
-    </a>
-  ))}
-</nav>
+<div id="mobile-menu" class="md:hidden overflow-hidden max-h-0 transition-all duration-300 ease-in-out bg-white">
+  <nav class="flex flex-col px-6 py-2">
+    <a href="/" class="text-base text-choco py-3 border-b border-choco/10">Home</a>
+    <a href="/sobre-mi" class="text-base text-choco py-3 border-b border-choco/10">Sobre mí</a>
+
+    <!-- Acordeón de Sesiones -->
+    <div class="border-b border-choco/10">
+      <button
+        id="sesiones-toggle"
+        class="w-full flex items-center justify-between text-base text-choco py-3"
+      >
+        Sesiones
+        <span id="sesiones-arrow" class="text-choco/40 transition-transform duration-300">▾</span>
+      </button>
+      <div id="sesiones-submenu" class="overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+        <div class="flex flex-col pb-2">
+          {sesiones.map((sesion) => (
+            <a href={sesion.href} class="text-sm text-choco/70 py-2 pl-4">
+              {sesion.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <a href="/contacto" class="text-base text-choco py-3">Contacto</a>
+  </nav>
+</div>
 
 <script>
   const btn = document.getElementById('menu-btn');
   const menu = document.getElementById('mobile-menu');
+
   btn?.addEventListener('click', () => {
-    menu?.classList.toggle('hidden');
-    menu?.classList.toggle('flex');
+    const isOpen = menu?.classList.contains('menu-open');
+    if (isOpen) {
+      menu?.classList.remove('menu-open');
+      menu!.style.maxHeight = '0px';
+    } else {
+      menu?.classList.add('menu-open');
+      menu!.style.maxHeight = '600px';
+    }
+  });
+
+  const sesionesToggle = document.getElementById('sesiones-toggle');
+  const sesionesSubmenu = document.getElementById('sesiones-submenu');
+  const sesionesArrow = document.getElementById('sesiones-arrow');
+
+  sesionesToggle?.addEventListener('click', () => {
+    const isOpen = sesionesSubmenu?.classList.contains('submenu-open');
+    if (isOpen) {
+      sesionesSubmenu?.classList.remove('submenu-open');
+      sesionesSubmenu!.style.maxHeight = '0px';
+      sesionesArrow!.style.transform = 'rotate(0deg)';
+    } else {
+      sesionesSubmenu?.classList.add('submenu-open');
+      sesionesSubmenu!.style.maxHeight = '300px';
+      sesionesArrow!.style.transform = 'rotate(180deg)';
+    }
   });
 </script>

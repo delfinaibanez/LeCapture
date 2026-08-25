@@ -10,7 +10,7 @@ const zona = 'Mendoza, Argentina'; // reemplazar por la zona real
 
   <!-- INTRO con cuadrillé -->
   <section
-    class="w-full py-16 md:py-20 px-6 text-center overflow-hidden"
+    class="w-full py-14 md:py-16 px-6 text-center overflow-hidden"
     style="
       background-color: #fff8ec;
       background-image:
@@ -26,63 +26,85 @@ const zona = 'Mendoza, Argentina'; // reemplazar por la zona real
     </p>
   </section>
 
+  <!-- CARTEL / NOTA (centrado, plano) -->
+  <div class="relative z-20 max-w-2xl mx-auto px-6 -mt-6 md:-mt-12 mb-16 md:mb-16">
+    <div class="bg-white rounded-2xl shadow-lg px-5 py-5 md:px-10 md:py-8">
+      <p class="font-script text-2xl md:text-3xl text-choco text-center mb-2 md:mb-3">
+        Antes de escribirme...
+      </p>
+      <p class="text-choco/75 text-xs md:text-sm leading-relaxed text-center">
+        El estudio funciona solo con cita previa, para asegurarte un espacio
+        tranquilo y dedicado. No hace falta que me preguntes por las tarifas:
+        en cada sección de la web vas a encontrar el precio y todos los
+        detalles de cada sesión. Tené en cuenta que las tarifas y
+        características pueden modificarse sin previo aviso, así que si ya lo
+        tenés decidido, ¡te recomiendo reservar hoy y asegurarte los precios
+        actuales!
+      </p>
+    </div>
+  </div>
+
   <!-- TARJETAS + MAPA -->
-  <section class="w-full py-16 md:py-20 px-6 bg-cream">
-    <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-10">
+  <section class="w-full pt-4 pb-16 md:pb-20 px-6 bg-cream">
+    <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-6">
 
       <!-- Columna izquierda: 3 tarjetas -->
-      <div class="w-full md:w-1/3 flex flex-col gap-4">
+      <div class="w-full md:w-2/5 flex flex-col gap-4">
 
         <!-- WhatsApp -->
         <a
           href={`https://wa.me/${whatsapp}?text=Hola!%20Quiero%20consultar%20por%20una%20sesión`}
           target="_blank"
-          class="bg-white rounded-2xl p-4 flex items-center gap-4 shadow-md hover:shadow-lg transition-shadow duration-300"
+          class="group bg-white rounded-2xl p-4 flex items-center gap-4 border border-choco/10 shadow-[0_2px_10px_rgba(107,74,63,0.08)] hover:shadow-[0_4px_16px_rgba(107,74,63,0.15)] hover:-translate-y-0.5 transition-all duration-300"
         >
-          <div class="w-11 h-11 shrink-0 rounded-full bg-orange-200/60 flex items-center justify-center">
-            <span class="text-xl">💬</span>
+          <div class="w-14 h-14 md:w-12 md:h-12 shrink-0 rounded-xl flex items-center justify-center shadow-inner" style="background-color: #DCCCAC;">
+            <span class="text-3xl md:text-2xl">💬</span>
           </div>
           <div class="text-left">
-            <p class="text-choco/45 text-[11px] font-semibold uppercase tracking-wider mb-0.5">
+            <p class="text-choco/40 text-[10px] font-bold uppercase tracking-widest mb-0.5">
               WhatsApp
             </p>
-            <p class="text-choco font-bold text-base">Respuesta más rápida</p>
+            <p class="text-choco font-bold text-[15px] group-hover:text-forest transition-colors">
+              Respuesta más rápida
+            </p>
           </div>
         </a>
 
         <!-- Email -->
-          <a
+        <a
           href={`mailto:${email}`}
-          class="bg-white rounded-2xl p-4 flex items-center gap-4 shadow-md hover:shadow-lg transition-shadow duration-300"
+          class="group bg-white rounded-2xl p-4 flex items-center gap-4 border border-choco/10 shadow-[0_2px_10px_rgba(107,74,63,0.08)] hover:shadow-[0_4px_16px_rgba(107,74,63,0.15)] hover:-translate-y-0.5 transition-all duration-300"
         >
-          <div class="w-11 h-11 shrink-0 rounded-full bg-purple-200/60 flex items-center justify-center">
-            <span class="text-xl">📧</span>
+          <div class="w-14 h-14 md:w-12 md:h-12 shrink-0 rounded-xl flex items-center justify-center shadow-inner" style="background-color: #DCCCAC;">
+            <span class="text-3xl md:text-2xl">📧</span>
           </div>
           <div class="text-left min-w-0">
-            <p class="text-choco/45 text-[11px] font-semibold uppercase tracking-wider mb-0.5">
+            <p class="text-choco/40 text-[10px] font-bold uppercase tracking-widest mb-0.5">
               Email
             </p>
-            <p class="text-choco font-bold text-base truncate">{email}</p>
+            <p class="text-choco font-bold text-[15px] truncate group-hover:text-forest transition-colors">
+              {email}
+            </p>
           </div>
         </a>
 
         <!-- Ubicación -->
-        <div class="bg-white rounded-2xl p-4 flex items-center gap-4 shadow-md">
-          <div class="w-11 h-11 shrink-0 rounded-full bg-rose flex items-center justify-center">
-            <span class="text-xl">📍</span>
+        <div class="bg-white rounded-2xl p-4 flex items-center gap-4 border border-choco/10 shadow-[0_2px_10px_rgba(107,74,63,0.08)]">
+          <div class="w-14 h-14 md:w-12 md:h-12 shrink-0 rounded-xl flex items-center justify-center shadow-inner" style="background-color: #DCCCAC;">
+            <span class="text-3xl md:text-2xl">📍</span>
           </div>
           <div class="text-left">
-            <p class="text-choco/45 text-[11px] font-semibold uppercase tracking-wider mb-0.5">
+            <p class="text-choco/40 text-[10px] font-bold uppercase tracking-widest mb-0.5">
               Zona
             </p>
-            <p class="text-choco font-bold text-base">{zona}</p>
+            <p class="text-choco font-bold text-[15px]">{zona}</p>
           </div>
         </div>
 
       </div>
 
       <!-- Columna derecha: mapa -->
-      <div class="w-full md:w-2/3">
+      <div class="w-full md:w-3/5">
         <div class="rounded-[1.5rem] overflow-hidden shadow-[0_0_0_5px_#fff8ec,0_0_0_8px_rgba(220,204,172,0.7)]">
           <iframe
             src={`https://www.google.com/maps?q=${encodeURIComponent(zona)}&z=12&output=embed`}
