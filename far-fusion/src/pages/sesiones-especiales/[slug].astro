@@ -53,35 +53,103 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
       <h2 class="font-heading text-2xl md:text-4xl font-semibold text-center text-[#3D1F1F] mb-10 md:mb-14">
         Un rincón mágico
       </h2>
-      <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-        {galeria.map((foto, i) => (
-          <div class="group rounded-2xl overflow-hidden shadow-md aspect-square">
-            <Image
-              src={foto}
-              alt={`Escenografía navideña ${i + 1}`}
-              width={500}
-              height={500}
-              format="webp"
-              quality={85}
-              loading="lazy"
-              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-            />
+
+      <div class="relative max-w-5xl mx-auto">
+
+        <!-- Sticker pinito, esquina superior derecha -->
+        <div class="absolute -top-4 -right-3 md:-top-5 md:-right-5 z-20 rotate-[12deg]" aria-hidden="true">
+          <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#F5EFE0] border-2 border-[#8B3A3A]/30 shadow-lg flex items-center justify-center">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4A7A4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 md:w-7 md:h-7">
+              <path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/>
+              <path d="M12 22v-3"/>
+            </svg>
           </div>
-        ))}
+        </div>
+
+        <!-- Sticker pinito, borde izquierdo, entre filas -->
+        <div class="hidden md:block absolute top-[38%] -left-5 z-20 rotate-[-10deg]" aria-hidden="true">
+          <div class="w-11 h-11 rounded-full bg-[#F5EFE0] border-2 border-[#C9A24B]/40 shadow-lg flex items-center justify-center">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4A7A4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+              <path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/>
+              <path d="M12 22v-3"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+          {galeria.map((foto, i) => (
+            <div class="group rounded-2xl overflow-hidden shadow-md aspect-square">
+              <Image
+                src={foto}
+                alt={`Escenografía navideña ${i + 1}`}
+                width={500}
+                height={500}
+                format="webp"
+                quality={85}
+                loading="lazy"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )}
 
   <!-- VIDEO -->
   {videoEmbed && (
-    <section class="w-full py-16 md:py-20 px-6 bg-[#3D1F1F]">
+    <section class="relative w-full py-16 md:py-24 px-6 bg-[#3D1F1F] overflow-hidden">
+
+      <!-- Copos de nieve decorativos -->
+      {[
+        { top: '6%',  left: '6%',  size: 34, color: '#C9A24B', opacity: 0.7,  rotate: -10, mobile: true  },
+        { top: '9%',  left: '86%', size: 24, color: '#F5EFE0', opacity: 0.5,  rotate: 15,  mobile: false },
+        { top: '20%', left: '46%', size: 16, color: '#C9A24B', opacity: 0.35, rotate: 25,  mobile: false },
+        { top: '16%', left: '24%', size: 20, color: '#C9A24B', opacity: 0.5,  rotate: -20, mobile: true  },
+        { top: '38%', left: '9%',  size: 14, color: '#F5EFE0', opacity: 0.3,  rotate: 30,  mobile: false },
+        { top: '55%', left: '4%',  size: 22, color: '#F5EFE0', opacity: 0.45, rotate: 8,   mobile: false },
+        { top: '62%', left: '93%', size: 30, color: '#C9A24B', opacity: 0.6,  rotate: -18, mobile: true  },
+        { top: '76%', left: '46%', size: 16, color: '#F5EFE0', opacity: 0.35, rotate: 5,   mobile: false },
+        { top: '85%', left: '16%', size: 18, color: '#C9A24B', opacity: 0.4,  rotate: 12,  mobile: false },
+        { top: '90%', left: '72%', size: 24, color: '#F5EFE0', opacity: 0.5,  rotate: -6,  mobile: true  },
+      ].map((c) => (
+        <div
+          class={`absolute pointer-events-none ${c.mobile ? '' : 'hidden md:block'}`}
+          style={`top:${c.top}; left:${c.left}; transform: rotate(${c.rotate}deg); opacity:${c.opacity};`}
+          aria-hidden="true"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke={c.color}
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style={`width:${c.size}px; height:${c.size}px;`}
+          >
+            <g><line x1="12" y1="4" x2="12" y2="20"/><path d="M9 7l3-3 3 3M9 17l3 3 3-3"/></g>
+            <g transform="rotate(60 12 12)"><line x1="12" y1="4" x2="12" y2="20"/><path d="M9 7l3-3 3 3M9 17l3 3 3-3"/></g>
+            <g transform="rotate(120 12 12)"><line x1="12" y1="4" x2="12" y2="20"/><path d="M9 7l3-3 3 3M9 17l3 3 3-3"/></g>
+          </svg>
+        </div>
+      ))}
+
       <p class="text-[#C9A24B] text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
         Mirá cómo es
       </p>
       <h2 class="font-heading text-2xl md:text-4xl font-semibold text-center text-cream mb-10 md:mb-14">
         Detrás de escena
       </h2>
-      <div class="max-w-md mx-auto rounded-2xl overflow-hidden shadow-2xl" set:html={videoEmbed} />
+
+      <div class="max-w-3xl mx-auto relative">
+        <!-- Marco dorado asomando detrás -->
+        <div
+          class="absolute inset-0 rounded-[1.75rem] rotate-[-2deg] translate-x-3 translate-y-3 md:translate-x-4 md:translate-y-4 -z-10"
+          style="background-color: #C9A24B;"
+          aria-hidden="true"
+        ></div>
+        <div class="rounded-[1.75rem] overflow-hidden shadow-2xl border-4 border-[#C9A24B]/50" set:html={videoEmbed} />
+      </div>
     </section>
   )}
 
@@ -143,13 +211,8 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
               <a
                 href={pack.linkReserva}
                 target="_blank"
-                class={`text-center rounded-full py-3.5 font-bold transition-all duration-300 group-hover:scale-105 ${
-                  i === 1
-                    ? 'bg-[#C9A24B] text-[#3D1F1F] shadow-lg hover:bg-[#C9A24B]/90'
-                    : i === 0
-                      ? 'bg-[#8B3A3A] text-white hover:bg-[#8B3A3A]/85'
-                      : 'bg-[#3D1F1F] text-white hover:bg-[#3D1F1F]/85'
-                }`}
+                class="text-center rounded-full py-3.5 font-bold transition-all duration-300 group-hover:scale-105 shadow-lg hover:opacity-90"
+                style={`background-color: ${i === 1 ? '#C9A24B' : i === 0 ? '#8B3A3A' : '#3D1F1F'}; color: ${i === 1 ? '#3D1F1F' : '#FFFFFF'};`}
               >
                 Reservá tu lugar
               </a>
@@ -177,7 +240,19 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
             <details class="group bg-white rounded-2xl px-6 py-4 shadow-sm">
               <summary class="flex items-center justify-between cursor-pointer text-[#3D1F1F] font-semibold text-sm md:text-base list-none">
                 {faq.pregunta}
-                <span class="text-[#8B3A3A]/50 text-xl group-open:rotate-45 transition-transform duration-300">+</span>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="w-5 h-5 shrink-0 ml-3 text-[#3D1F1F]/35 group-open:text-[#8B3A3A] group-open:rotate-45 transition-all duration-300"
+                >
+                  <g><line x1="12" y1="4" x2="12" y2="20"/><path d="M9 7l3-3 3 3M9 17l3 3 3-3"/></g>
+                  <g transform="rotate(60 12 12)"><line x1="12" y1="4" x2="12" y2="20"/><path d="M9 7l3-3 3 3M9 17l3 3 3-3"/></g>
+                  <g transform="rotate(120 12 12)"><line x1="12" y1="4" x2="12" y2="20"/><path d="M9 7l3-3 3 3M9 17l3 3 3-3"/></g>
+                </svg>
               </summary>
               <p class="text-[#3D1F1F]/70 text-sm mt-3 leading-relaxed">
                 {faq.respuesta}
