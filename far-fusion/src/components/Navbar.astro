@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
 import logo from '../assets/logo.png';
 
 const links = [
@@ -16,6 +17,10 @@ const sesiones = [
   { href: '/sesiones/primer-anito', label: 'Primer Añito' },
   { href: '/sesiones/infantiles', label: 'Infantiles' },
 ];
+
+// Buscamos si hay alguna sesión especial activa
+const todasEspeciales = await getCollection('sesionesEspeciales');
+const especialActiva = todasEspeciales.find((s) => s.data.activa);
 ---
 <header class="relative z-50 w-full py-4 px-6 flex items-center justify-between bg-white shadow-sm">
 <a href="/">
@@ -42,12 +47,23 @@ const sesiones = [
           <div class="bg-white rounded-2xl shadow-lg border border-choco/10 py-2 min-w-[180px]">
             {sesiones.map((sesion) => (
               <a
-              href={sesion.href}
-              class="block px-5 py-2.5 text-base text-choco hover:bg-sand/40 hover:text-forest transition-colors"
-            >
-              {sesion.label}
-            </a>
+                href={sesion.href}
+                class="block px-5 py-2.5 text-base text-choco hover:bg-sand/40 hover:text-forest transition-colors"
+              >
+                {sesion.label}
+              </a>
             ))}
+            {especialActiva && (
+              <>
+                <div class="border-t border-choco/10 my-1"></div>
+                <a
+                  href={`/sesiones-especiales/${especialActiva.data.slug}`}
+                  class="block px-5 py-2.5 text-base text-[#8B3A3A] font-semibold hover:bg-[#F5EFE0] transition-colors"
+                >
+                   {especialActiva.data.titulo}
+                </a>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -87,6 +103,14 @@ const sesiones = [
               {sesion.label}
             </a>
           ))}
+          {especialActiva && (
+            <a
+              href={`/sesiones-especiales/${especialActiva.data.slug}`}
+              class="text-sm text-[#8B3A3A] font-semibold py-2 pl-4"
+            >
+              ✨ {especialActiva.data.titulo}
+            </a>
+          )}
         </div>
       </div>
     </div>

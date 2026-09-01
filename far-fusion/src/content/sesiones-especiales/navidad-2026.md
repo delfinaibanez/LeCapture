@@ -1,5 +1,5 @@
 ---
-titulo: "Sesiones de Navidad"
+titulo: "Sesion Navidad 2025"
 subtitulo: "Cupos limitados — Diciembre 2026"
 imagen: "./navidad-2026.jpg"
 activa: true
