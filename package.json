@@ -1,0 +1,20 @@
+{
+  "name": "far-fusion",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.2.2",
+    "swiper": "^14.1.0",
+    "tailwindcss": "^4.3.3"
+  }
+}

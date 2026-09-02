@@ -1,0 +1,303 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import CTAFinal from '../../components/CTAFinal.astro';
+
+export async function getStaticPaths() {
+  const sesiones = await getCollection('sesionesEspeciales');
+  return sesiones.map((sesion) => ({
+    params: { slug: sesion.data.slug },
+    props: { sesion },
+  }));
+}
+
+const { sesion } = Astro.props;
+const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs } = sesion.data;
+---
+
+<Layout title={titulo}>
+
+  <!-- HERO navideño -->
+  <section class="relative w-full h-[55vh] md:h-[65vh] overflow-hidden">
+    <Image
+      src={imagen}
+      alt={titulo}
+      width={1600}
+      height={1000}
+      format="webp"
+      quality={85}
+      loading="eager"
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-[#3D2420]/60 via-[#3D2420]/20 to-transparent"></div>
+    <div class="absolute inset-0 flex flex-col items-center justify-end text-center px-6 pb-12 md:pb-16">
+      <span class="inline-block bg-[#D9A24B] text-[#3D2420] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">
+        {subtitulo}
+      </span>
+      <h1 class="font-script text-4xl md:text-6xl font-normal text-cream mb-4 drop-shadow-md">
+        {titulo}
+      </h1>
+      <p class="text-cream/90 text-sm md:text-base max-w-xl leading-relaxed drop-shadow-md">
+        {descripcion}
+      </p>
+    </div>
+  </section>
+
+  <!-- GALERÍA -->
+  {galeria && galeria.length > 0 && (
+    <section class="w-full py-16 md:py-20 px-6 bg-[#fff8ec]">
+      <p class="text-[#B5623A] text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
+        La escenografía
+      </p>
+      <h2 class="font-heading text-2xl md:text-4xl font-semibold text-center text-[#6b4a3f] mb-10 md:mb-14">
+        Un rincón mágico
+      </h2>
+
+      <div class="relative max-w-5xl mx-auto">
+        <!-- Sticker pinito, esquina superior derecha -->
+        <div class="absolute -top-4 -right-3 md:-top-5 md:-right-5 z-20 rotate-[12deg]" aria-hidden="true">
+          <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#fff8ec] border-2 border-[#B5623A]/30 shadow-lg flex items-center justify-center">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#8B4A35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 md:w-7 md:h-7">
+              <path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/>
+              <path d="M12 22v-3"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Sticker pinito, borde izquierdo, entre filas -->
+        <div class="hidden md:block absolute top-[38%] -left-5 z-20 rotate-[-10deg]" aria-hidden="true">
+          <div class="w-11 h-11 rounded-full bg-[#fff8ec] border-2 border-[#D9A24B]/40 shadow-lg flex items-center justify-center">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#B5623A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+              <path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/>
+              <path d="M12 22v-3"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+          {galeria.map((foto, i) => (
+            <div class="group rounded-2xl overflow-hidden shadow-md aspect-square">
+              <Image
+                src={foto}
+                alt={`Escenografía navideña ${i + 1}`}
+                width={500}
+                height={500}
+                format="webp"
+                quality={85}
+                loading="lazy"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- VIDEO -->
+  {videoEmbed && (
+    <section class="relative w-full py-16 md:py-24 px-6 bg-[#3D2420] overflow-hidden">
+
+      <!-- Copos de nieve decorativos -->
+      {[
+        { top: '6%',  left: '6%',  size: 34, color: '#D9A24B', opacity: 0.5,  rotate: -10, mobile: true  },
+        { top: '9%',  left: '86%', size: 24, color: '#fff8ec', opacity: 0.35, rotate: 15,  mobile: false },
+        { top: '20%', left: '46%', size: 16, color: '#D9A24B', opacity: 0.25, rotate: 25,  mobile: false },
+        { top: '16%', left: '24%', size: 20, color: '#D9A24B', opacity: 0.35, rotate: -20, mobile: true  },
+        { top: '38%', left: '9%',  size: 14, color: '#fff8ec', opacity: 0.2,  rotate: 30,  mobile: false },
+        { top: '55%', left: '4%',  size: 22, color: '#fff8ec', opacity: 0.3,  rotate: 8,   mobile: false },
+        { top: '62%', left: '93%', size: 30, color: '#D9A24B', opacity: 0.4,  rotate: -18, mobile: true  },
+        { top: '76%', left: '46%', size: 16, color: '#fff8ec', opacity: 0.25, rotate: 5,   mobile: false },
+        { top: '85%', left: '16%', size: 18, color: '#D9A24B', opacity: 0.3,  rotate: 12,  mobile: false },
+        { top: '90%', left: '72%', size: 24, color: '#fff8ec', opacity: 0.35, rotate: -6,  mobile: true  },
+      ].map((c) => (
+        <div
+          class={`absolute pointer-events-none ${c.mobile ? '' : 'hidden md:block'}`}
+          style={`top:${c.top}; left:${c.left}; transform: rotate(${c.rotate}deg); opacity:${c.opacity};`}
+          aria-hidden="true"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke={c.color}
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style={`width:${c.size}px; height:${c.size}px;`}
+          >
+            <path d="m10 20-1.25-2.5L6 18"/>
+            <path d="M10 4 8.75 6.5 6 6"/>
+            <path d="m14 20 1.25-2.5L18 18"/>
+            <path d="m14 4 1.25 2.5L18 6"/>
+            <path d="m17 21-3-6h-4"/>
+            <path d="m17 3-3 6 1.5 3"/>
+            <path d="M2 12h6.5L10 9"/>
+            <path d="m20 10-1.5 2 1.5 2"/>
+            <path d="M22 12h-6.5L14 15"/>
+            <path d="m4 10 1.5 2L4 14"/>
+            <path d="m7 21 3-6-1.5-3"/>
+            <path d="m7 3 3 6h4"/>
+          </svg>
+        </div>
+      ))}
+
+      <p class="text-[#D9A24B] text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
+        Mirá cómo es
+      </p>
+      <h2 class="font-heading text-2xl md:text-4xl font-semibold text-center text-cream mb-10 md:mb-14">
+        Detrás de escena
+      </h2>
+
+      <div class="max-w-3xl mx-auto relative">
+        <!-- Marco dorado asomando detrás -->
+        <div
+          class="absolute inset-0 rounded-[1.75rem] rotate-[-2deg] translate-x-3 translate-y-3 md:translate-x-4 md:translate-y-4 -z-10"
+          style="background-color: #D9A24B;"
+          aria-hidden="true"
+        ></div>
+        <div class="rounded-[1.75rem] overflow-hidden shadow-2xl border-4 border-[#D9A24B]/40" set:html={videoEmbed} />
+      </div>
+    </section>
+  )}
+
+  <!-- PACKS -->
+  {packs && packs.length > 0 && (
+    <section class="w-full py-16 md:py-24 px-6 bg-[#fff8ec]">
+      <div class="max-w-6xl mx-auto">
+        <p class="text-[#B5623A] text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
+          Elegí tu experiencia
+        </p>
+        <h2 class="font-heading text-2xl md:text-4xl font-semibold text-center text-[#6b4a3f] mb-12 md:mb-16">
+          Packs disponibles
+        </h2>
+
+        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-center justify-items-center">
+          {packs.map((pack, i) => (
+            <div class={`group relative rounded-[2rem] flex flex-col w-full text-center transition-all duration-300 hover:scale-105 hover:-translate-y-1 ${
+              i === 1
+                ? 'p-8 md:p-10 pt-12 md:pt-14 bg-[#8B4A35] text-cream border-4 border-[#D9A24B] shadow-2xl md:scale-110 z-10'
+                : 'p-7 md:p-8 bg-white text-[#6b4a3f] border-2 border-dashed border-[#B5623A]/35 shadow-md'
+            }`}>
+
+              {i === 1 && (
+                <span class="absolute -top-4 left-1/2 -translate-x-1/2 bg-white text-[#8B4A35] text-[11px] font-bold uppercase tracking-widest px-5 py-2 rounded-full shadow-lg border-2 border-[#D9A24B] whitespace-nowrap">
+                  🎄 Más elegido
+                </span>
+              )}
+
+              <p class={`font-bold uppercase tracking-widest mb-1 ${i === 1 ? 'text-2xl text-cream' : 'text-lg text-[#B5623A]'}`}>
+                {pack.nombre}
+              </p>
+              <p class={`text-sm mb-5 ${i === 1 ? 'text-cream/80' : 'text-[#6b4a3f]/60'}`}>
+                {pack.tagline}
+              </p>
+
+              <ul class="flex-1 flex flex-col items-center space-y-2.5 mb-6">
+                {pack.items.map((item) => (
+                  <li class={`text-sm flex items-start gap-2 max-w-[85%] ${i === 1 ? 'text-cream/90' : 'text-[#6b4a3f]/75'}`}>
+                    <span class={`mt-0.5 font-bold shrink-0 ${i === 1 ? 'text-[#D9A24B]' : 'text-[#B5623A]'}`}>✓</span>
+                    <span class="text-left">{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div class="text-center mb-3">
+                <p class={`font-bold ${i === 1 ? 'text-4xl text-cream' : 'text-3xl text-[#6b4a3f]'}`}>
+                  {pack.precio}
+                </p>
+              </div>
+
+              {pack.precioCuotas && (
+                <div class={`text-center rounded-xl py-2 px-3 mb-5 text-xs font-medium ${
+                  i === 1 ? 'bg-cream/15 text-cream/90' : 'bg-[#B5623A]/10 text-[#6b4a3f]/70'
+                }`}>
+                  {pack.precioCuotas}
+                </div>
+              )}
+
+              <a
+                href={pack.linkReserva}
+                target="_blank"
+                class="text-center rounded-full py-3.5 font-bold transition-all duration-300 group-hover:scale-105 shadow-lg hover:opacity-90"
+                style={`background-color: ${i === 1 ? '#D9A24B' : i === 0 ? '#B5623A' : '#6b4a3f'}; color: ${i === 1 ? '#3D2420' : '#FFFFFF'};`}
+              >
+                Reservá tu lugar
+              </a>
+
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- FAQ -->
+  {faqs && faqs.length > 0 && (
+    <section class="w-full py-16 md:py-24 px-6 bg-[#6b4a3f]/5">
+      <div class="max-w-3xl mx-auto">
+        <p class="text-[#B5623A] text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
+          Dudas frecuentes
+        </p>
+        <h2 class="font-heading text-2xl md:text-4xl font-semibold text-center text-[#6b4a3f] mb-12 md:mb-16">
+          Preguntas frecuentes
+        </h2>
+
+        <div class="flex flex-col gap-3">
+          {faqs.map((faq) => (
+            <details class="group bg-white rounded-2xl px-6 py-4 shadow-sm">
+              <summary class="flex items-center justify-between cursor-pointer text-[#6b4a3f] font-semibold text-sm md:text-base list-none">
+                {faq.pregunta}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="w-5 h-5 shrink-0 ml-3 text-[#6b4a3f]/35 group-open:text-[#B5623A] group-open:rotate-45 transition-all duration-300"
+                >
+                  <path d="m10 20-1.25-2.5L6 18"/>
+                  <path d="M10 4 8.75 6.5 6 6"/>
+                  <path d="m14 20 1.25-2.5L18 18"/>
+                  <path d="m14 4 1.25 2.5L18 6"/>
+                  <path d="m17 21-3-6h-4"/>
+                  <path d="m17 3-3 6 1.5 3"/>
+                  <path d="M2 12h6.5L10 9"/>
+                  <path d="m20 10-1.5 2 1.5 2"/>
+                  <path d="M22 12h-6.5L14 15"/>
+                  <path d="m4 10 1.5 2L4 14"/>
+                  <path d="m7 21 3-6-1.5-3"/>
+                  <path d="m7 3 3 6h4"/>
+                </svg>
+              </summary>
+              <p class="text-[#6b4a3f]/70 text-sm mt-3 leading-relaxed">
+                {faq.respuesta}
+              </p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA FINAL -->
+  <CTAFinal
+    bgColor="#fff8ec"
+    gridLight="rgba(217,162,75,0.35)"
+    gridDark="rgba(139,74,53,0.25)"
+    badgeBg="#B5623A"
+    badgeText="#ffffff"
+    headingColor="#6b4a3f"
+    textColor="#6b4a3fB3"
+    buttonBg="#B5623A"
+    buttonText="#ffffff"
+    badgeLabel="Reservá tu sesión 🎄"
+    heading="¿Lista para tu sesión de Navidad?"
+    subtext="Contame qué tenés en mente para tu sesión navideña y coordinamos todos los detalles"
+    whatsappMessage="Hola! Quiero consultar por una sesión de Navidad"
+  />
+
+</Layout>

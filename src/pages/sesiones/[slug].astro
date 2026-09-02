@@ -1,0 +1,146 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import { getCollection, render } from 'astro:content';
+import CTAFinal from '../../components/CTAFinal.astro';
+
+export async function getStaticPaths() {
+  const sesiones = await getCollection('sesionesFijas');
+  return sesiones.map((sesion) => ({
+    params: { slug: sesion.data.slug },
+    props: { sesion },
+  }));
+}
+
+const { sesion } = Astro.props;
+const { titulo, descripcion, imagenHero, packs, faqs } = sesion.data;
+---
+
+<Layout title={titulo}>
+
+  <!-- HERO -->
+  <section class="relative w-full h-[55vh] md:h-[65vh] overflow-hidden">
+    <Image
+      src={imagenHero}
+      alt={titulo}
+      width={1600}
+      height={1000}
+      format="webp"
+      quality={85}
+      loading="eager"
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-choco/80 via-choco/20 to-transparent"></div>
+    <div class="absolute inset-0 flex flex-col items-center justify-end text-center px-6 pb-12 md:pb-16">
+      <h1 class="font-script text-4xl md:text-6xl font-normal text-cream mb-4 drop-shadow-md">
+        {titulo}
+      </h1>
+      <p class="text-cream/90 text-sm md:text-base max-w-xl leading-relaxed drop-shadow-md">
+        {descripcion}
+      </p>
+    </div>
+  </section>
+
+  <!-- PACKS -->
+  <section class="w-full py-10 md:py-24 px-6 bg-cream">
+    <div class="max-w-6xl mx-auto">
+
+      <p class="text-forest text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
+        Elegí tu experiencia
+      </p>
+      <h2 class="text-xl md:text-4xl font-semibold text-center text-choco mb-8 md:mb-16">
+        Packs disponibles
+      </h2>
+
+      <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 items-center justify-items-center">
+        {packs.map((pack, i) => (
+          <div class={`group relative rounded-2xl md:rounded-[2rem] flex flex-col w-full transition-all duration-300 hover:scale-105 hover:-translate-y-1 ${
+            i === 1
+              ? 'p-5 md:p-10 pt-9 md:pt-14 bg-forest text-cream border-4 border-tan shadow-2xl md:scale-110 z-10'
+              : 'p-4 md:p-8 bg-white text-choco border-2 border-sand shadow-md'
+          }`}>
+
+            {i === 1 && (
+              <span class="absolute -top-3 md:-top-4 left-1/2 -translate-x-1/2 bg-white text-forest text-[10px] md:text-[11px] font-bold uppercase tracking-widest px-4 py-1.5 md:px-5 md:py-2 rounded-full shadow-lg border-2 border-tan whitespace-nowrap">
+                 Más elegido
+              </span>
+            )}
+
+            <p class={`font-bold uppercase tracking-widest mb-1 text-center ${i === 1 ? 'text-xl md:text-2xl text-cream' : 'text-base md:text-lg text-sage-button'}`}>
+              {pack.nombre}
+            </p>
+            <p class={`text-xs md:text-sm mb-3 md:mb-5 text-center ${i === 1 ? 'text-cream/80' : 'text-choco/60'}`}>
+              {pack.tagline}
+            </p>
+
+            <ul class="flex-1 space-y-1.5 md:space-y-2.5 mb-4 md:mb-6">
+              {pack.items.map((item) => (
+                <li class={`text-xs md:text-sm flex items-start gap-2 ${i === 1 ? 'text-cream/90' : 'text-choco/75'}`}>
+                  <span class={`mt-0.5 font-bold ${i === 1 ? 'text-tan' : 'text-sage-button'}`}>✓</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div class="text-center mb-2 md:mb-3">
+              <p class={`font-bold ${i === 1 ? 'text-2xl md:text-4xl text-cream' : 'text-xl md:text-3xl text-choco'}`}>
+                {pack.precio}
+              </p>
+            </div>
+
+            {pack.precioCuotas && (
+              <div class={`text-center rounded-xl py-1.5 md:py-2 px-3 mb-3 md:mb-5 text-[10px] md:text-xs font-medium ${
+                i === 1 ? 'bg-cream/15 text-cream/90' : 'bg-sand/40 text-choco/70'
+              }`}>
+                {pack.precioCuotas}
+              </div>
+            )}
+
+            <a
+              href={pack.linkReserva}
+              target="_blank"
+              class="text-center text-sm md:text-base rounded-full py-2.5 md:py-3.5 font-bold transition-all duration-300 group-hover:scale-105 shadow-lg hover:opacity-90"
+              style={`background-color: ${i === 1 ? '#dcccac' : i === 0 ? '#99ad7a' : '#546b41'}; color: ${i === 1 ? '#6b4a3f' : '#fff8ec'};`}
+            >
+              Reservá tu lugar
+            </a>
+
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="w-full py-16 md:py-24 px-6 bg-sand/30">
+    <div class="max-w-3xl mx-auto">
+
+      <p class="text-forest text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
+        Dudas frecuentes
+      </p>
+      <h2 class="text-2xl md:text-4xl font-semibold text-center text-choco mb-12 md:mb-16">
+        Preguntas frecuentes
+      </h2>
+
+      <div class="flex flex-col gap-3">
+        {faqs.map((faq) => (
+          <details class="group bg-white rounded-2xl px-6 py-4 shadow-sm">
+            <summary class="flex items-center justify-between cursor-pointer text-choco font-semibold text-sm md:text-base list-none">
+              {faq.pregunta}
+              <span class="text-choco/40 text-xl group-open:rotate-45 transition-transform duration-300">+</span>
+            </summary>
+            <p class="text-choco/70 text-sm mt-3 leading-relaxed">
+              {faq.respuesta}
+            </p>
+          </details>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <CTAFinal />
+
+</Layout>
