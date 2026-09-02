@@ -1,0 +1,61 @@
+---
+import { Image } from 'astro:assets';
+
+// Toma automáticamente TODAS las imágenes de la carpeta hero, sin importa el nombre
+const heroImages = Object.values(
+  import.meta.glob('../assets/images/home/hero/*.{jpeg,jpg,png,webp}', { eager: true })
+).map((mod: any) => mod.default);
+---
+
+<section class="relative w-full h-[70vh] md:h-[75vh] overflow-hidden">
+  <swiper-container
+    class="w-full h-full"
+    loop="true"
+    autoplay-delay="4500"
+    autoplay-disable-on-interaction="false"
+    effect="fade"
+    speed="1000"
+  >
+    {heroImages.map((img, i) => (
+      <swiper-slide>
+        <Image
+          src={img}
+          alt={`LeCapture Fotografía - imagen ${i + 1}`}
+          width={1920}
+          height={1080}
+          format="webp"
+          quality={80}
+          loading={i === 0 ? 'eager' : 'lazy'}
+          class="w-full h-full object-cover"
+        />
+      </swiper-slide>
+    ))}
+  </swiper-container>
+
+  <!-- Texto superpuesto -->
+  <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 bg-black/30 pointer-events-none">
+    <h1 class="text-white text-4xl md:text-6xl font-semibold mb-4 drop-shadow-lg">
+      LeCapture
+    </h1>
+    <p class="text-white text-base md:text-xl mb-6 max-w-md drop-shadow-lg">
+      Fotografía de embarazo, recién nacidos e infantiles
+    </p>
+    
+      href="/sesiones"
+      class="pointer-events-auto bg-white text-gray-900 px-6 py-3 rounded-full font-medium hover:bg-gray-200 transition-colors"
+     <a>
+      Ver sesiones
+    </a>
+  </div>
+</section>
+
+<script>
+  import { register } from 'swiper/element/bundle';
+  register();
+</script>
+
+<style is:global>
+  swiper-container {
+    --swiper-theme-color: #ffffff;
+  }
+</style>
