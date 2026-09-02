@@ -30,9 +30,9 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
       loading="eager"
       class="absolute inset-0 w-full h-full object-cover"
     />
-    <div class="absolute inset-0 bg-gradient-to-t from-[#4C5C2D]/85 via-[#4C5C2D]/30 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-[#3D2420]/60 via-[#3D2420]/20 to-transparent"></div>
     <div class="absolute inset-0 flex flex-col items-center justify-end text-center px-6 pb-12 md:pb-16">
-      <span class="inline-block bg-[#D9C08C] text-[#6b4a3f] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">
+      <span class="inline-block bg-[#D9A24B] text-[#3D2420] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">
         {subtitulo}
       </span>
       <h1 class="font-script text-4xl md:text-6xl font-normal text-cream mb-4 drop-shadow-md">
@@ -47,7 +47,7 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
   <!-- GALERÍA -->
   {galeria && galeria.length > 0 && (
     <section class="w-full py-16 md:py-20 px-6 bg-[#fff8ec]">
-      <p class="text-[#6A7E3F] text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
+      <p class="text-[#B5623A] text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
         La escenografía
       </p>
       <h2 class="font-heading text-2xl md:text-4xl font-semibold text-center text-[#6b4a3f] mb-10 md:mb-14">
@@ -55,11 +55,10 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
       </h2>
 
       <div class="relative max-w-5xl mx-auto">
-
         <!-- Sticker pinito, esquina superior derecha -->
         <div class="absolute -top-4 -right-3 md:-top-5 md:-right-5 z-20 rotate-[12deg]" aria-hidden="true">
-          <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#fff8ec] border-2 border-[#6A7E3F]/30 shadow-lg flex items-center justify-center">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#6A7E3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 md:w-7 md:h-7">
+          <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#fff8ec] border-2 border-[#B5623A]/30 shadow-lg flex items-center justify-center">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#8B4A35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 md:w-7 md:h-7">
               <path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/>
               <path d="M12 22v-3"/>
             </svg>
@@ -68,8 +67,8 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
 
         <!-- Sticker pinito, borde izquierdo, entre filas -->
         <div class="hidden md:block absolute top-[38%] -left-5 z-20 rotate-[-10deg]" aria-hidden="true">
-          <div class="w-11 h-11 rounded-full bg-[#fff8ec] border-2 border-[#D9C08C]/40 shadow-lg flex items-center justify-center">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#6A7E3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+          <div class="w-11 h-11 rounded-full bg-[#fff8ec] border-2 border-[#D9A24B]/40 shadow-lg flex items-center justify-center">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#B5623A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
               <path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/>
               <path d="M12 22v-3"/>
             </svg>
@@ -98,20 +97,20 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
 
   <!-- VIDEO -->
   {videoEmbed && (
-    <section class="relative w-full py-16 md:py-24 px-6 bg-[#4C5C2D] overflow-hidden">
+    <section class="relative w-full py-16 md:py-24 px-6 bg-[#3D2420] overflow-hidden">
 
       <!-- Copos de nieve decorativos -->
       {[
-        { top: '6%',  left: '6%',  size: 34, color: '#D9C08C', opacity: 0.7,  rotate: -10, mobile: true  },
-        { top: '9%',  left: '86%', size: 24, color: '#fff8ec', opacity: 0.5,  rotate: 15,  mobile: false },
-        { top: '20%', left: '46%', size: 16, color: '#D9C08C', opacity: 0.35, rotate: 25,  mobile: false },
-        { top: '16%', left: '24%', size: 20, color: '#D9C08C', opacity: 0.5,  rotate: -20, mobile: true  },
-        { top: '38%', left: '9%',  size: 14, color: '#fff8ec', opacity: 0.3,  rotate: 30,  mobile: false },
-        { top: '55%', left: '4%',  size: 22, color: '#fff8ec', opacity: 0.45, rotate: 8,   mobile: false },
-        { top: '62%', left: '93%', size: 30, color: '#D9C08C', opacity: 0.6,  rotate: -18, mobile: true  },
-        { top: '76%', left: '46%', size: 16, color: '#fff8ec', opacity: 0.35, rotate: 5,   mobile: false },
-        { top: '85%', left: '16%', size: 18, color: '#D9C08C', opacity: 0.4,  rotate: 12,  mobile: false },
-        { top: '90%', left: '72%', size: 24, color: '#fff8ec', opacity: 0.5,  rotate: -6,  mobile: true  },
+        { top: '6%',  left: '6%',  size: 34, color: '#D9A24B', opacity: 0.5,  rotate: -10, mobile: true  },
+        { top: '9%',  left: '86%', size: 24, color: '#fff8ec', opacity: 0.35, rotate: 15,  mobile: false },
+        { top: '20%', left: '46%', size: 16, color: '#D9A24B', opacity: 0.25, rotate: 25,  mobile: false },
+        { top: '16%', left: '24%', size: 20, color: '#D9A24B', opacity: 0.35, rotate: -20, mobile: true  },
+        { top: '38%', left: '9%',  size: 14, color: '#fff8ec', opacity: 0.2,  rotate: 30,  mobile: false },
+        { top: '55%', left: '4%',  size: 22, color: '#fff8ec', opacity: 0.3,  rotate: 8,   mobile: false },
+        { top: '62%', left: '93%', size: 30, color: '#D9A24B', opacity: 0.4,  rotate: -18, mobile: true  },
+        { top: '76%', left: '46%', size: 16, color: '#fff8ec', opacity: 0.25, rotate: 5,   mobile: false },
+        { top: '85%', left: '16%', size: 18, color: '#D9A24B', opacity: 0.3,  rotate: 12,  mobile: false },
+        { top: '90%', left: '72%', size: 24, color: '#fff8ec', opacity: 0.35, rotate: -6,  mobile: true  },
       ].map((c) => (
         <div
           class={`absolute pointer-events-none ${c.mobile ? '' : 'hidden md:block'}`}
@@ -119,22 +118,32 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
           aria-hidden="true"
         >
           <svg
+            xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="none"
             stroke={c.color}
-            stroke-width="1.5"
+            stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
             style={`width:${c.size}px; height:${c.size}px;`}
           >
-            <g><line x1="12" y1="4" x2="12" y2="20"/><path d="M9 7l3-3 3 3M9 17l3 3 3-3"/></g>
-            <g transform="rotate(60 12 12)"><line x1="12" y1="4" x2="12" y2="20"/><path d="M9 7l3-3 3 3M9 17l3 3 3-3"/></g>
-            <g transform="rotate(120 12 12)"><line x1="12" y1="4" x2="12" y2="20"/><path d="M9 7l3-3 3 3M9 17l3 3 3-3"/></g>
+            <path d="m10 20-1.25-2.5L6 18"/>
+            <path d="M10 4 8.75 6.5 6 6"/>
+            <path d="m14 20 1.25-2.5L18 18"/>
+            <path d="m14 4 1.25 2.5L18 6"/>
+            <path d="m17 21-3-6h-4"/>
+            <path d="m17 3-3 6 1.5 3"/>
+            <path d="M2 12h6.5L10 9"/>
+            <path d="m20 10-1.5 2 1.5 2"/>
+            <path d="M22 12h-6.5L14 15"/>
+            <path d="m4 10 1.5 2L4 14"/>
+            <path d="m7 21 3-6-1.5-3"/>
+            <path d="m7 3 3 6h4"/>
           </svg>
         </div>
       ))}
 
-      <p class="text-[#D9C08C] text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
+      <p class="text-[#D9A24B] text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
         Mirá cómo es
       </p>
       <h2 class="font-heading text-2xl md:text-4xl font-semibold text-center text-cream mb-10 md:mb-14">
@@ -145,10 +154,10 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
         <!-- Marco dorado asomando detrás -->
         <div
           class="absolute inset-0 rounded-[1.75rem] rotate-[-2deg] translate-x-3 translate-y-3 md:translate-x-4 md:translate-y-4 -z-10"
-          style="background-color: #D9C08C;"
+          style="background-color: #D9A24B;"
           aria-hidden="true"
         ></div>
-        <div class="rounded-[1.75rem] overflow-hidden shadow-2xl border-4 border-[#D9C08C]/50" set:html={videoEmbed} />
+        <div class="rounded-[1.75rem] overflow-hidden shadow-2xl border-4 border-[#D9A24B]/40" set:html={videoEmbed} />
       </div>
     </section>
   )}
@@ -157,7 +166,7 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
   {packs && packs.length > 0 && (
     <section class="w-full py-16 md:py-24 px-6 bg-[#fff8ec]">
       <div class="max-w-6xl mx-auto">
-        <p class="text-[#6A7E3F] text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
+        <p class="text-[#B5623A] text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
           Elegí tu experiencia
         </p>
         <h2 class="font-heading text-2xl md:text-4xl font-semibold text-center text-[#6b4a3f] mb-12 md:mb-16">
@@ -168,17 +177,17 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
           {packs.map((pack, i) => (
             <div class={`group relative rounded-[2rem] flex flex-col w-full text-center transition-all duration-300 hover:scale-105 hover:-translate-y-1 ${
               i === 1
-                ? 'p-8 md:p-10 pt-12 md:pt-14 bg-[#4C5C2D] text-cream border-4 border-[#D9C08C] shadow-2xl md:scale-110 z-10'
-                : 'p-7 md:p-8 bg-white text-[#6b4a3f] border-2 border-[#D9C08C]/40 shadow-md'
+                ? 'p-8 md:p-10 pt-12 md:pt-14 bg-[#8B4A35] text-cream border-4 border-[#D9A24B] shadow-2xl md:scale-110 z-10'
+                : 'p-7 md:p-8 bg-white text-[#6b4a3f] border-2 border-dashed border-[#B5623A]/35 shadow-md'
             }`}>
 
               {i === 1 && (
-                <span class="absolute -top-4 left-1/2 -translate-x-1/2 bg-white text-[#6A7E3F] text-[11px] font-bold uppercase tracking-widest px-5 py-2 rounded-full shadow-lg border-2 border-[#D9C08C] whitespace-nowrap">
+                <span class="absolute -top-4 left-1/2 -translate-x-1/2 bg-white text-[#8B4A35] text-[11px] font-bold uppercase tracking-widest px-5 py-2 rounded-full shadow-lg border-2 border-[#D9A24B] whitespace-nowrap">
                   🎄 Más elegido
                 </span>
               )}
 
-              <p class={`font-bold uppercase tracking-widest mb-1 ${i === 1 ? 'text-2xl text-cream' : 'text-lg text-[#6A7E3F]'}`}>
+              <p class={`font-bold uppercase tracking-widest mb-1 ${i === 1 ? 'text-2xl text-cream' : 'text-lg text-[#B5623A]'}`}>
                 {pack.nombre}
               </p>
               <p class={`text-sm mb-5 ${i === 1 ? 'text-cream/80' : 'text-[#6b4a3f]/60'}`}>
@@ -188,7 +197,7 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
               <ul class="flex-1 flex flex-col items-center space-y-2.5 mb-6">
                 {pack.items.map((item) => (
                   <li class={`text-sm flex items-start gap-2 max-w-[85%] ${i === 1 ? 'text-cream/90' : 'text-[#6b4a3f]/75'}`}>
-                    <span class={`mt-0.5 font-bold shrink-0 ${i === 1 ? 'text-[#D9C08C]' : 'text-[#6A7E3F]'}`}>✓</span>
+                    <span class={`mt-0.5 font-bold shrink-0 ${i === 1 ? 'text-[#D9A24B]' : 'text-[#B5623A]'}`}>✓</span>
                     <span class="text-left">{item}</span>
                   </li>
                 ))}
@@ -202,7 +211,7 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
 
               {pack.precioCuotas && (
                 <div class={`text-center rounded-xl py-2 px-3 mb-5 text-xs font-medium ${
-                  i === 1 ? 'bg-cream/15 text-cream/90' : 'bg-[#D9C08C]/15 text-[#6b4a3f]/70'
+                  i === 1 ? 'bg-cream/15 text-cream/90' : 'bg-[#B5623A]/10 text-[#6b4a3f]/70'
                 }`}>
                   {pack.precioCuotas}
                 </div>
@@ -212,7 +221,7 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
                 href={pack.linkReserva}
                 target="_blank"
                 class="text-center rounded-full py-3.5 font-bold transition-all duration-300 group-hover:scale-105 shadow-lg hover:opacity-90"
-                style={`background-color: ${i === 1 ? '#D9C08C' : i === 0 ? '#6A7E3F' : '#6b4a3f'}; color: ${i === 1 ? '#6b4a3f' : '#FFFFFF'};`}
+                style={`background-color: ${i === 1 ? '#D9A24B' : i === 0 ? '#B5623A' : '#6b4a3f'}; color: ${i === 1 ? '#3D2420' : '#FFFFFF'};`}
               >
                 Reservá tu lugar
               </a>
@@ -228,7 +237,7 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
   {faqs && faqs.length > 0 && (
     <section class="w-full py-16 md:py-24 px-6 bg-[#6b4a3f]/5">
       <div class="max-w-3xl mx-auto">
-        <p class="text-[#6A7E3F] text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
+        <p class="text-[#B5623A] text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
           Dudas frecuentes
         </p>
         <h2 class="font-heading text-2xl md:text-4xl font-semibold text-center text-[#6b4a3f] mb-12 md:mb-16">
@@ -241,17 +250,27 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
               <summary class="flex items-center justify-between cursor-pointer text-[#6b4a3f] font-semibold text-sm md:text-base list-none">
                 {faq.pregunta}
                 <svg
+                  xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="1.5"
+                  stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  class="w-5 h-5 shrink-0 ml-3 text-[#6b4a3f]/35 group-open:text-[#6A7E3F] group-open:rotate-45 transition-all duration-300"
+                  class="w-5 h-5 shrink-0 ml-3 text-[#6b4a3f]/35 group-open:text-[#B5623A] group-open:rotate-45 transition-all duration-300"
                 >
-                  <g><line x1="12" y1="4" x2="12" y2="20"/><path d="M9 7l3-3 3 3M9 17l3 3 3-3"/></g>
-                  <g transform="rotate(60 12 12)"><line x1="12" y1="4" x2="12" y2="20"/><path d="M9 7l3-3 3 3M9 17l3 3 3-3"/></g>
-                  <g transform="rotate(120 12 12)"><line x1="12" y1="4" x2="12" y2="20"/><path d="M9 7l3-3 3 3M9 17l3 3 3-3"/></g>
+                  <path d="m10 20-1.25-2.5L6 18"/>
+                  <path d="M10 4 8.75 6.5 6 6"/>
+                  <path d="m14 20 1.25-2.5L18 18"/>
+                  <path d="m14 4 1.25 2.5L18 6"/>
+                  <path d="m17 21-3-6h-4"/>
+                  <path d="m17 3-3 6 1.5 3"/>
+                  <path d="M2 12h6.5L10 9"/>
+                  <path d="m20 10-1.5 2 1.5 2"/>
+                  <path d="M22 12h-6.5L14 15"/>
+                  <path d="m4 10 1.5 2L4 14"/>
+                  <path d="m7 21 3-6-1.5-3"/>
+                  <path d="m7 3 3 6h4"/>
                 </svg>
               </summary>
               <p class="text-[#6b4a3f]/70 text-sm mt-3 leading-relaxed">
@@ -267,13 +286,13 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
   <!-- CTA FINAL -->
   <CTAFinal
     bgColor="#fff8ec"
-    gridLight="rgba(217,192,140,0.4)"
-    gridDark="rgba(178,59,50,0.32)"
-    badgeBg="#6A7E3F"
+    gridLight="rgba(217,162,75,0.35)"
+    gridDark="rgba(139,74,53,0.25)"
+    badgeBg="#B5623A"
     badgeText="#ffffff"
     headingColor="#6b4a3f"
     textColor="#6b4a3fB3"
-    buttonBg="#6A7E3F"
+    buttonBg="#B5623A"
     buttonText="#ffffff"
     badgeLabel="Reservá tu sesión 🎄"
     heading="¿Lista para tu sesión de Navidad?"
