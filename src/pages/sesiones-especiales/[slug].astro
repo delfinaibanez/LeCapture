@@ -181,6 +181,37 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
                 : 'p-7 md:p-8 bg-white text-[#6b4a3f] border-2 border-dashed border-[#B5623A]/35 shadow-md'
             }`}>
 
+              {/* Patrón sutil de pinitos de fondo, solo en la tarjeta destacada */}
+              {i === 1 && (
+                <div class="absolute inset-0 rounded-[2rem] overflow-hidden pointer-events-none z-[-1]" aria-hidden="true">
+                  {[
+                    { top: '6%',  left: '10%', size: 20, rotate: -8  },
+                    { top: '12%', left: '75%', size: 16, rotate: 14  },
+                    { top: '28%', left: '40%', size: 22, rotate: -15 },
+                    { top: '35%', left: '85%', size: 14, rotate: 6   },
+                    { top: '48%', left: '15%', size: 18, rotate: 10  },
+                    { top: '58%', left: '55%', size: 16, rotate: -12 },
+                    { top: '70%', left: '80%', size: 20, rotate: 18  },
+                    { top: '78%', left: '25%', size: 14, rotate: -6  },
+                    { top: '88%', left: '60%', size: 18, rotate: 8   },
+                    { top: '92%', left: '8%',  size: 16, rotate: -10 },
+                  ].map((p) => (
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#D9A24B"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      style={`position:absolute; top:${p.top}; left:${p.left}; width:${p.size}px; height:${p.size}px; transform: rotate(${p.rotate}deg); opacity:0.18;`}
+                    >
+                      <path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/>
+                      <path d="M12 22v-3"/>
+                    </svg>
+                  ))}
+                </div>
+              )}
+
               {i === 1 && (
                 <span class="absolute -top-4 left-1/2 -translate-x-1/2 bg-white text-[#8B4A35] text-[11px] font-bold uppercase tracking-widest px-5 py-2 rounded-full shadow-lg border-2 border-[#D9A24B] whitespace-nowrap">
                   🎄 Más elegido
