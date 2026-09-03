@@ -1,0 +1,126 @@
+---
+import { Image } from 'astro:assets';
+import sinEditar from '../assets/images/home/edicion/sin-editar.jpg';
+import editada from '../assets/images/home/edicion/editada.jpg';
+---
+
+<section
+  class="w-full py-16 md:py-24 px-6 bg-sand/40"
+>
+  <p class="text-forest text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
+    El detrás de escena
+  </p>
+  <h2 class="text-2xl md:text-4xl font-semibold text-center text-choco mb-4">
+    La magia de la edición
+  </h2>
+  <p class="text-choco/70 text-center max-w-lg mx-auto mb-10 md:mb-14">
+    Deslizá para ver la transformación 
+  </p>
+
+  <div class="max-w-lg mx-auto relative">
+
+    <!-- Tarjeta de color asomando detrás -->
+    <div
+      class="absolute inset-0 rounded-[2rem] rotate-[4deg] translate-x-4 translate-y-4 md:translate-x-6 md:translate-y-6 -z-10 shadow-lg border-4"
+      style="background-color: #C3CC9B; border-color: #fff8ec;"
+      aria-hidden="true"
+    ></div>
+
+    <!-- Sticker estrella -->
+    <div class="absolute -top-5 -left-5 md:-top-7 md:-left-7 z-20 rotate-[-15deg]" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6b4a3f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 md:w-14 md:h-14 drop-shadow-sm"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+    </div>
+
+    <!-- Anotación a mano, apuntando a la manija -->
+    <div class="hidden md:block absolute top-1/2 -right-28 -translate-y-1/2 z-20 rotate-[-6deg]" aria-hidden="true">
+      <p class="font-script text-4xl text-choco mb-1 text-center">Desliza!</p>
+      <svg width="80" height="44" viewBox="0 0 70 40" class="text-choco/70">
+        <path d="M65 5 Q40 5 15 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        <path d="M15 30 L15 20 M15 30 L25 27" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </div>
+
+    <div
+      id="comparador"
+      class="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden shadow-lg select-none cursor-ew-resize"
+    >
+      <!-- Foto editada: fondo, siempre completa, tamaño fijo -->
+      <Image
+        src={editada}
+        alt="Foto editada"
+        width={800}
+        height={600}
+        format="webp"
+        quality={85}
+        loading="lazy"
+        class="absolute inset-0 w-full h-full object-cover pointer-events-none"
+      />
+
+      <!-- Foto sin editar: mismo tamaño exacto, se recorta con clip-path -->
+      <div
+        id="comparador-original"
+        class="absolute inset-0 w-full h-full pointer-events-none"
+        style="clip-path: inset(0 50% 0 0);"
+      >
+        <Image
+          src={sinEditar}
+          alt="Foto sin editar"
+          width={800}
+          height={600}
+          format="webp"
+          quality={85}
+          loading="lazy"
+          class="absolute inset-0 w-full h-full object-cover"
+        />
+      </div>
+
+      <!-- Etiquetas -->
+      <span class="absolute top-4 left-4 bg-choco/70 text-white text-xs font-semibold px-3 py-1 rounded-full pointer-events-none shadow-sm">
+        Sin editar
+      </span>
+      <span class="absolute top-4 right-4 bg-forest/80 text-white text-xs font-semibold px-3 py-1 rounded-full pointer-events-none shadow-sm">
+        Editada
+      </span>
+
+      <!-- Línea + manija -->
+      <div id="comparador-linea" class="absolute top-0 bottom-0 w-1 bg-white shadow-md pointer-events-none" style="left: 50%;">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center">
+          <span class="text-choco text-sm">↔</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const comparador = document.getElementById('comparador');
+  const original = document.getElementById('comparador-original');
+  const linea = document.getElementById('comparador-linea');
+
+  let dragging = false;
+
+  function mover(clientX: number) {
+    if (!comparador || !original || !linea) return;
+    const rect = comparador.getBoundingClientRect();
+    let pos = ((clientX - rect.left) / rect.width) * 100;
+    pos = Math.max(0, Math.min(100, pos));
+    original.style.clipPath = `inset(0 ${100 - pos}% 0 0)`;
+    linea.style.left = `${pos}%`;
+  }
+
+  comparador?.addEventListener('mousedown', () => (dragging = true));
+  window.addEventListener('mouseup', () => (dragging = false));
+  window.addEventListener('mousemove', (e) => {
+    if (dragging) mover(e.clientX);
+  });
+
+  comparador?.addEventListener('touchstart', () => (dragging = true));
+  window.addEventListener('touchend', () => (dragging = false));
+  window.addEventListener('touchmove', (e) => {
+    if (dragging && e.touches[0]) mover(e.touches[0].clientX);
+  });
+
+  comparador?.addEventListener('click', (e) => {
+    mover((e as MouseEvent).clientX);
+  });
+</script>
