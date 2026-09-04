@@ -66,34 +66,59 @@ const etapas = [
     <button
       id="camino-prev"
       aria-label="Ver anterior"
-      class="absolute left-0 top-9 z-10 w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center text-choco/60 hover:text-choco transition-colors"
+      class="absolute left-0 top-9 z-10 w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center text-choco/60 hover:text-choco transition-opacity duration-200"
     >
       <span class="text-lg leading-none -mt-0.5">‹</span>
     </button>
     <button
       id="camino-next"
       aria-label="Ver siguiente"
-      class="absolute right-0 top-9 z-10 w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center text-choco/60 hover:text-choco transition-colors"
+      class="absolute right-0 top-9 z-10 w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center text-choco/60 hover:text-choco transition-opacity duration-200"
     >
       <span class="text-lg leading-none -mt-0.5">›</span>
     </button>
   </div>
 
   <script>
-    const scrollEl = document.getElementById('camino-scroll');
-    const nextBtn = document.getElementById('camino-next');
-    const prevBtn = document.getElementById('camino-prev');
+    const scrollEl = document.getElementById('camino-scroll') as HTMLDivElement | null;
+    const nextBtn = document.getElementById('camino-next') as HTMLButtonElement | null;
+    const prevBtn = document.getElementById('camino-prev') as HTMLButtonElement | null;
 
-    // Mueve el ancho de una card (w-24 = 96px + gap-5 = 20px)
-    const STEP = 116;
+    const STEP = 116; // ancho de card (96px) + gap (20px)
+    const TOLERANCE = 4; // margen de error por redondeos de scroll
+
+    function updateArrows() {
+      if (!scrollEl || !nextBtn || !prevBtn) return;
+
+      const maxScroll = scrollEl.scrollWidth - scrollEl.clientWidth;
+      const atStart = scrollEl.scrollLeft <= TOLERANCE;
+      const atEnd = scrollEl.scrollLeft >= maxScroll - TOLERANCE;
+
+      prevBtn.disabled = atStart;
+      prevBtn.classList.toggle('opacity-0', atStart);
+      prevBtn.classList.toggle('pointer-events-none', atStart);
+
+      nextBtn.disabled = atEnd;
+      nextBtn.classList.toggle('opacity-0', atEnd);
+      nextBtn.classList.toggle('pointer-events-none', atEnd);
+    }
 
     nextBtn?.addEventListener('click', () => {
-      scrollEl?.scrollBy({ left: STEP * 2, behavior: 'smooth' });
+      if (!scrollEl) return;
+      const maxScroll = scrollEl.scrollWidth - scrollEl.clientWidth;
+      const target = Math.min(scrollEl.scrollLeft + STEP * 2, maxScroll);
+      scrollEl.scrollTo({ left: target, behavior: 'smooth' });
     });
 
     prevBtn?.addEventListener('click', () => {
-      scrollEl?.scrollBy({ left: -STEP * 2, behavior: 'smooth' });
+      if (!scrollEl) return;
+      const target = Math.max(scrollEl.scrollLeft - STEP * 2, 0);
+      scrollEl.scrollTo({ left: target, behavior: 'smooth' });
     });
+
+    scrollEl?.addEventListener('scroll', updateArrows);
+    // Estado inicial al cargar
+    updateArrows();
   </script>
 
   <!-- DESKTOP: línea horizontal -->
