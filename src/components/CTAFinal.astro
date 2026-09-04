@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import fotoCta from '../assets/images/home/cta/foto-cta.jpg';
+
 interface Props {
   badgeLabel?: string;
   heading?: string;
@@ -14,34 +17,40 @@ const {
   whatsappNumber = '549XXXXXXXXXX',
   whatsappMessage = 'Hola! Quiero consultar por una sesión',
 } = Astro.props;
+
+// Patrón de corazoncitos tenues, repetido en mosaico
+const heartPattern = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><g fill="none" stroke="%236b4a3f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.12"><path transform="translate(10,10) scale(0.7)" d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/><path transform="translate(75,55) scale(0.55) rotate(15)" d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/><path transform="translate(30,80) scale(0.6) rotate(-12)" d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></g></svg>`;
 ---
 
-<section class="relative w-full py-20 md:py-28 px-6 overflow-hidden bg-sand/40">
+<section class="relative w-full py-20 md:py-32 px-6 overflow-hidden" style="background-color: #e4dfb5;">
 
-  <!-- Manchas de color difuminadas de fondo -->
+  <!-- Patrón de corazoncitos tenues -->
   <div
-    class="absolute -top-10 -left-10 w-64 h-64 rounded-full blur-3xl opacity-50 pointer-events-none"
-    style="background-color: #fbe8ce;"
-    aria-hidden="true"
-  ></div>
-  <div
-    class="absolute -bottom-16 -right-10 w-72 h-72 rounded-full blur-3xl opacity-50 pointer-events-none"
-    style="background-color: #c3cc9b;"
+    class="absolute inset-0 pointer-events-none"
+    style={`background-image: url('${heartPattern}'); background-size: 120px 120px;`}
     aria-hidden="true"
   ></div>
 
-  <!-- Estrellita decorativa suelta -->
-  <span class="hidden md:block absolute top-10 right-[18%] rotate-[-12deg] z-10" aria-hidden="true">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 text-choco/30"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/></svg>
-  </span>
+  <div class="relative max-w-3xl mx-auto z-10 flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 text-center md:text-left">
 
-  <!-- Tarjeta flotante con marco grueso (mismo lenguaje que "Sesión especial") -->
-  <div class="relative max-w-xl mx-auto z-10">
-    <div class="relative bg-cream rounded-[2.5rem] shadow-[0_0_0_6px_#fff8ec,0_0_0_9px_rgba(220,204,172,0.7)] px-8 py-14 md:px-14 md:py-16 text-center">
+    <!-- Foto: rectangular, inclinada -->
+    <div class="relative shrink-0">
+      <div class="relative w-36 h-44 md:w-52 md:h-64 rounded-[1.5rem] overflow-hidden shadow-lg rotate-[-3deg] ring-4 ring-cream">
+        <Image
+          src={fotoCta}
+          alt="Sesión de fotos LeCapture"
+          width={500}
+          height={625}
+          format="webp"
+          quality={85}
+          loading="lazy"
+          class="w-full h-full object-cover"
+        />
+      </div>
 
-      <!-- Sticker Corazón -->
+      <!-- Sticker Corazón principal -->
       <div
-        class="absolute -top-6 -right-3 md:-top-7 md:-right-5 z-20 p-3 rounded-2xl rotate-12 bg-cream border border-choco/10 shadow-md"
+        class="absolute -top-3 -right-4 z-20 p-2 rounded-xl rotate-12 bg-cream border border-choco/10 shadow-md"
         aria-hidden="true"
       >
         <svg
@@ -54,28 +63,27 @@ const {
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="w-7 h-7"
+          class="w-5 h-5"
         >
           <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/>
         </svg>
       </div>
+    </div>
 
-      <!-- Badge -->
-      <span class="inline-block text-xs font-semibold tracking-wider uppercase px-4 py-1.5 rounded-full mb-5 bg-sand/60 text-choco">
+    <!-- Texto -->
+    <div class="flex flex-col items-center md:items-start">
+      <span class="inline-block text-xs font-semibold tracking-wider uppercase px-4 py-1.5 rounded-full mb-5 bg-cream text-choco shadow-sm">
         {badgeLabel}
       </span>
 
-      <!-- Título -->
       <h2 class="font-heading text-2xl md:text-4xl font-semibold mb-4 leading-tight text-choco">
         {heading}
       </h2>
 
-      <!-- Subtexto -->
-      <p class="text-base md:text-lg mb-8 max-w-sm mx-auto text-choco/80">
+      <p class="text-sm md:text-base mb-8 max-w-sm text-choco/80">
         {subtext}
       </p>
 
-      <!-- Botón -->
       <a
         href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`}
         target="_blank"
@@ -83,9 +91,9 @@ const {
         class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold transition-transform duration-300 bg-sage-button hover:opacity-90 hover:scale-105 shadow-sm"
       >
         Escribime por WhatsApp
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 shrink-0"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg>
       </a>
-
     </div>
+
   </div>
 </section>
