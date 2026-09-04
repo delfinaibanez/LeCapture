@@ -15,27 +15,30 @@ const etapas = [
 ];
 ---
 
-<section class="w-full py-16 md:py-24 px-6 bg-sand/30">
-  <p class="text-forest text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
-    Sesiones
-  </p>
-  <h2 class="text-2xl md:text-4xl font-semibold text-center text-choco mb-4">
-    Un camino, una historia
-  </h2>
-  <p class="text-choco/70 text-center max-w-lg mx-auto mb-12 md:mb-16">
-    Acompañamos cada etapa, desde la panza hasta los primeros pasos.
-  </p>
+<section class="w-full py-16 md:py-24 bg-sand/30">
+  <div class="px-6">
+    <p class="text-forest text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
+      Sesiones
+    </p>
+    <h2 class="text-2xl md:text-4xl font-semibold text-center text-choco mb-4">
+      Un camino, una historia
+    </h2>
+    <p class="text-choco/70 text-center max-w-lg mx-auto mb-12 md:mb-16">
+      Acompañamos cada etapa, desde la panza hasta los primeros pasos.
+    </p>
+  </div>
 
   <!-- MOBILE: carrusel horizontal con flechas -->
-  <div class="md:hidden relative px-6">
+  <div class="md:hidden relative">
     <div
       id="camino-scroll"
-      class="flex gap-6 overflow-x-auto snap-x snap-mandatory py-3 scrollbar-hide"
+      class="flex gap-5 overflow-x-auto snap-x snap-mandatory py-3 scrollbar-hide px-12"
+      style="scroll-padding-inline: 3rem;"
     >
       {etapas.map((etapa, i) => (
         <a
           href={etapa.href}
-          class="group flex flex-col items-center text-center snap-center shrink-0 w-28"
+          class="group flex flex-col items-center text-center snap-center shrink-0 w-24"
         >
           <div class="relative w-24 h-24 rounded-full overflow-hidden ring-4 ring-white shadow-md bg-cream">
             <Image
@@ -59,18 +62,18 @@ const etapas = [
       ))}
     </div>
 
-    <!-- Flechas: botones circulares sutiles -->
+    <!-- Flechas: pegadas al borde real de la pantalla -->
     <button
       id="camino-prev"
       aria-label="Ver anterior"
-      class="absolute left-1 top-9 w-8 h-8 rounded-full bg-white/90 shadow-md flex items-center justify-center text-choco/60 hover:text-choco hover:bg-white transition-colors"
+      class="absolute left-0 top-9 z-10 w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center text-choco/60 hover:text-choco transition-colors"
     >
       <span class="text-lg leading-none -mt-0.5">‹</span>
     </button>
     <button
       id="camino-next"
       aria-label="Ver siguiente"
-      class="absolute right-1 top-9 w-8 h-8 rounded-full bg-white/90 shadow-md flex items-center justify-center text-choco/60 hover:text-choco hover:bg-white transition-colors"
+      class="absolute right-0 top-9 z-10 w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center text-choco/60 hover:text-choco transition-colors"
     >
       <span class="text-lg leading-none -mt-0.5">›</span>
     </button>
@@ -81,17 +84,20 @@ const etapas = [
     const nextBtn = document.getElementById('camino-next');
     const prevBtn = document.getElementById('camino-prev');
 
+    // Mueve el ancho de una card (w-24 = 96px + gap-5 = 20px)
+    const STEP = 116;
+
     nextBtn?.addEventListener('click', () => {
-      scrollEl?.scrollBy({ left: 140, behavior: 'smooth' });
+      scrollEl?.scrollBy({ left: STEP * 2, behavior: 'smooth' });
     });
 
     prevBtn?.addEventListener('click', () => {
-      scrollEl?.scrollBy({ left: -140, behavior: 'smooth' });
+      scrollEl?.scrollBy({ left: -STEP * 2, behavior: 'smooth' });
     });
   </script>
 
   <!-- DESKTOP: línea horizontal -->
-  <div class="hidden md:flex relative items-start justify-between max-w-5xl mx-auto gap-4">
+  <div class="hidden md:flex relative items-start justify-between max-w-5xl mx-auto gap-4 px-6">
     <div class="absolute top-16 left-0 h-0.5 w-full bg-gray-200 -z-10"></div>
 
     {etapas.map((etapa) => (
