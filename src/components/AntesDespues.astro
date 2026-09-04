@@ -43,6 +43,7 @@ import editada from '../assets/images/home/edicion/editada.jpg';
     <div
       id="comparador"
       class="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden shadow-lg select-none cursor-ew-resize"
+      style="touch-action: none;"
     >
       <!-- Foto editada: fondo, siempre completa, tamaño fijo -->
       <Image
@@ -108,19 +109,37 @@ import editada from '../assets/images/home/edicion/editada.jpg';
     linea.style.left = `${pos}%`;
   }
 
+  // --- Mouse ---
   comparador?.addEventListener('mousedown', () => (dragging = true));
   window.addEventListener('mouseup', () => (dragging = false));
   window.addEventListener('mousemove', (e) => {
     if (dragging) mover(e.clientX);
   });
 
-  comparador?.addEventListener('touchstart', () => (dragging = true));
-  window.addEventListener('touchend', () => (dragging = false));
-  window.addEventListener('touchmove', (e) => {
-    if (dragging && e.touches[0]) mover(e.touches[0].clientX);
-  });
-
   comparador?.addEventListener('click', (e) => {
     mover((e as MouseEvent).clientX);
   });
+
+  // --- Touch ---
+  comparador?.addEventListener(
+    'touchstart',
+    (e) => {
+      dragging = true;
+      if (e.touches[0]) mover(e.touches[0].clientX);
+    },
+    { passive: false }
+  );
+
+  window.addEventListener('touchend', () => (dragging = false));
+
+  window.addEventListener(
+    'touchmove',
+    (e) => {
+      if (dragging && e.touches[0]) {
+        e.preventDefault();
+        mover(e.touches[0].clientX);
+      }
+    },
+    { passive: false }
+  );
 </script>
