@@ -19,7 +19,6 @@ const {
 const svgPattern = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M0 3h24M0 9h24M0 15h24M0 21h24M3 0v24M9 0v24M15 0v24M21 0v24" stroke="%23ffffff" stroke-width="0.9" stroke-dasharray="2 2" opacity="0.75"/></svg>`;
 ---
 
-<!-- Se usa bg-sand/40 para matchear perfectamente con la sección Sobre Mí -->
 <section 
   class="relative w-full py-20 md:py-28 px-6 overflow-hidden bg-sand/40"
 >
@@ -73,11 +72,11 @@ const svgPattern = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/s
       {subtext}
     </p>
 
-    <!-- Botón -->
+    <!-- Botón con verde #99ad7a (bg-sage-button) -->
     <a
       href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`}
       target="_blank"
-      class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold transition-transform duration-300 bg-forest text-cream hover:bg-sage-button hover:scale-105"
+      class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold transition-transform duration-300 bg-sage-button text-white hover:scale-105"
     >
       Escribime por WhatsApp
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 shrink-0"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg>
