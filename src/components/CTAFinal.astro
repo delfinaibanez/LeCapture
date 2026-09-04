@@ -1,8 +1,8 @@
 ---
 interface Props {
   bgColor?: string;
-  gridLight?: string;
-  gridDark?: string;
+  gridGreen?: string;
+  gridRose?: string;
   badgeBg?: string;
   badgeText?: string;
   headingColor?: string;
@@ -17,9 +17,9 @@ interface Props {
 }
 
 const {
-  bgColor = '#F2DDD3',
-  gridLight = 'rgba(251,232,206,0.75)',
-  gridDark = 'rgba(153,173,122,0.35)',
+  bgColor = '#FFF8EC',
+  gridGreen = 'rgba(153,173,122,0.35)',
+  gridRose = 'rgba(235,188,188,0.45)',
   badgeBg = '#99ad7a',
   badgeText = '#ffffff',
   headingColor = '#6b4a3f',
@@ -39,10 +39,42 @@ const {
   style={`
     background-color: ${bgColor};
     background-image:
-      repeating-linear-gradient(90deg, transparent, transparent 16px, ${gridLight} 16px, ${gridLight} 28px, transparent 28px, transparent 44px),
-      repeating-linear-gradient(0deg, transparent, transparent 16px, ${gridLight} 16px, ${gridLight} 28px, transparent 28px, transparent 44px),
-      repeating-linear-gradient(90deg, transparent, transparent 16px, ${gridDark} 16px, ${gridDark} 28px, transparent 28px, transparent 44px),
-      repeating-linear-gradient(0deg, transparent, transparent 16px, ${gridDark} 16px, ${gridDark} 28px, transparent 28px, transparent 44px);
+      /* Líneas horizontales: combinación de franjas anchas y finas en rosa y verde */
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 20px,
+        ${gridRose} 20px,
+        ${gridRose} 28px,
+        transparent 28px,
+        transparent 34px,
+        ${gridGreen} 34px,
+        ${gridGreen} 36px,
+        transparent 36px,
+        transparent 42px,
+        ${gridRose} 42px,
+        ${gridRose} 50px,
+        transparent 50px,
+        transparent 70px
+      ),
+      /* Líneas verticales: réplica cruzada para formar la grilla escocesa */
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 20px,
+        ${gridRose} 20px,
+        ${gridRose} 28px,
+        transparent 28px,
+        transparent 34px,
+        ${gridGreen} 34px,
+        ${gridGreen} 36px,
+        transparent 36px,
+        transparent 42px,
+        ${gridRose} 42px,
+        ${gridRose} 50px,
+        transparent 50px,
+        transparent 70px
+      );
   `}
 >
   <div class="relative max-w-2xl mx-auto text-center">
