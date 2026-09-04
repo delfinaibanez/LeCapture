@@ -1,13 +1,5 @@
 ---
 interface Props {
-  bgColor?: string;
-  textureColor?: string;
-  badgeBg?: string;
-  badgeText?: string;
-  headingColor?: string;
-  textColor?: string;
-  buttonBg?: string;
-  buttonText?: string;
   badgeLabel?: string;
   heading?: string;
   subtext?: string;
@@ -16,14 +8,6 @@ interface Props {
 }
 
 const {
-  bgColor = '#E4D9C6',
-  textureColor = '#FFFFFF',
-  badgeBg = '#FFF8EC',
-  badgeText = '#4A3728',
-  headingColor = '#4A3728',
-  textColor = '#655344',
-  buttonBg = '#687850',
-  buttonText = '#ffffff',
   badgeLabel = 'Reservá tu sesión',
   heading = '¿Lista para capturar esta etapa?',
   subtext = 'Contame qué tenés en mente para tu sesión y coordinamos todos los detalles',
@@ -31,27 +15,25 @@ const {
   whatsappMessage = 'Hola! Quiero consultar por una sesión',
 } = Astro.props;
 
-// SVG en Data URL para la trama de lino
-const svgPattern = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M0 3h24M0 9h24M0 15h24M0 21h24M3 0v24M9 0v24M15 0v24M21 0v24" stroke="${encodeURIComponent(textureColor)}" stroke-width="0.9" stroke-dasharray="2 2" opacity="0.75"/></svg>`;
+// Trama blanca continua usando SVG
+const svgPattern = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M0 3h24M0 9h24M0 15h24M0 21h24M3 0v24M9 0v24M15 0v24M21 0v24" stroke="%23ffffff" stroke-width="0.9" stroke-dasharray="2 2" opacity="0.75"/></svg>`;
 ---
 
 <section 
-  class="relative w-full py-20 md:py-28 px-6 overflow-hidden" 
-  style={`background-color: ${bgColor};`}
+  class="relative w-full py-20 md:py-28 px-6 overflow-hidden bg-[#F3EBE0]"
 >
-  <!-- Textura de entramado claro continuo -->
+  <!-- Textura de entramado claro -->
   <div 
     class="absolute inset-0 pointer-events-none"
     style={`background-image: url('${svgPattern}'); background-size: 24px 24px;`}
   ></div>
 
-  <!-- Contenido central con Sticker de Corazón plano -->
+  <!-- Contenido central -->
   <div class="relative max-w-2xl mx-auto text-center z-10">
 
-    <!-- Sticker Corazón plano (esquina superior derecha del área de contenido) -->
+    <!-- Sticker Corazón plano -->
     <div 
-      class="absolute -top-6 -right-2 md:right-4 z-20 p-2.5 rounded-2xl rotate-12 border pointer-events-none"
-      style={`background-color: ${badgeBg}; border-color: ${textureColor};`}
+      class="absolute -top-6 -right-2 md:right-4 z-20 p-2.5 rounded-2xl rotate-12 border border-white/80 bg-[var(--color-cream)] pointer-events-none shadow-sm"
     >
       <svg 
         xmlns="http://www.w3.org/2000/svg" 
@@ -59,7 +41,7 @@ const svgPattern = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/s
         height="24" 
         viewBox="0 0 24 24" 
         fill="none" 
-        stroke={headingColor} 
+        stroke="var(--color-choco)" 
         stroke-width="2" 
         stroke-linecap="round" 
         stroke-linejoin="round" 
@@ -71,22 +53,21 @@ const svgPattern = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/s
 
     <!-- Badge -->
     <span
-      class="inline-block text-xs font-semibold tracking-wider uppercase px-4 py-1.5 rounded-full mb-5"
-      style={`background-color: ${badgeBg}; color: ${badgeText};`}
+      class="inline-block text-xs font-semibold tracking-wider uppercase px-4 py-1.5 rounded-full mb-5 bg-[var(--color-cream)] text-[var(--color-choco)] shadow-sm"
     >
       {badgeLabel}
     </span>
 
+    <!-- Título principal -->
     <h2
-      class="font-heading text-2xl md:text-4xl font-semibold mb-4 leading-tight"
-      style={`color: ${headingColor};`}
+      class="font-heading text-2xl md:text-4xl font-semibold mb-4 leading-tight text-[var(--color-choco)]"
     >
       {heading}
     </h2>
 
+    <!-- Bajada/Subtexto -->
     <p
-      class="text-base md:text-lg mb-8 max-w-sm mx-auto"
-      style={`color: ${textColor};`}
+      class="text-base md:text-lg mb-8 max-w-sm mx-auto opacity-90 text-[var(--color-choco)]"
     >
       {subtext}
     </p>
@@ -95,8 +76,7 @@ const svgPattern = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/s
     <a
       href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`}
       target="_blank"
-      class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold transition-all duration-300"
-      style={`background-color: ${buttonBg}; color: ${buttonText};`}
+      class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold transition-all duration-300 bg-[var(--color-forest)] text-[var(--color-cream)] hover:bg-[var(--color-sage-button)]"
     >
       Escribime por WhatsApp
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 shrink-0"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg>
