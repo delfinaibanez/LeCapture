@@ -37,7 +37,7 @@ const etapas = [
           href={etapa.href}
           class="group flex flex-col items-center text-center snap-center shrink-0 w-28"
         >
-          <div class="relative w-24 h-24 rounded-full overflow-hidden ring-4 ring-sage-button/60 shadow-sm bg-gray-100">
+          <div class="relative w-24 h-24 rounded-full overflow-hidden ring-4 ring-white shadow-md bg-cream">
             <Image
               src={etapa.img}
               alt={etapa.nombre}
@@ -59,7 +59,6 @@ const etapas = [
       ))}
     </div>
 
-  
     <!-- Flechas: botones circulares sutiles -->
     <button
       id="camino-prev"
@@ -91,7 +90,7 @@ const etapas = [
     });
   </script>
 
-  <!-- DESKTOP: línea horizontal (como ya estaba) -->
+  <!-- DESKTOP: línea horizontal -->
   <div class="hidden md:flex relative items-start justify-between max-w-5xl mx-auto gap-4">
     <div class="absolute top-16 left-0 h-0.5 w-full bg-gray-200 -z-10"></div>
 
@@ -100,7 +99,7 @@ const etapas = [
         href={etapa.href}
         class="group flex flex-col items-center text-center w-1/5"
       >
-        <div class="relative w-32 h-32 rounded-full overflow-hidden ring-4 ring-sage-button/60 shadow-md group-hover:scale-105 transition-transform duration-300 bg-gray-100">
+        <div class="relative w-32 h-32 rounded-full overflow-hidden ring-4 ring-white shadow-md group-hover:ring-cream group-hover:scale-105 transition-all duration-300 bg-cream">
           <Image
             src={etapa.img}
             alt={etapa.nombre}
