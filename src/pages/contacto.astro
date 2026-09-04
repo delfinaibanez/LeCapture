@@ -4,28 +4,31 @@ import Layout from '../layouts/Layout.astro';
 const whatsapp = '549XXXXXXXXXX'; // reemplazar por el real
 const email = 'contacto@lecapture.com'; // reemplazar por el real
 const zona = 'Mendoza, Argentina'; // reemplazar por la zona real
+
+// Patrón de corazoncitos, mismo que en el CTA final
+const heartPattern = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><g fill="none" stroke="%236b4a3f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.18"><path transform="translate(10,10) scale(0.7)" d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/><path transform="translate(75,55) scale(0.55) rotate(15)" d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/><path transform="translate(30,80) scale(0.6) rotate(-12)" d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></g></svg>`;
 ---
 
 <Layout title="Contacto">
 
-  <!-- INTRO con cuadrillé -->
-  <section
-    class="relative w-full py-14 md:py-16 px-6 text-center overflow-hidden"
-    style="
-      background-color: #E4DFB5;
-      background-image:
-        repeating-linear-gradient(90deg, transparent, transparent 16px, rgba(251,232,206,0.45) 16px, rgba(251,232,206,0.45) 28px, transparent 28px, transparent 44px),
-        repeating-linear-gradient(0deg, transparent, transparent 16px, rgba(251,232,206,0.45) 16px, rgba(251,232,206,0.45) 28px, transparent 28px, transparent 44px),
-        repeating-linear-gradient(90deg, transparent, transparent 16px, rgba(195,204,155,0.3) 16px, rgba(195,204,155,0.3) 28px, transparent 28px, transparent 44px),
-        repeating-linear-gradient(0deg, transparent, transparent 16px, rgba(195,204,155,0.3) 16px, rgba(195,204,155,0.3) 28px, transparent 28px, transparent 44px);
-    "
-  >
-    <h1 class="font-heading text-3xl md:text-4xl font-bold text-choco mb-3 uppercase tracking-wide">
-      Contacto
-    </h1>
-    <p class="text-choco/70 max-w-lg mx-auto">
-      Contame sobre la sesión que estás buscando y coordinamos todo juntas ✨
-    </p>
+  <!-- INTRO con corazoncitos -->
+  <section class="relative w-full py-14 md:py-16 px-6 text-center overflow-hidden bg-sand/40">
+
+    <!-- Patrón de corazoncitos, más chico en mobile, más grande en desktop -->
+    <div
+      class="absolute inset-0 pointer-events-none bg-[length:70px_70px] md:bg-[length:120px_120px]"
+      style={`background-image: url('${heartPattern}');`}
+      aria-hidden="true"
+    ></div>
+
+    <div class="relative z-10">
+      <h1 class="font-heading text-3xl md:text-4xl font-bold text-choco mb-3 uppercase tracking-wide">
+        Contacto
+      </h1>
+      <p class="text-choco/70 max-w-lg mx-auto">
+        Contame sobre la sesión que estás buscando y coordinamos todo juntas ✨
+      </p>
+    </div>
   </section>
 
   <!-- CARTEL / NOTA (con washi tape y sticker) -->

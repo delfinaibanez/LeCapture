@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 }
 
 const { sesion } = Astro.props;
-const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs } = sesion.data;
+const { titulo, subtitulo, descripcion, imagen, mostrarPacks, mostrarFaqs, galeria, videoEmbed, packs, faqs } = sesion.data;
 ---
 
 <Layout title={titulo}>
@@ -30,9 +30,9 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
       loading="eager"
       class="absolute inset-0 w-full h-full object-cover"
     />
-    <div class="absolute inset-0 bg-gradient-to-t from-[#3D2420]/60 via-[#3D2420]/20 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-[#5C4237]/60 via-[#5C4237]/20 to-transparent"></div>
     <div class="absolute inset-0 flex flex-col items-center justify-end text-center px-6 pb-12 md:pb-16">
-      <span class="inline-block bg-[#D9A24B] text-[#3D2420] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">
+      <span class="inline-block bg-[#C9A468] text-[#5C4237] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">
         {subtitulo}
       </span>
       <h1 class="font-script text-4xl md:text-6xl font-normal text-cream mb-4 drop-shadow-md">
@@ -55,19 +55,17 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
       </h2>
 
       <div class="relative max-w-5xl mx-auto">
-        <!-- Sticker pinito, esquina superior derecha -->
         <div class="absolute -top-4 -right-3 md:-top-5 md:-right-5 z-20 rotate-[12deg]" aria-hidden="true">
           <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#fff8ec] border-2 border-[#B5623A]/30 shadow-lg flex items-center justify-center">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#8B4A35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 md:w-7 md:h-7">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#A56A4E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 md:w-7 md:h-7">
               <path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/>
               <path d="M12 22v-3"/>
             </svg>
           </div>
         </div>
 
-        <!-- Sticker pinito, borde izquierdo, entre filas -->
         <div class="hidden md:block absolute top-[38%] -left-5 z-20 rotate-[-10deg]" aria-hidden="true">
-          <div class="w-11 h-11 rounded-full bg-[#fff8ec] border-2 border-[#D9A24B]/40 shadow-lg flex items-center justify-center">
+          <div class="w-11 h-11 rounded-full bg-[#fff8ec] border-2 border-[#C9A468]/40 shadow-lg flex items-center justify-center">
             <svg viewBox="0 0 24 24" fill="none" stroke="#B5623A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
               <path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/>
               <path d="M12 22v-3"/>
@@ -97,20 +95,18 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
 
   <!-- VIDEO -->
   {videoEmbed && (
-    <section class="relative w-full py-16 md:py-24 px-6 bg-[#3D2420] overflow-hidden">
-
-      <!-- Copos de nieve decorativos -->
+    <section class="relative w-full py-16 md:py-24 px-6 bg-[#5C4237] overflow-hidden">
       {[
-        { top: '6%',  left: '6%',  size: 34, color: '#D9A24B', opacity: 0.5,  rotate: -10, mobile: true  },
-        { top: '9%',  left: '86%', size: 24, color: '#fff8ec', opacity: 0.35, rotate: 15,  mobile: false },
-        { top: '20%', left: '46%', size: 16, color: '#D9A24B', opacity: 0.25, rotate: 25,  mobile: false },
-        { top: '16%', left: '24%', size: 20, color: '#D9A24B', opacity: 0.35, rotate: -20, mobile: true  },
-        { top: '38%', left: '9%',  size: 14, color: '#fff8ec', opacity: 0.2,  rotate: 30,  mobile: false },
-        { top: '55%', left: '4%',  size: 22, color: '#fff8ec', opacity: 0.3,  rotate: 8,   mobile: false },
-        { top: '62%', left: '93%', size: 30, color: '#D9A24B', opacity: 0.4,  rotate: -18, mobile: true  },
-        { top: '76%', left: '46%', size: 16, color: '#fff8ec', opacity: 0.25, rotate: 5,   mobile: false },
-        { top: '85%', left: '16%', size: 18, color: '#D9A24B', opacity: 0.3,  rotate: 12,  mobile: false },
-        { top: '90%', left: '72%', size: 24, color: '#fff8ec', opacity: 0.35, rotate: -6,  mobile: true  },
+        { top: '6%',  left: '6%',  size: 34, color: '#C9A468', opacity: 0.28, rotate: -10, mobile: true  },
+        { top: '9%',  left: '86%', size: 24, color: '#fff8ec', opacity: 0.18, rotate: 15,  mobile: false },
+        { top: '20%', left: '46%', size: 16, color: '#C9A468', opacity: 0.15, rotate: 25,  mobile: false },
+        { top: '16%', left: '24%', size: 20, color: '#C9A468', opacity: 0.2,  rotate: -20, mobile: true  },
+        { top: '38%', left: '9%',  size: 14, color: '#fff8ec', opacity: 0.15, rotate: 30,  mobile: false },
+        { top: '55%', left: '4%',  size: 22, color: '#fff8ec', opacity: 0.18, rotate: 8,   mobile: false },
+        { top: '62%', left: '93%', size: 30, color: '#C9A468', opacity: 0.25, rotate: -18, mobile: true  },
+        { top: '76%', left: '46%', size: 16, color: '#fff8ec', opacity: 0.15, rotate: 5,   mobile: false },
+        { top: '85%', left: '16%', size: 18, color: '#C9A468', opacity: 0.18, rotate: 12,  mobile: false },
+        { top: '90%', left: '72%', size: 24, color: '#fff8ec', opacity: 0.2,  rotate: -6,  mobile: true  },
       ].map((c) => (
         <div
           class={`absolute pointer-events-none ${c.mobile ? '' : 'hidden md:block'}`}
@@ -143,7 +139,7 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
         </div>
       ))}
 
-      <p class="text-[#D9A24B] text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
+      <p class="text-[#C9A468] text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
         Mirá cómo es
       </p>
       <h2 class="font-heading text-2xl md:text-4xl font-semibold text-center text-cream mb-10 md:mb-14">
@@ -151,19 +147,19 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
       </h2>
 
       <div class="max-w-3xl mx-auto relative">
-        <!-- Marco dorado asomando detrás -->
         <div
           class="absolute inset-0 rounded-[1.75rem] rotate-[-2deg] translate-x-3 translate-y-3 md:translate-x-4 md:translate-y-4 -z-10"
-          style="background-color: #D9A24B;"
+          style="background-color: #C9A468;"
           aria-hidden="true"
         ></div>
-        <div class="rounded-[1.75rem] overflow-hidden shadow-2xl border-4 border-[#D9A24B]/40" set:html={videoEmbed} />
+        <div class="rounded-[1.75rem] overflow-hidden shadow-2xl border-4 border-[#C9A468]/40" set:html={videoEmbed} />
       </div>
     </section>
   )}
 
+  
   <!-- PACKS -->
-  {packs && packs.length > 0 && (
+  {mostrarPacks && packs && packs.length > 0 && (
     <section class="w-full py-16 md:py-24 px-6 bg-[#fff8ec]">
       <div class="max-w-6xl mx-auto">
         <p class="text-[#B5623A] text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
@@ -177,11 +173,10 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
           {packs.map((pack, i) => (
             <div class={`group relative rounded-[2rem] flex flex-col w-full text-center transition-all duration-300 hover:scale-105 hover:-translate-y-1 ${
               i === 1
-                ? 'p-8 md:p-10 pt-12 md:pt-14 bg-[#8B4A35] text-cream border-4 border-[#D9A24B] shadow-2xl md:scale-110 z-10'
+                ? 'p-8 md:p-10 pt-12 md:pt-14 bg-[#A56A4E] text-cream border-4 border-[#C9A468] shadow-2xl md:scale-110 z-10'
                 : 'p-7 md:p-8 bg-white text-[#6b4a3f] border-2 border-dashed border-[#B5623A]/35 shadow-md'
             }`}>
 
-              {/* Patrón sutil de pinitos de fondo, solo en la tarjeta destacada */}
               {i === 1 && (
                 <div class="absolute inset-0 rounded-[2rem] overflow-hidden pointer-events-none z-[-1]" aria-hidden="true">
                   {[
@@ -199,7 +194,7 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
                     <svg
                       viewBox="0 0 24 24"
                       fill="none"
-                      stroke="#D9A24B"
+                      stroke="#C9A468"
                       stroke-width="2"
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -213,7 +208,7 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
               )}
 
               {i === 1 && (
-                <span class="absolute -top-4 left-1/2 -translate-x-1/2 bg-white text-[#8B4A35] text-[11px] font-bold uppercase tracking-widest px-5 py-2 rounded-full shadow-lg border-2 border-[#D9A24B] whitespace-nowrap">
+                <span class="absolute -top-4 left-1/2 -translate-x-1/2 bg-white text-[#A56A4E] text-[11px] font-bold uppercase tracking-widest px-5 py-2 rounded-full shadow-lg border-2 border-[#C9A468] whitespace-nowrap">
                   🎄 Más elegido
                 </span>
               )}
@@ -228,7 +223,7 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
               <ul class="flex-1 flex flex-col items-center space-y-2.5 mb-6">
                 {pack.items.map((item) => (
                   <li class={`text-sm flex items-start gap-2 max-w-[85%] ${i === 1 ? 'text-cream/90' : 'text-[#6b4a3f]/75'}`}>
-                    <span class={`mt-0.5 font-bold shrink-0 ${i === 1 ? 'text-[#D9A24B]' : 'text-[#B5623A]'}`}>✓</span>
+                    <span class={`mt-0.5 font-bold shrink-0 ${i === 1 ? 'text-[#C9A468]' : 'text-[#B5623A]'}`}>✓</span>
                     <span class="text-left">{item}</span>
                   </li>
                 ))}
@@ -252,7 +247,7 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
                 href={pack.linkReserva}
                 target="_blank"
                 class="text-center rounded-full py-3.5 font-bold transition-all duration-300 group-hover:scale-105 shadow-lg hover:opacity-90"
-                style={`background-color: ${i === 1 ? '#D9A24B' : i === 0 ? '#B5623A' : '#6b4a3f'}; color: ${i === 1 ? '#3D2420' : '#FFFFFF'};`}
+                style={`background-color: ${i === 1 ? '#C9A468' : i === 0 ? '#B5623A' : '#6b4a3f'}; color: ${i === 1 ? '#5C4237' : '#FFFFFF'};`}
               >
                 Reservá tu lugar
               </a>
@@ -265,7 +260,7 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
   )}
 
   <!-- FAQ -->
-  {faqs && faqs.length > 0 && (
+  {mostrarFaqs && faqs && faqs.length > 0 && (
     <section class="w-full py-16 md:py-24 px-6 bg-[#6b4a3f]/5">
       <div class="max-w-3xl mx-auto">
         <p class="text-[#B5623A] text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
@@ -315,20 +310,11 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
   )}
 
   <!-- CTA FINAL -->
-  <CTAFinal
-    bgColor="#fff8ec"
-    gridLight="rgba(217,162,75,0.35)"
-    gridDark="rgba(139,74,53,0.25)"
-    badgeBg="#B5623A"
-    badgeText="#ffffff"
-    headingColor="#6b4a3f"
-    textColor="#6b4a3fB3"
-    buttonBg="#B5623A"
-    buttonText="#ffffff"
-    badgeLabel="Reservá tu sesión 🎄"
-    heading="¿Lista para tu sesión de Navidad?"
-    subtext="Contame qué tenés en mente para tu sesión navideña y coordinamos todos los detalles"
-    whatsappMessage="Hola! Quiero consultar por una sesión de Navidad"
-  />
+<CTAFinal
+  badgeLabel="Reservá tu sesión 🎄"
+  heading="¿Lista para tu sesión de Navidad?"
+  subtext="Contame qué tenés en mente para tu sesión navideña y coordinamos todos los detalles"
+  whatsappMessage="Hola! Quiero consultar por una sesión de Navidad"
+/>
 
 </Layout>
