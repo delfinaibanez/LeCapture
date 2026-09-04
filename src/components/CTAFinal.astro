@@ -1,8 +1,7 @@
 ---
 interface Props {
   bgColor?: string;
-  gridGreen?: string;
-  gridRose?: string;
+  textureColor?: string;
   badgeBg?: string;
   badgeText?: string;
   headingColor?: string;
@@ -17,14 +16,13 @@ interface Props {
 }
 
 const {
-  bgColor = '#FFF8EC',
-  gridGreen = 'rgba(153,173,122,0.35)',
-  gridRose = 'rgba(235,188,188,0.45)',
-  badgeBg = '#99ad7a',
-  badgeText = '#ffffff',
-  headingColor = '#6b4a3f',
-  textColor = '#6b4a3f',
-  buttonBg = '#99ad7a',
+  bgColor = '#DCCCAC',
+  textureColor = '#FFF8EC',
+  badgeBg = '#FFF8EC',
+  badgeText = '#42362B', // Texto oscuro legible sobre el badge claro
+  headingColor = '#2D231A',
+  textColor = '#4A3E31',
+  buttonBg = '#687850', // Verde oliva profundo sobrio
   buttonText = '#ffffff',
   badgeLabel = 'Reservá tu sesión',
   heading = '¿Lista para capturar esta etapa?',
@@ -32,55 +30,32 @@ const {
   whatsappNumber = '549XXXXXXXXXX',
   whatsappMessage = 'Hola! Quiero consultar por una sesión',
 } = Astro.props;
+
+// SVG en Data URL para la trama
+const svgPattern = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M0 3h24M0 9h24M0 15h24M0 21h24M3 0v24M9 0v24M15 0v24M21 0v24" stroke="${encodeURIComponent(textureColor)}" stroke-width="0.8" stroke-dasharray="2 2" opacity="0.45"/></svg>`;
 ---
 
-<section
-  class="relative w-full py-16 md:py-24 px-6 overflow-hidden"
-  style={`
-    background-color: ${bgColor};
-    background-image:
-      /* Líneas horizontales: combinación de franjas anchas y finas en rosa y verde */
-      repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 20px,
-        ${gridRose} 20px,
-        ${gridRose} 28px,
-        transparent 28px,
-        transparent 34px,
-        ${gridGreen} 34px,
-        ${gridGreen} 36px,
-        transparent 36px,
-        transparent 42px,
-        ${gridRose} 42px,
-        ${gridRose} 50px,
-        transparent 50px,
-        transparent 70px
-      ),
-      /* Líneas verticales: réplica cruzada para formar la grilla escocesa */
-      repeating-linear-gradient(
-        90deg,
-        transparent,
-        transparent 20px,
-        ${gridRose} 20px,
-        ${gridRose} 28px,
-        transparent 28px,
-        transparent 34px,
-        ${gridGreen} 34px,
-        ${gridGreen} 36px,
-        transparent 36px,
-        transparent 42px,
-        ${gridRose} 42px,
-        ${gridRose} 50px,
-        transparent 50px,
-        transparent 70px
-      );
-  `}
+<section 
+  class="relative w-full py-20 md:py-28 px-6 overflow-hidden" 
+  style={`background-color: ${bgColor};`}
 >
-  <div class="relative max-w-2xl mx-auto text-center">
+  <!-- Textura de fondo -->
+  <div 
+    class="absolute inset-0 pointer-events-none"
+    style={`background-image: url('${svgPattern}'); background-size: 24px 24px;`}
+  ></div>
+
+  <!-- Viñeta radial suave -->
+  <div 
+    class="absolute inset-0 pointer-events-none"
+    style={`background: radial-gradient(circle at center, transparent 35%, ${bgColor} 92%);`}
+  ></div>
+
+  <!-- Contenido central -->
+  <div class="relative max-w-2xl mx-auto text-center z-10">
 
     <span
-      class="inline-block text-xs font-semibold tracking-wide uppercase px-4 py-1.5 rounded-full mb-5"
+      class="inline-block text-xs font-semibold tracking-wider uppercase px-4 py-1.5 rounded-full mb-5 shadow-sm"
       style={`background-color: ${badgeBg}; color: ${badgeText};`}
     >
       {badgeLabel}
@@ -103,7 +78,7 @@ const {
     <a
       href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`}
       target="_blank"
-      class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold shadow-md hover:scale-105 transition-transform duration-300"
+      class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
       style={`background-color: ${buttonBg}; color: ${buttonText};`}
     >
       Escribime por WhatsApp
