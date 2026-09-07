@@ -8,6 +8,8 @@ const sesionesEspeciales = defineCollection({
     subtitulo: z.string(),
     imagen: image(),
     activa: z.boolean(),
+    mostrarPacks: z.boolean().default(true),
+    mostrarFaqs: z.boolean().default(true),
     whatsappTexto: z.string(),
     slug: z.string(),
     descripcion: z.string(),

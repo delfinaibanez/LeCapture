@@ -1,20 +1,20 @@
 ---
-titulo: "Sesion Navidad 2026"
-subtitulo: "Cupos limitados — Diciembre 2026"
-imagen: "./navidad-2026.jpg"
+titulo: "Sesion Navidad 2025"
+subtitulo: "Diciembre 2025"
+imagen: "./navidad-2025.jpg"
 activa: true
 mostrarPacks: false
 mostrarFaqs: false
 whatsappTexto: "Hola! Quiero consultar por una sesión de Navidad"
-slug: "navidad-2026"
+slug: "navidad-2025"
 descripcion: "Una sesión mágica y llena de calidez para celebrar la Navidad en familia, con una escenografía vintage pensada en cada detalle."
 galeria:
-  - "./navidad-galeria/foto1.jpg"
-  - "./navidad-galeria/foto2.jpg"
-  - "./navidad-galeria/foto3.jpg"
-  - "./navidad-galeria/foto4.jpg"
-  - "./navidad-galeria/foto5.jpg"
-  - "./navidad-galeria/foto6.jpg"
+  - "./navidad-2025-galeria/foto1.jpg"
+  - "./navidad-2025-galeria/foto2.jpg"
+  - "./navidad-2025-galeria/foto3.jpg"
+  - "./navidad-2025-galeria/foto4.jpg"
+  - "./navidad-2025-galeria/foto5.jpg"
+  - "./navidad-2025-galeria/foto6.jpg"
 videoEmbed: '<iframe width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video de muestra" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="aspect-ratio: 16/9; display: block;"></iframe>'
 packs:
   - nombre: "Mini Sesión"

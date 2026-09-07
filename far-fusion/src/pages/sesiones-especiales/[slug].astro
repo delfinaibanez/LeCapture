@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 }
 
 const { sesion } = Astro.props;
-const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs } = sesion.data;
+const { titulo, subtitulo, descripcion, imagen, mostrarPacks, mostrarFaqs, galeria, videoEmbed, packs, faqs } = sesion.data;
 ---
 
 <Layout title={titulo}>
@@ -163,7 +163,7 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
   )}
 
   <!-- PACKS -->
-  {packs && packs.length > 0 && (
+  {mostrarPacks && packs && packs.length > 0 && (
     <section class="w-full py-16 md:py-24 px-6 bg-[#fff8ec]">
       <div class="max-w-6xl mx-auto">
         <p class="text-[#B5623A] text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
@@ -234,7 +234,7 @@ const { titulo, subtitulo, descripcion, imagen, galeria, videoEmbed, packs, faqs
   )}
 
   <!-- FAQ -->
-  {faqs && faqs.length > 0 && (
+  {mostrarFaqs && faqs && faqs.length > 0 && (
     <section class="w-full py-16 md:py-24 px-6 bg-[#6b4a3f]/5">
       <div class="max-w-3xl mx-auto">
         <p class="text-[#B5623A] text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
