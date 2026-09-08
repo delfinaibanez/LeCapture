@@ -19,13 +19,13 @@ const estudioImages = Object.keys(estudioModules)
 
 <Layout title="Sobre mí">
 
-  <!-- INTRO -->
-  <section class="w-full py-16 md:py-24 px-6" style="background-color: #EFE9E3;">
-    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-10 md:gap-16">
+   <!-- INTRO -->
+  <section class="w-full py-14 md:py-24 px-6" style="background-color: #EFE9E3;">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-16">
 
       <!-- Foto vertical con proporción fija + tarjetita -->
-        <div class="relative w-72 md:w-[26rem] shrink-0 mx-auto md:mx-0">
-        <div class="aspect-[3/4] rounded-[2rem] overflow-hidden shadow-lg">
+      <div class="relative w-60 md:w-[26rem] shrink-0 mx-auto md:mx-0">
+        <div class="aspect-[3/4] rounded-[1.75rem] md:rounded-[2rem] overflow-hidden shadow-lg">
           <Image
             src={retrato}
             alt="Fotógrafa de LeCapture"
@@ -37,9 +37,9 @@ const estudioImages = Object.keys(estudioModules)
             class="w-full h-full object-cover"
           />
         </div>
-        <div class="absolute -bottom-4 -right-4 bg-cream border border-choco/20 rounded-2xl px-4 py-2.5 shadow-md rotate-[-4deg] text-center">
-          <p class="text-choco font-bold text-lg leading-none">+500</p>
-          <p class="text-choco/70 text-xs flex items-center justify-center gap-1">
+        <div class="absolute -bottom-3 -right-3 md:-bottom-4 md:-right-4 bg-cream border border-choco/20 rounded-xl md:rounded-2xl px-3 py-2 md:px-4 md:py-2.5 shadow-md rotate-[-4deg] text-center">
+          <p class="text-choco font-bold text-base md:text-lg leading-none">+500</p>
+          <p class="text-choco/70 text-[10px] md:text-xs flex items-center justify-center gap-1">
             familias felices
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3 shrink-0" style="color: #C3CC9B;"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>
           </p>
@@ -47,25 +47,42 @@ const estudioImages = Object.keys(estudioModules)
       </div>
 
       <!-- Texto -->
-      <div class="text-center md:text-left md:pt-4">
+      <div class="text-center md:text-left md:pt-4 px-2 md:px-0">
         <p class="text-forest text-xs md:text-sm font-semibold tracking-widest uppercase mb-2">
           Conóceme
         </p>
-        <h1 class="font-script text-3xl md:text-5xl font-normal text-choco mb-5 relative inline-block">
+        <h1 class="font-script text-3xl md:text-5xl font-normal text-choco mb-4 md:mb-5">
           Hola, soy Candela
-
         </h1>
-        <p class="text-choco/70 leading-relaxed mb-4 max-w-md">
-          Mi cámara y yo somos inseparables desde hace más de una década. Con más de 500 familias y bebés retratados —y una formación en España que me llevó a recorrer distintos rincones de Europa—, volví mi pasión un oficio. Busco la armonía y la belleza en cada rincón, cuidando los colores, las texturas y los pequeños detalles cotidianos para que cada imagen tenga su propia magia.
+        <p class="text-choco/70 leading-relaxed mb-4 max-w-md mx-auto md:mx-0 text-sm md:text-base">
+          Mi cámara y yo somos inseparables desde hace más de una década. Con más de 500 familias y bebés retratados —y una formación en España que me llevó a recorrer distintos rincones de Europa—, volví mi pasión un oficio.
         </p>
-        <p class="text-choco/70 leading-relaxed max-w-md">
+
+        <!-- En mobile, segundo párrafo colapsable para no saturar la pantalla -->
+        <details class="md:hidden group text-left max-w-md mx-auto">
+          <summary class="list-none flex items-center justify-center gap-1 text-choco text-sm font-semibold cursor-pointer mb-2">
+            Seguir leyendo
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0 transition-transform group-open:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+          </summary>
+          <p class="text-choco/70 leading-relaxed text-sm mb-2">
+            Busco la armonía y la belleza en cada rincón, cuidando los colores, las texturas y los pequeños detalles cotidianos para que cada imagen tenga su propia magia.
+          </p>
+          <p class="text-choco/70 leading-relaxed text-sm">
+            Me encanta crear con mis propias manos: diseño, decoro y armo cada escenografía para que tu sesión sea irrepetible. Detrás de cada toma hay mucho más que técnica; hay horas de dedicación, sensibilidad estética y el deseo genuino de que tus recuerdos reflejen la belleza y autenticidad de tu historia.
+          </p>
+        </details>
+
+        <!-- En desktop, todo el texto visible sin colapsar -->
+        <p class="hidden md:block text-choco/70 leading-relaxed mb-4 max-w-md">
+          Busco la armonía y la belleza en cada rincón, cuidando los colores, las texturas y los pequeños detalles cotidianos para que cada imagen tenga su propia magia.
+        </p>
+        <p class="hidden md:block text-choco/70 leading-relaxed max-w-md">
           Me encanta crear con mis propias manos: diseño, decoro y armo cada escenografía para que tu sesión sea irrepetible. Detrás de cada toma hay mucho más que técnica; hay horas de dedicación, sensibilidad estética y el deseo genuino de que tus recuerdos reflejen la belleza y autenticidad de tu historia.
         </p>
       </div>
 
     </div>
   </section>
-
   <!-- DETRÁS DE CÁMARA -->
   <section class="w-full py-16 md:py-24 px-6" style="background-color: #EFE9E3;">
     <div class="max-w-5xl mx-auto">
@@ -80,27 +97,31 @@ const estudioImages = Object.keys(estudioModules)
       Paciencia, juego y momentos espontáneos: la verdadera receta detrás de cada risa y cada recuerdo.
       </p>
 
-      <!-- MOBILE: carrusel horizontal -->
-      <div class="md:hidden relative">
+         <!-- MOBILE: carrusel horizontal -->
+      <div class="md:hidden relative -mx-6 px-6">
         <div
           id="detras-scroll"
           class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide"
         >
           {detrasCamaraImages.map((foto, i) => (
-            <div class="snap-center shrink-0 w-64 rounded-[1.5rem] overflow-hidden shadow-md">
+            <div class="snap-center shrink-0 w-[72vw] max-w-72 aspect-[3/4] rounded-[1.5rem] overflow-hidden shadow-md">
               <Image
                 src={foto}
                 alt={`Detrás de cámara - imagen ${i + 1}`}
                 width={500}
-                height={600}
+                height={650}
                 format="webp"
                 quality={85}
                 loading="lazy"
-                class="w-full h-80 object-cover"
+                class="w-full h-full object-cover"
               />
             </div>
           ))}
         </div>
+
+        <!-- Degradados en los bordes, mismo recurso que en "El estudio" -->
+        <div class="pointer-events-none absolute top-0 left-0 h-[calc(100%-1rem)] w-10 bg-gradient-to-r from-[#EFE9E3] to-transparent"></div>
+        <div class="pointer-events-none absolute top-0 right-0 h-[calc(100%-1rem)] w-10 bg-gradient-to-l from-[#EFE9E3] to-transparent"></div>
       </div>
        <!-- DESKTOP: galería en grilla cuadrada pareja -->
       <div class="hidden md:grid grid-cols-4 gap-4">
