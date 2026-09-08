@@ -83,6 +83,7 @@ const estudioImages = Object.keys(estudioModules)
 
     </div>
   </section>
+
   <!-- DETRÁS DE CÁMARA -->
   <section class="w-full py-16 md:py-24 px-6" style="background-color: #EFE9E3;">
     <div class="max-w-5xl mx-auto">
@@ -158,14 +159,40 @@ const estudioImages = Object.keys(estudioModules)
        Un espacio creado y pensado desde el amor para que vos, tu familia se sientan como en casa, rodeados de comodidad y calidez.
       </p>
 
-      <!-- Carrusel horizontal con flechas -->
-      <div class="relative">
+      <!-- MOBILE: carrusel horizontal, mismo lenguaje que "Detrás de cámara" -->
+      <div class="md:hidden relative -mx-6 px-6">
         <div
-          id="estudio-scroll"
-          class="flex gap-5 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide"
+          id="estudio-scroll-mobile"
+          class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide"
+        >
+          {estudioImages.map((foto, i) => (
+            <div class="snap-center shrink-0 w-[78vw] max-w-80 aspect-[4/3] rounded-[1.5rem] overflow-hidden shadow-md">
+              <Image
+                src={foto}
+                alt={`Estudio de fotografía - imagen ${i + 1}`}
+                width={500}
+                height={380}
+                format="webp"
+                quality={85}
+                loading="lazy"
+                class="w-full h-full object-cover"
+              />
+            </div>
+          ))}
+        </div>
+
+        <div class="pointer-events-none absolute top-0 left-0 h-[calc(100%-1rem)] w-10 bg-gradient-to-r from-[#F9F8F6] to-transparent"></div>
+        <div class="pointer-events-none absolute top-0 right-0 h-[calc(100%-1rem)] w-10 bg-gradient-to-l from-[#F9F8F6] to-transparent"></div>
+      </div>
+
+      <!-- DESKTOP: carrusel con flechas -->
+      <div class="hidden md:block relative overflow-hidden">
+        <div
+          id="estudio-track"
+          class="flex gap-5 pb-4 transition-transform duration-700 ease-[cubic-bezier(0.65,0,0.35,1)]"
         >
          {estudioImages.map((foto, i) => (
-            <div class="snap-center shrink-0 w-72 md:w-96 rounded-[1.5rem] overflow-hidden shadow-md group">
+            <div class="shrink-0 w-72 md:w-96 rounded-[1.5rem] overflow-hidden shadow-md group">
               <Image
                 src={foto}
                 alt={`Estudio de fotografía - imagen ${i + 1}`}
@@ -180,11 +207,9 @@ const estudioImages = Object.keys(estudioModules)
           ))}   
         </div>
 
-        <!-- Degradados en ambos bordes -->
         <div class="pointer-events-none absolute top-0 left-0 h-[calc(100%-1rem)] w-16 bg-gradient-to-r from-sand/70 via-sand/25 to-transparent"></div>
         <div class="pointer-events-none absolute top-0 right-0 h-[calc(100%-1rem)] w-16 bg-gradient-to-l from-sand/70 via-sand/25 to-transparent"></div>
 
-        <!-- Flechas -->
         <button
           id="estudio-prev"
           aria-label="Ver anterior"
@@ -205,17 +230,42 @@ const estudioImages = Object.keys(estudioModules)
   </section>
 
   <script>
-    const scrollEl = document.getElementById('estudio-scroll');
+    const track = document.getElementById('estudio-track');
     const nextBtn = document.getElementById('estudio-next');
     const prevBtn = document.getElementById('estudio-prev');
 
+    let index = 0;
+    const gap = 20; // gap-5
+
+    function getCardWidth() {
+      const card = track?.querySelector('div') as HTMLElement | null;
+      return card ? card.offsetWidth + gap : 0;
+    }
+
+    function maxIndex() {
+      if (!track) return 0;
+      const cardCount = track.children.length;
+      const visible = Math.floor((track.parentElement!.offsetWidth) / getCardWidth());
+      return Math.max(cardCount - visible, 0);
+    }
+
+    function update() {
+      if (!track) return;
+      const offset = index * getCardWidth();
+      track.style.transform = `translateX(-${offset}px)`;
+    }
+
     nextBtn?.addEventListener('click', () => {
-      scrollEl?.scrollBy({ left: 320, behavior: 'smooth' });
+      index = Math.min(index + 1, maxIndex());
+      update();
     });
 
     prevBtn?.addEventListener('click', () => {
-      scrollEl?.scrollBy({ left: -320, behavior: 'smooth' });
+      index = Math.max(index - 1, 0);
+      update();
     });
+
+    window.addEventListener('resize', update);
   </script>
 
   <!-- CTA FINAL -->
