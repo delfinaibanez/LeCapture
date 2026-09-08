@@ -124,26 +124,88 @@ const estudioImages = Object.keys(estudioModules)
         <div class="pointer-events-none absolute top-0 left-0 h-[calc(100%-1rem)] w-10 bg-gradient-to-r from-[#EFE9E3] to-transparent"></div>
         <div class="pointer-events-none absolute top-0 right-0 h-[calc(100%-1rem)] w-10 bg-gradient-to-l from-[#EFE9E3] to-transparent"></div>
       </div>
-       <!-- DESKTOP: galería en grilla cuadrada pareja -->
-      <div class="hidden md:grid grid-cols-4 gap-4">
-        {detrasCamaraImages.slice(0, 8).map((foto, i) => (
-          <div class="aspect-square rounded-[1.5rem] overflow-hidden shadow-md group">
-            <Image
-              src={foto}
-              alt={`Detrás de cámara - imagen ${i + 1}`}
-              width={400}
-              height={400}
-              format="webp"
-              quality={85}
-              loading="lazy"
-              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-            />
-          </div>
-        ))}
+       <!-- DESKTOP: carrusel deslizante -->
+      <div class="hidden md:block relative overflow-hidden">
+        <div
+          id="detras-track"
+          class="flex gap-4 pb-4 transition-transform duration-700 ease-[cubic-bezier(0.65,0,0.35,1)]"
+        >
+          {detrasCamaraImages.map((foto, i) => (
+            <div class="shrink-0 w-56 aspect-square rounded-[1.5rem] overflow-hidden shadow-md group">
+              <Image
+                src={foto}
+                alt={`Detrás de cámara - imagen ${i + 1}`}
+                width={400}
+                height={400}
+                format="webp"
+                quality={85}
+                loading="lazy"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+            </div>
+          ))}
+        </div>
+
+        <div class="pointer-events-none absolute top-0 left-0 h-[calc(100%-1rem)] w-16 bg-gradient-to-r from-[#EFE9E3] via-[#EFE9E3]/70 to-transparent"></div>
+        <div class="pointer-events-none absolute top-0 right-0 h-[calc(100%-1rem)] w-16 bg-gradient-to-l from-[#EFE9E3] via-[#EFE9E3]/70 to-transparent"></div>
+
+        <button
+          id="detras-prev"
+          aria-label="Ver anterior"
+          class="absolute left-0 top-1/2 -translate-y-1/2 text-choco/50 hover:text-choco text-4xl leading-none px-2 transition-colors"
+        >
+          ‹
+        </button>
+        <button
+          id="detras-next"
+          aria-label="Ver siguiente"
+          class="absolute right-0 top-1/2 -translate-y-1/2 text-choco/50 hover:text-choco text-4xl leading-none px-2 transition-colors"
+        >
+          ›
+        </button>
       </div>
 
     </div>
   </section>
+
+  <script>
+    const detrasTrack = document.getElementById('detras-track');
+    const detrasNextBtn = document.getElementById('detras-next');
+    const detrasPrevBtn = document.getElementById('detras-prev');
+
+    let detrasIndex = 0;
+    const detrasGap = 16; // gap-4
+
+    function getDetrasCardWidth() {
+      const card = detrasTrack?.querySelector('div') as HTMLElement | null;
+      return card ? card.offsetWidth + detrasGap : 0;
+    }
+
+    function detrasMaxIndex() {
+      if (!detrasTrack) return 0;
+      const cardCount = detrasTrack.children.length;
+      const visible = Math.floor((detrasTrack.parentElement!.offsetWidth) / getDetrasCardWidth());
+      return Math.max(cardCount - visible, 0);
+    }
+
+    function detrasUpdate() {
+      if (!detrasTrack) return;
+      const offset = detrasIndex * getDetrasCardWidth();
+      detrasTrack.style.transform = `translateX(-${offset}px)`;
+    }
+
+    detrasNextBtn?.addEventListener('click', () => {
+      detrasIndex = Math.min(detrasIndex + 1, detrasMaxIndex());
+      detrasUpdate();
+    });
+
+    detrasPrevBtn?.addEventListener('click', () => {
+      detrasIndex = Math.max(detrasIndex - 1, 0);
+      detrasUpdate();
+    });
+
+    window.addEventListener('resize', detrasUpdate);
+  </script>
 
   <!-- EL ESTUDIO -->
   <section class="w-full py-16 md:py-24 px-6" style="background-color: #F9F8F6;">
