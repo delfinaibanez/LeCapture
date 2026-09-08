@@ -75,7 +75,11 @@ const { titulo, subtitulo, descripcion, imagen, mostrarPacks, mostrarFaqs, galer
 
         <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
           {galeria.map((foto, i) => (
-            <div class="group rounded-2xl overflow-hidden shadow-md aspect-square">
+            <button
+              type="button"
+              class="lightbox-trigger group rounded-2xl overflow-hidden shadow-md aspect-square cursor-zoom-in"
+              data-index={i}
+            >
               <Image
                 src={foto}
                 alt={`Escenografía navideña ${i + 1}`}
@@ -84,14 +88,110 @@ const { titulo, subtitulo, descripcion, imagen, mostrarPacks, mostrarFaqs, galer
                 format="webp"
                 quality={85}
                 loading="lazy"
-                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                class="lightbox-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
-            </div>
+            </button>
           ))}
         </div>
       </div>
     </section>
   )}
+
+  <!-- LIGHTBOX (modal de foto ampliada) -->
+  {galeria && galeria.length > 0 && (
+    <div
+      id="lightbox-overlay"
+      class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/85 p-4 md:p-10"
+    >
+      <button
+        id="lightbox-close"
+        aria-label="Cerrar"
+        class="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl flex items-center justify-center transition-colors"
+      >
+        ✕
+      </button>
+      <button
+        id="lightbox-prev"
+        aria-label="Anterior"
+        class="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl flex items-center justify-center transition-colors"
+      >
+        ‹
+      </button>
+      <img
+        id="lightbox-image"
+        src=""
+        alt="Foto ampliada"
+        class="max-w-full max-h-full rounded-xl shadow-2xl object-contain"
+      />
+      <button
+        id="lightbox-next"
+        aria-label="Siguiente"
+        class="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl flex items-center justify-center transition-colors"
+      >
+        ›
+      </button>
+    </div>
+  )}
+
+  <script>
+    const overlay = document.getElementById('lightbox-overlay');
+    const overlayImg = document.getElementById('lightbox-image') as HTMLImageElement | null;
+    const closeBtn = document.getElementById('lightbox-close');
+    const prevBtn = document.getElementById('lightbox-prev');
+    const nextBtn = document.getElementById('lightbox-next');
+
+    const triggers = Array.from(document.querySelectorAll<HTMLButtonElement>('.lightbox-trigger'));
+    let currentIndex = 0;
+
+    function getSrc(index: number): string | null {
+      const img = triggers[index]?.querySelector('img');
+      return img ? img.currentSrc || img.src : null;
+    }
+
+    function open(index: number) {
+      if (!overlay || !overlayImg) return;
+      currentIndex = index;
+      const src = getSrc(currentIndex);
+      if (!src) return;
+      overlayImg.src = src;
+      overlay.classList.remove('hidden');
+      overlay.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+      if (!overlay) return;
+      overlay.classList.add('hidden');
+      overlay.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    function showRelative(delta: number) {
+      if (triggers.length === 0) return;
+      currentIndex = (currentIndex + delta + triggers.length) % triggers.length;
+      const src = getSrc(currentIndex);
+      if (src && overlayImg) overlayImg.src = src;
+    }
+
+    triggers.forEach((trigger, i) => {
+      trigger.addEventListener('click', () => open(i));
+    });
+
+    closeBtn?.addEventListener('click', close);
+    prevBtn?.addEventListener('click', () => showRelative(-1));
+    nextBtn?.addEventListener('click', () => showRelative(1));
+
+    overlay?.addEventListener('click', (e) => {
+      if (e.target === overlay) close();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (overlay?.classList.contains('hidden')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') showRelative(-1);
+      if (e.key === 'ArrowRight') showRelative(1);
+    });
+  </script>
 
   <!-- VIDEO -->
   {videoEmbed && (
@@ -309,12 +409,6 @@ const { titulo, subtitulo, descripcion, imagen, mostrarPacks, mostrarFaqs, galer
     </section>
   )}
 
-  <!-- CTA FINAL -->
-<CTAFinal
-  badgeLabel="Reservá tu sesión 🎄"
-  heading="¿Lista para tu sesión de Navidad?"
-  subtext="Contame qué tenés en mente para tu sesión navideña y coordinamos todos los detalles"
-  whatsappMessage="Hola! Quiero consultar por una sesión de Navidad"
-/>
+
 
 </Layout>
