@@ -2,6 +2,13 @@
 import { Image } from 'astro:assets';
 import sinEditar from '../assets/images/home/edicion/sin-editar.jpg';
 import editada from '../assets/images/home/edicion/editada.jpg';
+import sinEditar2 from '../assets/images/home/edicion/sin-editar-2.jpg';
+import editada2 from '../assets/images/home/edicion/editada-2.jpg';
+
+const comparaciones = [
+  { antes: sinEditar, despues: editada },
+  { antes: sinEditar2, despues: editada2 },
+];
 ---
 
 <section
@@ -18,124 +25,120 @@ import editada from '../assets/images/home/edicion/editada.jpg';
     Deslizá para ver la transformación 
   </p>
 
-  <div class="max-w-lg mx-auto relative">
+  <div class="max-w-lg md:max-w-4xl mx-auto flex flex-col md:flex-row gap-16 md:gap-10">
+    {comparaciones.map((foto) => (
+      <div class="relative md:flex-1">
 
-    <!-- Tarjeta de color asomando detrás -->
-    <div
-      class="absolute inset-0 rounded-[2rem] rotate-[4deg] translate-x-4 translate-y-4 md:translate-x-6 md:translate-y-6 -z-10 shadow-lg border-4"
-      style="background-color: rgb(217, 207, 199); border-color: #fff8ec;"
-      aria-hidden="true"
-    ></div>
+        <!-- Tarjeta de color asomando detrás -->
+        <div
+          class="absolute inset-0 rounded-[2rem] rotate-[4deg] translate-x-4 translate-y-4 md:translate-x-6 md:translate-y-6 -z-10 shadow-lg border-4"
+          style="background-color: rgb(217, 207, 199); border-color: #fff8ec;"
+          aria-hidden="true"
+        ></div>
 
-    <!-- Anotación a mano, apuntando a la manija -->
-    <div class="hidden md:block absolute top-1/2 -right-28 -translate-y-1/2 z-20 rotate-[-6deg]" aria-hidden="true">
-      <p class="font-script text-4xl text-choco mb-1 text-center">Desliza!</p>
-      <svg width="80" height="44" viewBox="0 0 70 40" class="text-choco/70">
-        <path d="M65 5 Q40 5 15 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-        <path d="M15 30 L15 20 M15 30 L25 27" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-      </svg>
-    </div>
+        <div
+          class="comparador relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden shadow-lg select-none cursor-ew-resize"
+          style="touch-action: none;"
+        >
+          <!-- Foto editada: fondo, siempre completa, tamaño fijo -->
+          <Image
+            src={foto.despues}
+            alt="Foto editada"
+            width={800}
+            height={600}
+            format="webp"
+            quality={85}
+            loading="lazy"
+            class="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          />
 
-    <div
-      id="comparador"
-      class="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden shadow-lg select-none cursor-ew-resize"
-      style="touch-action: none;"
-    >
-      <!-- Foto editada: fondo, siempre completa, tamaño fijo -->
-      <Image
-        src={editada}
-        alt="Foto editada"
-        width={800}
-        height={600}
-        format="webp"
-        quality={85}
-        loading="lazy"
-        class="absolute inset-0 w-full h-full object-cover pointer-events-none"
-      />
+          <!-- Foto sin editar: mismo tamaño exacto, se recorta con clip-path -->
+          <div
+            class="comparador-original absolute inset-0 w-full h-full pointer-events-none"
+            style="clip-path: inset(0 50% 0 0);"
+          >
+            <Image
+              src={foto.antes}
+              alt="Foto sin editar"
+              width={800}
+              height={600}
+              format="webp"
+              quality={85}
+              loading="lazy"
+              class="absolute inset-0 w-full h-full object-cover"
+            />
+          </div>
 
-      <!-- Foto sin editar: mismo tamaño exacto, se recorta con clip-path -->
-      <div
-        id="comparador-original"
-        class="absolute inset-0 w-full h-full pointer-events-none"
-        style="clip-path: inset(0 50% 0 0);"
-      >
-        <Image
-          src={sinEditar}
-          alt="Foto sin editar"
-          width={800}
-          height={600}
-          format="webp"
-          quality={85}
-          loading="lazy"
-          class="absolute inset-0 w-full h-full object-cover"
-        />
-      </div>
+          <!-- Etiquetas -->
+          <span class="absolute top-4 left-4 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full pointer-events-none shadow-sm" style="background-color: rgba(201, 181, 156, 0.55);">
+            Sin editar
+          </span>
+          <span class="absolute top-4 right-4 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full pointer-events-none shadow-sm" style="background-color: rgba(201, 181, 156, 0.55);">
+            Editada
+          </span>
 
-      <!-- Etiquetas -->
-      <span class="absolute top-4 left-4 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full pointer-events-none shadow-sm" style="background-color: rgba(201, 181, 156, 0.55);">
-        Sin editar
-      </span>
-      <span class="absolute top-4 right-4 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full pointer-events-none shadow-sm" style="background-color: rgba(201, 181, 156, 0.55);">
-        Editada
-      </span>
-
-      <!-- Línea + manija -->
-      <div id="comparador-linea" class="absolute top-0 bottom-0 w-1 bg-white shadow-md pointer-events-none" style="left: 50%;">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center">
-          <span class="text-choco text-sm">↔</span>
+          <!-- Línea + manija -->
+          <div class="comparador-linea absolute top-0 bottom-0 w-1 bg-white shadow-md pointer-events-none" style="left: 50%;">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center">
+              <span class="text-choco text-sm">↔</span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    ))}
   </div>
 </section>
 
 <script>
-  const comparador = document.getElementById('comparador');
-  const original = document.getElementById('comparador-original');
-  const linea = document.getElementById('comparador-linea');
+  const comparadores = document.querySelectorAll<HTMLElement>('.comparador');
 
-  let dragging = false;
+  comparadores.forEach((comparador) => {
+    const original = comparador.querySelector<HTMLElement>('.comparador-original');
+    const linea = comparador.querySelector<HTMLElement>('.comparador-linea');
 
-  function mover(clientX: number) {
-    if (!comparador || !original || !linea) return;
-    const rect = comparador.getBoundingClientRect();
-    let pos = ((clientX - rect.left) / rect.width) * 100;
-    pos = Math.max(0, Math.min(100, pos));
-    original.style.clipPath = `inset(0 ${100 - pos}% 0 0)`;
-    linea.style.left = `${pos}%`;
-  }
+    let dragging = false;
 
-  // --- Mouse ---
-  comparador?.addEventListener('mousedown', () => (dragging = true));
-  window.addEventListener('mouseup', () => (dragging = false));
-  window.addEventListener('mousemove', (e) => {
-    if (dragging) mover(e.clientX);
+    function mover(clientX: number) {
+      if (!original || !linea) return;
+      const rect = comparador.getBoundingClientRect();
+      let pos = ((clientX - rect.left) / rect.width) * 100;
+      pos = Math.max(0, Math.min(100, pos));
+      original.style.clipPath = `inset(0 ${100 - pos}% 0 0)`;
+      linea.style.left = `${pos}%`;
+    }
+
+    // --- Mouse ---
+    comparador.addEventListener('mousedown', () => (dragging = true));
+    window.addEventListener('mouseup', () => (dragging = false));
+    window.addEventListener('mousemove', (e) => {
+      if (dragging) mover(e.clientX);
+    });
+
+    comparador.addEventListener('click', (e) => {
+      mover((e as MouseEvent).clientX);
+    });
+
+    // --- Touch ---
+    comparador.addEventListener(
+      'touchstart',
+      (e) => {
+        dragging = true;
+        if (e.touches[0]) mover(e.touches[0].clientX);
+      },
+      { passive: false }
+    );
+
+    window.addEventListener('touchend', () => (dragging = false));
+
+    window.addEventListener(
+      'touchmove',
+      (e) => {
+        if (dragging && e.touches[0]) {
+          e.preventDefault();
+          mover(e.touches[0].clientX);
+        }
+      },
+      { passive: false }
+    );
   });
-
-  comparador?.addEventListener('click', (e) => {
-    mover((e as MouseEvent).clientX);
-  });
-
-  // --- Touch ---
-  comparador?.addEventListener(
-    'touchstart',
-    (e) => {
-      dragging = true;
-      if (e.touches[0]) mover(e.touches[0].clientX);
-    },
-    { passive: false }
-  );
-
-  window.addEventListener('touchend', () => (dragging = false));
-
-  window.addEventListener(
-    'touchmove',
-    (e) => {
-      if (dragging && e.touches[0]) {
-        e.preventDefault();
-        mover(e.touches[0].clientX);
-      }
-    },
-    { passive: false }
-  );
 </script>
