@@ -2,9 +2,7 @@
 titulo: "Sesion Navidad 2025"
 subtitulo: "Diciembre 2025"
 imagen: "./navidad-2025.jpg"
-activa: true
-mostrarPacks: false
-mostrarFaqs: false
+activa: false
 whatsappTexto: "Hola! Quiero consultar por una sesión de Navidad"
 slug: "navidad-2025"
 descripcion: "Una sesión mágica y llena de calidez para celebrar la Navidad en familia, con una escenografía vintage pensada en cada detalle."

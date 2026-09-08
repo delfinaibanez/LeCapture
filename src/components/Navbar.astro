@@ -18,9 +18,10 @@ const sesiones = [
   { href: '/sesiones/infantiles', label: 'Infantiles' },
 ];
 
-// Buscamos si hay alguna sesión especial activa
+// Buscamos las sesiones especiales activas y las archivadas (pasadas)
 const todasEspeciales = await getCollection('sesionesEspeciales');
-const especialActiva = todasEspeciales.find((s) => s.data.activa);
+const especialesActivas = todasEspeciales.filter((s) => s.data.activa);
+const especialesArchivadas = todasEspeciales.filter((s) => !s.data.activa);
 ---
 <header class="relative z-50 w-full py-4 px-6 flex items-center justify-between bg-white shadow-sm">
 <a href="/">
@@ -44,7 +45,7 @@ const especialActiva = todasEspeciales.find((s) => s.data.activa);
           {link.label}
         </span>
         <div class="absolute top-full left-1/2 -translate-x-1/2 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-          <div class="bg-white rounded-2xl shadow-lg border border-choco/10 py-2 min-w-[180px]">
+          <div class="bg-white rounded-2xl shadow-lg border border-choco/10 py-2 min-w-[200px]">
             {sesiones.map((sesion) => (
               <a
                 href={sesion.href}
@@ -53,15 +54,36 @@ const especialActiva = todasEspeciales.find((s) => s.data.activa);
                 {sesion.label}
               </a>
             ))}
-            {especialActiva && (
+            {especialesActivas.length > 0 && (
               <>
                 <div class="border-t border-choco/10 my-1"></div>
-                <a
-                  href={`/sesiones-especiales/${especialActiva.data.slug}`}
-                  class="block px-5 py-2.5 text-base text-[#8B3A3A] font-semibold hover:bg-[#F5EFE0] transition-colors"
-                >
-                   {especialActiva.data.titulo}
-                </a>
+                <p class="px-5 pt-1 pb-1 text-[10px] font-bold uppercase tracking-widest text-choco/40">
+                  Especiales
+                </p>
+                {especialesActivas.map((especial) => (
+                  <a
+                    href={`/sesiones-especiales/${especial.data.slug}`}
+                    class="block px-5 py-2.5 text-base text-[#8B3A3A] font-semibold hover:bg-[#F5EFE0] transition-colors"
+                  >
+                    {especial.data.titulo}
+                  </a>
+                ))}
+              </>
+            )}
+            {especialesArchivadas.length > 0 && (
+              <>
+                <div class="border-t border-choco/10 my-1"></div>
+                <p class="px-5 pt-1 pb-1 text-[10px] font-bold uppercase tracking-widest text-choco/40">
+                  Galería
+                </p>
+                {especialesArchivadas.map((especial) => (
+                  <a
+                    href={`/sesiones-especiales/${especial.data.slug}`}
+                    class="block px-5 py-2.5 text-base text-choco/70 hover:bg-sand/40 hover:text-forest transition-colors"
+                  >
+                    {especial.data.titulo}
+                  </a>
+                ))}
               </>
             )}
           </div>
@@ -103,13 +125,35 @@ const especialActiva = todasEspeciales.find((s) => s.data.activa);
               {sesion.label}
             </a>
           ))}
-          {especialActiva && (
-            <a
-              href={`/sesiones-especiales/${especialActiva.data.slug}`}
-              class="text-sm text-[#8B3A3A] font-semibold py-2 pl-4"
-            >
-              {especialActiva.data.titulo}
-            </a>
+          {especialesActivas.length > 0 && (
+            <>
+              <p class="pl-4 pt-2 pb-1 text-[10px] font-bold uppercase tracking-widest text-choco/40">
+                Especiales
+              </p>
+              {especialesActivas.map((especial) => (
+                <a
+                  href={`/sesiones-especiales/${especial.data.slug}`}
+                  class="text-sm text-[#8B3A3A] font-semibold py-2 pl-4"
+                >
+                  {especial.data.titulo}
+                </a>
+              ))}
+            </>
+          )}
+          {especialesArchivadas.length > 0 && (
+            <>
+              <p class="pl-4 pt-2 pb-1 text-[10px] font-bold uppercase tracking-widest text-choco/40">
+                Galería
+              </p>
+              {especialesArchivadas.map((especial) => (
+                <a
+                  href={`/sesiones-especiales/${especial.data.slug}`}
+                  class="text-sm text-choco/70 py-2 pl-4"
+                >
+                  {especial.data.titulo}
+                </a>
+              ))}
+            </>
           )}
         </div>
       </div>
