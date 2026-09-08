@@ -102,34 +102,22 @@ const estudioImages = Object.keys(estudioModules)
           ))}
         </div>
       </div>
-
-      <!-- DESKTOP: mosaico bento para hasta 7 fotos -->
-      <div class="hidden md:grid grid-cols-6 grid-rows-2 gap-4 h-[500px]">
-        {detrasCamaraImages.slice(0, 7).map((foto, i) => {
-          const spanClasses = [
-            'col-span-2 row-span-2', // 1: grande, alta
-            'col-span-2 row-span-1', // 2
-            'col-span-2 row-span-1', // 3
-            'col-span-1 row-span-1', // 4
-            'col-span-1 row-span-1', // 5
-            'col-span-1 row-span-1', // 6
-            'col-span-1 row-span-1', // 7
-          ];
-          return (
-            <div class={`${spanClasses[i]} rounded-[1.5rem] overflow-hidden shadow-md group`}>
-              <Image
-                src={foto}
-                alt={`Detrás de cámara - imagen ${i + 1}`}
-                width={i === 0 ? 600 : 400}
-                height={i === 0 ? 800 : 400}
-                format="webp"
-                quality={85}
-                loading="lazy"
-                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-            </div>
-          );
-        })}
+       <!-- DESKTOP: galería en grilla cuadrada pareja -->
+      <div class="hidden md:grid grid-cols-4 gap-4">
+        {detrasCamaraImages.slice(0, 8).map((foto, i) => (
+          <div class="aspect-square rounded-[1.5rem] overflow-hidden shadow-md group">
+            <Image
+              src={foto}
+              alt={`Detrás de cámara - imagen ${i + 1}`}
+              width={400}
+              height={400}
+              format="webp"
+              quality={85}
+              loading="lazy"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            />
+          </div>
+        ))}
       </div>
 
     </div>
