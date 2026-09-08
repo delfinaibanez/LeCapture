@@ -2,10 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import retrato from '../assets/images/sobre-mi/retrato.jpg';
-import detrasCamara1 from '../assets/images/sobre-mi/detras-camara/foto1.jpg';
-import detrasCamara2 from '../assets/images/sobre-mi/detras-camara/foto2.jpg';
-import detrasCamara3 from '../assets/images/sobre-mi/detras-camara/foto3.jpg';
 import CTAFinal from '../components/CTAFinal.astro';
+
+// Detrás de cámara: toma automáticamente TODAS las fotos de la carpeta, ordenadas por nombre
+const detrasCamaraModules = import.meta.glob('../assets/images/sobre-mi/detras-camara/*.{jpeg,jpg,png,webp}', { eager: true });
+const detrasCamaraImages = Object.keys(detrasCamaraModules)
+  .sort()
+  .map((key) => (detrasCamaraModules[key] as any).default);
 
 // Toma automáticamente TODAS las fotos de la carpeta estudio, ordenadas por nombre
 const estudioModules = import.meta.glob('../assets/images/sobre-mi/estudio/*.{jpeg,jpg,png,webp}', { eager: true });
@@ -77,44 +80,56 @@ const estudioImages = Object.keys(estudioModules)
       Paciencia, juego y momentos espontáneos: la verdadera receta detrás de cada risa y cada recuerdo.
       </p>
 
-      <!-- Mosaico: foto grande + 2 chicas, con altura total fija -->
-      <div class="grid grid-cols-2 grid-rows-2 gap-4 md:gap-6 h-[380px] md:h-[480px]">
-        <div class="row-span-2 rounded-[1.5rem] overflow-hidden shadow-md group">
-          <Image
-            src={detrasCamara1}
-            alt="Sesión de fotos en proceso"
-            width={600}
-            height={800}
-            format="webp"
-            quality={85}
-            loading="lazy"
-            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-          />
+      <!-- MOBILE: carrusel horizontal -->
+      <div class="md:hidden relative">
+        <div
+          id="detras-scroll"
+          class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide"
+        >
+          {detrasCamaraImages.map((foto, i) => (
+            <div class="snap-center shrink-0 w-64 rounded-[1.5rem] overflow-hidden shadow-md">
+              <Image
+                src={foto}
+                alt={`Detrás de cámara - imagen ${i + 1}`}
+                width={500}
+                height={600}
+                format="webp"
+                quality={85}
+                loading="lazy"
+                class="w-full h-80 object-cover"
+              />
+            </div>
+          ))}
         </div>
-        <div class="rounded-[1.5rem] overflow-hidden shadow-md group">
-          <Image
-            src={detrasCamara2}
-            alt="Sesión de fotos en proceso"
-            width={500}
-            height={380}
-            format="webp"
-            quality={85}
-            loading="lazy"
-            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-          />
-        </div>
-        <div class="rounded-[1.5rem] overflow-hidden shadow-md group">
-          <Image
-            src={detrasCamara3}
-            alt="Sesión de fotos en proceso"
-            width={500}
-            height={380}
-            format="webp"
-            quality={85}
-            loading="lazy"
-            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-          />
-        </div>
+      </div>
+
+      <!-- DESKTOP: mosaico bento para hasta 7 fotos -->
+      <div class="hidden md:grid grid-cols-6 grid-rows-2 gap-4 h-[500px]">
+        {detrasCamaraImages.slice(0, 7).map((foto, i) => {
+          const spanClasses = [
+            'col-span-2 row-span-2', // 1: grande, alta
+            'col-span-2 row-span-1', // 2
+            'col-span-2 row-span-1', // 3
+            'col-span-1 row-span-1', // 4
+            'col-span-1 row-span-1', // 5
+            'col-span-1 row-span-1', // 6
+            'col-span-1 row-span-1', // 7
+          ];
+          return (
+            <div class={`${spanClasses[i]} rounded-[1.5rem] overflow-hidden shadow-md group`}>
+              <Image
+                src={foto}
+                alt={`Detrás de cámara - imagen ${i + 1}`}
+                width={i === 0 ? 600 : 400}
+                height={i === 0 ? 800 : 400}
+                format="webp"
+                quality={85}
+                loading="lazy"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+            </div>
+          );
+        })}
       </div>
 
     </div>
