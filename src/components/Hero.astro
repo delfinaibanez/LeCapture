@@ -1,10 +1,11 @@
 ---
 import { Image } from 'astro:assets';
 
-// Toma automáticamente TODAS las imágenes de la carpeta hero, sin importa el nombre
-const heroImages = Object.values(
-  import.meta.glob('../assets/images/home/hero/*.{jpeg,jpg,png,webp}', { eager: true })
-).map((mod: any) => mod.default);
+// Toma automáticamente las imágenes de la carpeta hero, ordenadas por nombre de archivo
+const heroModules = import.meta.glob('../assets/images/home/hero/*.{jpeg,jpg,png,webp}', { eager: true });
+const heroImages = Object.keys(heroModules)
+  .sort()
+  .map((key) => (heroModules[key] as any).default);
 ---
 
 <section class="relative w-full h-[70vh] md:h-[75vh] overflow-hidden">
@@ -40,10 +41,11 @@ const heroImages = Object.values(
     <p class="text-white text-base md:text-xl mb-6 max-w-md drop-shadow-lg">
       Fotografía de embarazo, recién nacidos e infantiles
     </p>
-    
+
+    <a
       href="/sesiones"
       class="pointer-events-auto bg-white text-gray-900 px-6 py-3 rounded-full font-medium hover:bg-gray-200 transition-colors"
-     <a>
+    >
       Ver sesiones
     </a>
   </div>
