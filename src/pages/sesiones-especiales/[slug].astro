@@ -46,7 +46,7 @@ const { titulo, subtitulo, descripcion, imagen, mostrarPacks, mostrarFaqs, galer
 
   <!-- GALERÍA -->
   {galeria && galeria.length > 0 && (
-    <section class="w-full py-16 md:py-20 px-6 bg-[#fff8ec]">
+    <section class="w-full py-16 md:py-20 px-6" style="background-color: #EFE9E3;">
       <p class="text-[#B5623A] text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
         La escenografía
       </p>
@@ -55,24 +55,6 @@ const { titulo, subtitulo, descripcion, imagen, mostrarPacks, mostrarFaqs, galer
       </h2>
 
       <div class="relative max-w-5xl mx-auto">
-        <div class="absolute -top-4 -right-3 md:-top-5 md:-right-5 z-20 rotate-[12deg]" aria-hidden="true">
-          <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#fff8ec] border-2 border-[#B5623A]/30 shadow-lg flex items-center justify-center">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#A56A4E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 md:w-7 md:h-7">
-              <path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/>
-              <path d="M12 22v-3"/>
-            </svg>
-          </div>
-        </div>
-
-        <div class="hidden md:block absolute top-[38%] -left-5 z-20 rotate-[-10deg]" aria-hidden="true">
-          <div class="w-11 h-11 rounded-full bg-[#fff8ec] border-2 border-[#C9A468]/40 shadow-lg flex items-center justify-center">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#B5623A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
-              <path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/>
-              <path d="M12 22v-3"/>
-            </svg>
-          </div>
-        </div>
-
         <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
           {galeria.map((foto, i) => (
             <button
@@ -195,54 +177,11 @@ const { titulo, subtitulo, descripcion, imagen, mostrarPacks, mostrarFaqs, galer
 
   <!-- VIDEO -->
   {videoEmbed && (
-    <section class="relative w-full py-16 md:py-24 px-6 bg-[#5C4237] overflow-hidden">
-      {[
-        { top: '6%',  left: '6%',  size: 34, color: '#C9A468', opacity: 0.28, rotate: -10, mobile: true  },
-        { top: '9%',  left: '86%', size: 24, color: '#fff8ec', opacity: 0.18, rotate: 15,  mobile: false },
-        { top: '20%', left: '46%', size: 16, color: '#C9A468', opacity: 0.15, rotate: 25,  mobile: false },
-        { top: '16%', left: '24%', size: 20, color: '#C9A468', opacity: 0.2,  rotate: -20, mobile: true  },
-        { top: '38%', left: '9%',  size: 14, color: '#fff8ec', opacity: 0.15, rotate: 30,  mobile: false },
-        { top: '55%', left: '4%',  size: 22, color: '#fff8ec', opacity: 0.18, rotate: 8,   mobile: false },
-        { top: '62%', left: '93%', size: 30, color: '#C9A468', opacity: 0.25, rotate: -18, mobile: true  },
-        { top: '76%', left: '46%', size: 16, color: '#fff8ec', opacity: 0.15, rotate: 5,   mobile: false },
-        { top: '85%', left: '16%', size: 18, color: '#C9A468', opacity: 0.18, rotate: 12,  mobile: false },
-        { top: '90%', left: '72%', size: 24, color: '#fff8ec', opacity: 0.2,  rotate: -6,  mobile: true  },
-      ].map((c) => (
-        <div
-          class={`absolute pointer-events-none ${c.mobile ? '' : 'hidden md:block'}`}
-          style={`top:${c.top}; left:${c.left}; transform: rotate(${c.rotate}deg); opacity:${c.opacity};`}
-          aria-hidden="true"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke={c.color}
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            style={`width:${c.size}px; height:${c.size}px;`}
-          >
-            <path d="m10 20-1.25-2.5L6 18"/>
-            <path d="M10 4 8.75 6.5 6 6"/>
-            <path d="m14 20 1.25-2.5L18 18"/>
-            <path d="m14 4 1.25 2.5L18 6"/>
-            <path d="m17 21-3-6h-4"/>
-            <path d="m17 3-3 6 1.5 3"/>
-            <path d="M2 12h6.5L10 9"/>
-            <path d="m20 10-1.5 2 1.5 2"/>
-            <path d="M22 12h-6.5L14 15"/>
-            <path d="m4 10 1.5 2L4 14"/>
-            <path d="m7 21 3-6-1.5-3"/>
-            <path d="m7 3 3 6h4"/>
-          </svg>
-        </div>
-      ))}
-
-      <p class="text-[#C9A468] text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
+    <section class="relative w-full py-16 md:py-24 px-6" style="background-color: #F9F8F6;">
+      <p class="text-[#B5623A] text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
         Mirá cómo es
       </p>
-      <h2 class="font-heading text-2xl md:text-4xl font-semibold text-center text-cream mb-10 md:mb-14">
+      <h2 class="font-heading text-2xl md:text-4xl font-semibold text-center text-[#6b4a3f] mb-10 md:mb-14">
         Detrás de escena
       </h2>
 
@@ -278,38 +217,8 @@ const { titulo, subtitulo, descripcion, imagen, mostrarPacks, mostrarFaqs, galer
             }`}>
 
               {i === 1 && (
-                <div class="absolute inset-0 rounded-[2rem] overflow-hidden pointer-events-none z-[-1]" aria-hidden="true">
-                  {[
-                    { top: '6%',  left: '10%', size: 20, rotate: -8  },
-                    { top: '12%', left: '75%', size: 16, rotate: 14  },
-                    { top: '28%', left: '40%', size: 22, rotate: -15 },
-                    { top: '35%', left: '85%', size: 14, rotate: 6   },
-                    { top: '48%', left: '15%', size: 18, rotate: 10  },
-                    { top: '58%', left: '55%', size: 16, rotate: -12 },
-                    { top: '70%', left: '80%', size: 20, rotate: 18  },
-                    { top: '78%', left: '25%', size: 14, rotate: -6  },
-                    { top: '88%', left: '60%', size: 18, rotate: 8   },
-                    { top: '92%', left: '8%',  size: 16, rotate: -10 },
-                  ].map((p) => (
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#C9A468"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      style={`position:absolute; top:${p.top}; left:${p.left}; width:${p.size}px; height:${p.size}px; transform: rotate(${p.rotate}deg); opacity:0.18;`}
-                    >
-                      <path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/>
-                      <path d="M12 22v-3"/>
-                    </svg>
-                  ))}
-                </div>
-              )}
-
-              {i === 1 && (
                 <span class="absolute -top-4 left-1/2 -translate-x-1/2 bg-white text-[#A56A4E] text-[11px] font-bold uppercase tracking-widest px-5 py-2 rounded-full shadow-lg border-2 border-[#C9A468] whitespace-nowrap">
-                  🎄 Más elegido
+                  Más elegido
                 </span>
               )}
 
@@ -409,6 +318,6 @@ const { titulo, subtitulo, descripcion, imagen, mostrarPacks, mostrarFaqs, galer
     </section>
   )}
 
-
+  <CTAFinal />
 
 </Layout>
