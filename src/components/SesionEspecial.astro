@@ -10,12 +10,12 @@ const activa = todas.find((s: (typeof todas)[number]) => s.data.activa);
   <section class="w-full py-16 md:py-24 px-4 md:px-6" style="background-color: #F9F8F6;">
     <div class="max-w-4xl mx-auto relative">
 
-      <div class="rounded-[2.5rem] shadow-lg overflow-hidden" style="background-color: #D9CFC7;">
+      <div class="rounded-[2.5rem] shadow-xl overflow-hidden" style="background-color: #EFE9E3;">
         <div class="flex flex-col md:flex-row items-center">
 
           <!-- Foto ovalada con etiqueta colgante -->
           <div class="relative w-full md:w-1/2 p-8 md:p-10 flex justify-center">
-            <div class="relative w-64 h-64 md:w-72 md:h-72 rounded-full overflow-hidden shadow-lg rotate-[-3deg] border-8 border-cream">
+            <div class="relative w-64 h-64 md:w-72 md:h-72 rounded-full overflow-hidden shadow-lg rotate-[-3deg] border-8" style="border-color: #F9F8F6;">
               <Image
                 src={activa.data.imagen}
                 alt={activa.data.titulo}
@@ -28,32 +28,31 @@ const activa = todas.find((s: (typeof todas)[number]) => s.data.activa);
               />
             </div>
             <!-- Etiqueta colgante -->
-            <div class="absolute top-4 right-6 md:right-10 bg-cream border border-choco/20 rounded-sm px-3 py-1.5 shadow-md rotate-[8deg] text-xs text-choco font-semibold flex items-center gap-1.5">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 text-choco shrink-0"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/><path d="M12 22v-3"/></svg>
+            <div class="absolute top-4 right-6 md:right-10 rounded-sm px-3 py-1.5 shadow-md rotate-[8deg] text-xs font-semibold flex items-center gap-1.5 text-[#7A756D]" style="background-color: #F9F8F6; border: 1px solid rgba(122,117,109,0.2);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 shrink-0"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/><path d="M12 22v-3"/></svg>
               LeCapture
             </div>
           </div>
 
           <!-- Texto -->
           <div class="w-full md:w-1/2 p-8 md:pr-12 text-center md:text-left">
-            <span class="inline-flex items-center gap-1.5 text-choco text-sm font-semibold px-4 py-1.5 rounded-full mb-4" style="background-color: #EFE9E3;">
-              
+            <span class="inline-flex items-center gap-1.5 text-sm font-semibold px-4 py-1.5 rounded-full mb-4 text-[#7A756D] shadow-sm" style="background-color: #FFFFFF;">
               Sesión especial
             </span>
-            <h2 class="font-script text-2xl md:text-4xl font-normal text-choco mb-2">
+            <h2 class="font-script text-2xl md:text-4xl font-normal text-[#3D3A36] mb-2">
               {activa.data.titulo}
             </h2>
-            <p class="text-choco/70 text-base md:text-lg mb-6">
+            <p class="text-[#3D3A36]/70 text-base md:text-lg mb-6">
               {activa.data.subtitulo}
             </p>
             <a
-          href={`https://wa.me/549XXXXXXXXXX?text=${encodeURIComponent(activa.data.whatsappTexto)}`}
-          target="_blank"
-          style="background-color: #F9F8F6;"
-          class="inline-block px-7 py-3.5 rounded-full font-semibold text-choco hover:scale-105 transition-transform duration-300"
-        >
-          Reservar ahora
-        </a>
+              href={`https://wa.me/549XXXXXXXXXX?text=${encodeURIComponent(activa.data.whatsappTexto)}`}
+              target="_blank"
+              style="background-color: #9A948A; color: white;"
+              class="inline-block px-7 py-3.5 rounded-full font-semibold shadow-sm hover:opacity-90 hover:scale-105 transition-transform duration-300"
+            >
+              Reservar ahora
+            </a>
           </div>
 
         </div>
