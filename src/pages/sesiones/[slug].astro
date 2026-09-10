@@ -17,9 +17,6 @@ const { sesion } = Astro.props;
 const { titulo, descripcion, imagenHero, packs, faqs } = sesion.data;
 
 // Fotos de la sesión: toma todas las carpetas de sesiones y filtra por el slug actual.
-// Se normalizan guiones medios/bajos para que "recien-nacido" y "recien_nacido" matcheen igual,
-// así cada sesión puede tener una cantidad distinta de fotos sin depender de que el nombre
-// de carpeta sea carácter por carácter idéntico al slug.
 function normalizar(str: string) {
   return str
     .toLowerCase()
@@ -37,11 +34,11 @@ const fotosSesion = Object.keys(fotosModules)
   .sort()
   .map((key) => (fotosModules[key] as any).default);
 
-// Paleta para cada pack: fondo de la tarjeta, color del check, fondo del botón y color de texto del botón
+// Paleta adaptada con los colores que definiste
 const paletaPacks = [
-  { bg: '#F9F8F6', texto: '#6b4a3f', check: '#D9CFC7', boton: '#D9CFC7', botonTexto: '#6b4a3f' },
-  { bg: '#D9CFC7', texto: '#6b4a3f', check: '#F9F8F6', boton: '#F9F8F6', botonTexto: '#6b4a3f' },
-  { bg: '#EFE9E3', texto: '#6b4a3f', check: '#D9CFC7', boton: '#D9CFC7', botonTexto: '#6b4a3f' },
+  { bg: '#F9F8F6', texto: '#3D3A36', check: '#7A756D', boton: '#A99A8A', botonTexto: '#F9F8F6' },
+  { bg: '#EFE9E3', texto: '#3D3A36', check: '#7A756D', boton: '#A99A8A', botonTexto: '#F9F8F6' },
+  { bg: '#F9F8F6', texto: '#3D3A36', check: '#7A756D', boton: '#A99A8A', botonTexto: '#F9F8F6' },
 ];
 ---
 
@@ -59,13 +56,13 @@ const paletaPacks = [
       loading="eager"
       class="absolute inset-0 w-full h-full object-cover"
     />
-    <div class="absolute inset-0 bg-gradient-to-t from-choco/80 via-choco/20 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-[#3D3A36]/80 via-[#3D3A36]/20 to-transparent"></div>
     <div class="absolute inset-x-0 bottom-0 h-24 md:h-32 bg-gradient-to-t from-[#EFE9E3]/25 to-transparent"></div>
     <div class="absolute inset-0 flex flex-col items-center justify-end text-center px-6 pb-12 md:pb-16">
-      <h1 class="font-script text-4xl md:text-6xl font-normal text-cream mb-4 drop-shadow-md">
+      <h1 class="font-script text-4xl md:text-6xl font-normal text-[#F9F8F6] mb-4 drop-shadow-md">
         {titulo}
       </h1>
-      <p class="text-cream/90 text-sm md:text-base max-w-xl leading-relaxed drop-shadow-md">
+      <p class="text-[#F9F8F6]/90 text-sm md:text-base max-w-xl leading-relaxed drop-shadow-md">
         {descripcion}
       </p>
     </div>
@@ -75,10 +72,10 @@ const paletaPacks = [
   {fotosSesion.length > 0 && (
     <section class="w-full py-14 md:py-20 px-6" style="background-color: #F9F8F6;">
       <div class="max-w-5xl mx-auto">
-        <p class="text-forest text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
+        <p class="text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2" style="color: #7A756D;">
           Momentos reales
         </p>
-        <h2 class="text-xl md:text-4xl font-semibold text-center text-choco mb-8 md:mb-12">
+        <h2 class="text-xl md:text-4xl font-semibold text-center mb-8 md:mb-12" style="color: #3D3A36;">
           Fotos de esta sesión
         </h2>
 
@@ -91,10 +88,10 @@ const paletaPacks = [
   <section class="w-full py-10 md:py-24 px-6" style="background-color: #EFE9E3;">
     <div class="max-w-6xl mx-auto">
 
-      <p class="text-forest text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
+      <p class="text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2" style="color: #7A756D;">
         Elegí tu experiencia
       </p>
-      <h2 class="text-xl md:text-4xl font-semibold text-center text-choco mb-8 md:mb-16">
+      <h2 class="text-xl md:text-4xl font-semibold text-center mb-8 md:mb-16" style="color: #3D3A36;">
         Packs disponibles
       </h2>
 
@@ -108,39 +105,39 @@ const paletaPacks = [
                 ? 'p-5 md:p-10 pt-9 md:pt-14 border-4 shadow-2xl md:scale-110 z-10'
                 : 'p-4 md:p-8 border-2 shadow-md'
             }`}
-            style={`background-color: ${paleta.bg}; color: ${paleta.texto}; border-color: ${paleta.check};`}
+            style={`background-color: ${paleta.bg}; color: ${paleta.texto}; border-color: #A99A8A50;`}
           >
 
             {i === 1 && (
-              <span class="absolute -top-3 md:-top-4 left-1/2 -translate-x-1/2 bg-white text-[10px] md:text-[11px] font-bold uppercase tracking-widest px-4 py-1.5 md:px-5 md:py-2 rounded-full shadow-lg border-2 whitespace-nowrap" style={`color: ${paleta.bg}; border-color: ${paleta.check};`}>
-                 Más elegido
+              <span class="absolute -top-3 md:-top-4 left-1/2 -translate-x-1/2 text-[10px] md:text-[11px] font-bold uppercase tracking-widest px-4 py-1.5 md:px-5 md:py-2 rounded-full shadow-lg border-2 whitespace-nowrap" style="background-color: #F9F8F6; color: #3D3A36; border-color: #A99A8A;">
+                  Más elegido
               </span>
             )}
 
-            <p class={`font-bold uppercase tracking-widest mb-1 text-center ${i === 1 ? 'text-xl md:text-2xl' : 'text-base md:text-lg'}`}>
+            <p class={`font-bold uppercase tracking-widest mb-1 text-center ${i === 1 ? 'text-xl md:text-2xl' : 'text-base md:text-lg'}`} style="color: #3D3A36;">
               {pack.nombre}
             </p>
-            <p class={`text-xs md:text-sm mb-3 md:mb-5 text-center opacity-80`}>
+            <p class="text-xs md:text-sm mb-3 md:mb-5 text-center" style="color: #7A756D;">
               {pack.tagline}
             </p>
 
             <ul class="flex-1 space-y-1.5 md:space-y-2.5 mb-4 md:mb-6">
               {pack.items.map((item) => (
-                <li class="text-xs md:text-sm flex items-start gap-2 opacity-90">
-                  <span class="mt-0.5 font-bold" style={`color: ${paleta.check};`}>✓</span>
+                <li class="text-xs md:text-sm flex items-start gap-2" style="color: #3D3A36; opacity: 0.9;">
+                  <span class="mt-0.5 font-bold" style="color: #7A756D;">✓</span>
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
 
             <div class="text-center mb-2 md:mb-3">
-              <p class={`font-bold ${i === 1 ? 'text-2xl md:text-4xl' : 'text-xl md:text-3xl'}`}>
+              <p class={`font-bold ${i === 1 ? 'text-2xl md:text-4xl' : 'text-xl md:text-3xl'}`} style="color: #3D3A36;">
                 {pack.precio}
               </p>
             </div>
 
             {pack.precioCuotas && (
-              <div class="text-center rounded-xl py-1.5 md:py-2 px-3 mb-3 md:mb-5 text-[10px] md:text-xs font-medium opacity-80" style={`background-color: ${paleta.check}40;`}>
+              <div class="text-center rounded-xl py-1.5 md:py-2 px-3 mb-3 md:mb-5 text-[10px] md:text-xs font-medium" style="background-color: #A99A8A15; color: #3D3A36; opacity: 0.85;">
                 {pack.precioCuotas}
               </div>
             )}
@@ -149,7 +146,7 @@ const paletaPacks = [
               href={pack.linkReserva}
               target="_blank"
               class="text-center text-sm md:text-base rounded-full py-2.5 md:py-3.5 font-bold transition-all duration-300 group-hover:scale-105 shadow-lg hover:opacity-90"
-              style={`background-color: ${paleta.boton}; color: ${paleta.botonTexto};`}
+              style="background-color: #A99A8A; color: #F9F8F6;"
             >
               Reservá tu lugar
             </a>
@@ -165,21 +162,21 @@ const paletaPacks = [
   <section class="w-full py-16 md:py-24 px-6" style="background-color: #F9F8F6;">
     <div class="max-w-3xl mx-auto">
 
-      <p class="text-forest text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2">
+      <p class="text-xs md:text-sm font-semibold tracking-widest uppercase text-center mb-2" style="color: #7A756D;">
         Dudas frecuentes
       </p>
-      <h2 class="text-2xl md:text-4xl font-semibold text-center text-choco mb-12 md:mb-16">
+      <h2 class="text-2xl md:text-4xl font-semibold text-center mb-12 md:mb-16" style="color: #3D3A36;">
         Preguntas frecuentes
       </h2>
 
       <div class="flex flex-col gap-3">
         {faqs.map((faq) => (
           <details class="group rounded-2xl px-6 py-4 shadow-sm" style="background-color: #EFE9E3;">
-            <summary class="flex items-center justify-between cursor-pointer text-choco font-semibold text-sm md:text-base list-none">
+            <summary class="flex items-center justify-between cursor-pointer font-semibold text-sm md:text-base list-none" style="color: #3D3A36;">
               {faq.pregunta}
-              <span class="text-choco/40 text-xl group-open:rotate-45 transition-transform duration-300">+</span>
+              <span class="text-xl group-open:rotate-45 transition-transform duration-300" style="color: #7A756D;">+</span>
             </summary>
-            <p class="text-choco/70 text-sm mt-3 leading-relaxed">
+            <p class="text-sm mt-3 leading-relaxed" style="color: #3D3A36; opacity: 0.8;">
               {faq.respuesta}
             </p>
           </details>

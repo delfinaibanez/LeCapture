@@ -3,39 +3,37 @@ import Layout from '../layouts/Layout.astro';
 
 const whatsapp = '549XXXXXXXXXX'; // reemplazar por el real
 const email = 'contacto@lecapture.com'; // reemplazar por el real
-const zona = 'Mendoza, Argentina'; // reemplazar por la zona real
+const zona = 'Luján de Cuyo, Mendoza, Argentina';
 ---
 
 <Layout title="Contacto">
 
   <!-- INTRO -->
   <section class="relative w-full py-14 md:py-16 px-6 text-center overflow-hidden" style="background-color: #D9CFC7;">
-
     <div class="relative z-10">
-      <h1 class="font-heading text-3xl md:text-4xl font-bold text-choco mb-3 uppercase tracking-wide">
+      <h1 class="font-heading text-3xl md:text-4xl font-bold mb-3 uppercase tracking-wide" style="color: #3D3A36;">
         Contacto
       </h1>
-      <p class="text-choco/70 max-w-lg mx-auto">
+      <p class="max-w-lg mx-auto text-sm md:text-base" style="color: #3D3A36; opacity: 0.75;">
         Contame sobre la sesión que estás buscando y coordinamos todo juntas 
       </p>
     </div>
   </section>
-
-  <!-- CARTEL / NOTA (con washi tape) -->
+<!-- CARTEL / NOTA (con cinta adhesiva simulada) -->
   <div class="relative z-20 max-w-2xl mx-auto px-6 -mt-2 md:-mt-8 mb-16 md:mb-16">
     <div class="relative rotate-[-1.5deg]">
 
-      <!-- Washi tape -->
+      <!-- Simulación de cinta adhesiva (Cintex / Washi Tape) -->
       <div
-        class="absolute -top-3 md:-top-4 left-1/2 -translate-x-1/2 w-24 md:w-28 h-6 md:h-7 rotate-[-2deg] z-10 shadow-sm"
-        style="background-color: #C9B59C; border: 1px solid rgba(107,74,63,0.1);"
+        class="absolute -top-3 md:-top-4 left-1/2 -translate-x-1/2 w-28 md:w-32 h-7 md:h-8 rotate-[-1deg] z-10 shadow-sm opacity-90 backdrop-blur-xs"
+        style="background: linear-gradient(135deg, rgba(169,154,138,0.75) 0%, rgba(200,188,175,0.85) 100%); border-left: 2px dashed rgba(255,255,255,0.4); border-right: 2px dashed rgba(255,255,255,0.4); box-shadow: 0 1px 3px rgba(61,58,54,0.15);"
       ></div>
 
-      <div class="relative bg-white rounded-2xl shadow-lg px-5 py-6 md:px-10 md:py-9 border border-choco/5">
-        <p class="font-script text-2xl md:text-3xl text-choco text-center mb-2 md:mb-3">
+      <div class="relative bg-white rounded-2xl shadow-lg px-5 py-6 md:px-10 md:py-9" style="border: 1px solid rgba(61,58,54,0.05);">
+        <p class="font-script text-2xl md:text-3xl text-center mb-2 md:mb-3" style="color: #3D3A36;">
           Antes de escribirme...
         </p>
-        <p class="text-choco/75 text-xs md:text-sm leading-relaxed text-center">
+        <p class="text-xs md:text-sm leading-relaxed text-center" style="color: #3D3A36; opacity: 0.75;">
           El estudio funciona solo con cita previa, para asegurarte un espacio
           tranquilo y dedicado. No hace falta que me preguntes por las tarifas:
           en cada sección de la web vas a encontrar el precio y todos los
@@ -60,17 +58,17 @@ const zona = 'Mendoza, Argentina'; // reemplazar por la zona real
         <a
           href={`https://wa.me/${whatsapp}?text=Hola!%20Quiero%20consultar%20por%20una%20sesión`}
           target="_blank"
-          class="group rounded-2xl p-4 flex items-center gap-4 border border-choco/10 shadow-[0_2px_10px_rgba(107,74,63,0.08)] hover:shadow-[0_4px_16px_rgba(107,74,63,0.15)] hover:-translate-y-0.5 transition-all duration-300"
-          style="background-color: #EFE9E3;"
+          class="group rounded-2xl p-4 flex items-center gap-4 transition-all duration-300 hover:-translate-y-0.5 shadow-sm hover:shadow-md"
+          style="background-color: #EFE9E3; border: 1px solid rgba(61,58,54,0.08);"
         >
-          <div class="w-14 h-14 md:w-12 md:h-12 shrink-0 rounded-xl flex items-center justify-center shadow-inner" style="background-color: #C9B59C;">
+          <div class="w-14 h-14 md:w-12 md:h-12 shrink-0 rounded-xl flex items-center justify-center shadow-inner" style="background-color: #A99A8A;">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 md:w-6 md:h-6 shrink-0" style="color: #F9F8F6;"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/></svg>
           </div>
           <div class="text-left">
-            <p class="text-choco/40 text-[10px] font-bold uppercase tracking-widest mb-0.5">
+            <p class="text-[10px] font-bold uppercase tracking-widest mb-0.5" style="color: #7A756D;">
               WhatsApp
             </p>
-            <p class="text-choco font-bold text-[15px] group-hover:text-forest transition-colors">
+            <p class="font-bold text-[15px] transition-colors group-hover:opacity-75" style="color: #3D3A36;">
               Respuesta más rápida
             </p>
           </div>
@@ -79,32 +77,32 @@ const zona = 'Mendoza, Argentina'; // reemplazar por la zona real
         <!-- Email -->
         <a
           href={`mailto:${email}`}
-          class="group rounded-2xl p-4 flex items-center gap-4 border border-choco/10 shadow-[0_2px_10px_rgba(107,74,63,0.08)] hover:shadow-[0_4px_16px_rgba(107,74,63,0.15)] hover:-translate-y-0.5 transition-all duration-300"
-          style="background-color: #EFE9E3;"
+          class="group rounded-2xl p-4 flex items-center gap-4 transition-all duration-300 hover:-translate-y-0.5 shadow-sm hover:shadow-md"
+          style="background-color: #EFE9E3; border: 1px solid rgba(61,58,54,0.08);"
         >
-          <div class="w-14 h-14 md:w-12 md:h-12 shrink-0 rounded-xl flex items-center justify-center shadow-inner" style="background-color: #C9B59C;">
+          <div class="w-14 h-14 md:w-12 md:h-12 shrink-0 rounded-xl flex items-center justify-center shadow-inner" style="background-color: #A99A8A;">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 md:w-6 md:h-6 shrink-0" style="color: #F9F8F6;"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
           </div>
           <div class="text-left min-w-0">
-            <p class="text-choco/40 text-[10px] font-bold uppercase tracking-widest mb-0.5">
+            <p class="text-[10px] font-bold uppercase tracking-widest mb-0.5" style="color: #7A756D;">
               Email
             </p>
-            <p class="text-choco font-bold text-[15px] truncate group-hover:text-forest transition-colors">
+            <p class="font-bold text-[15px] truncate transition-colors group-hover:opacity-75" style="color: #3D3A36;">
               {email}
             </p>
           </div>
         </a>
 
         <!-- Ubicación -->
-        <div class="rounded-2xl p-4 flex items-center gap-4 border border-choco/10 shadow-[0_2px_10px_rgba(107,74,63,0.08)]" style="background-color: #EFE9E3;">
-          <div class="w-14 h-14 md:w-12 md:h-12 shrink-0 rounded-xl flex items-center justify-center shadow-inner" style="background-color: #C9B59C;">
+        <div class="rounded-2xl p-4 flex items-center gap-4 shadow-sm" style="background-color: #EFE9E3; border: 1px solid rgba(61,58,54,0.08);">
+          <div class="w-14 h-14 md:w-12 md:h-12 shrink-0 rounded-xl flex items-center justify-center shadow-inner" style="background-color: #A99A8A;">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 md:w-6 md:h-6 shrink-0" style="color: #F9F8F6;"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
           </div>
           <div class="text-left">
-            <p class="text-choco/40 text-[10px] font-bold uppercase tracking-widest mb-0.5">
+            <p class="text-[10px] font-bold uppercase tracking-widest mb-0.5" style="color: #7A756D;">
               Zona
             </p>
-            <p class="text-choco font-bold text-[15px]">{zona}</p>
+            <p class="font-bold text-[15px]" style="color: #3D3A36;">{zona}</p>
           </div>
         </div>
 
