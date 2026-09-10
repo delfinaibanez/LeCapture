@@ -7,6 +7,7 @@ const links = [
   { href: '/', label: 'Home' },
   { href: '/sobre-mi', label: 'Sobre mí' },
   { href: '/sesiones', label: 'Sesiones' },
+  { href: '/galeria', label: 'Galería' },
   { href: '/contacto', label: 'Contacto' },
 ];
 
@@ -20,8 +21,9 @@ const sesiones = [
 
 // Buscamos las sesiones especiales activas y las archivadas (pasadas)
 const todasEspeciales = await getCollection('sesionesEspeciales');
-const especialesActivas = todasEspeciales.filter((s) => s.data.activa);
-const especialesArchivadas = todasEspeciales.filter((s) => !s.data.activa);
+const especialesVisibles = todasEspeciales.filter((s) => s.data.slug !== 'navidad-2026');
+const especialesActivas = especialesVisibles.filter((s) => s.data.activa);
+const especialesArchivadas = especialesVisibles.filter((s) => !s.data.activa);
 ---
 <header class="relative z-50 w-full py-4 px-6 flex items-center justify-between bg-white shadow-sm">
 <a href="/">
@@ -159,6 +161,7 @@ const especialesArchivadas = todasEspeciales.filter((s) => !s.data.activa);
       </div>
     </div>
 
+    <a href="/galeria" class="text-base text-choco py-3 border-b border-choco/10">Galería</a>
     <a href="/contacto" class="text-base text-choco py-3">Contacto</a>
   </nav>
 </div>

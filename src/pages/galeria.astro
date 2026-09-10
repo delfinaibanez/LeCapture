@@ -1,0 +1,199 @@
+---
+import Layout from '../layouts/Layout.astro';
+import type { ImageMetadata } from 'astro';
+
+const definiciones = [
+  { carpeta: 'embarazo', titulo: 'Embarazo' },
+  { carpeta: 'recien-nacido', titulo: 'Recién nacido' },
+  { carpeta: 'mini-baby', titulo: 'Mini Baby' },
+  { carpeta: 'navidad', titulo: 'Navidad' },
+  { carpeta: 'dia-de-la-madre', titulo: 'Día de la Madre' },
+  { carpeta: 'infantiles', titulo: 'Infantiles' },
+  { carpeta: 'primer-anio', titulo: 'Primer año' },
+  { carpeta: 'familia', titulo: 'Familia' },
+];
+
+const modulos = import.meta.glob('../assets/images/galeria/**/*.{jpeg,jpg,png,webp}', {
+  eager: true,
+}) as Record<string, { default: ImageMetadata }>;
+
+let indiceInicial = 0;
+const colecciones = definiciones.map((definicion) => {
+  const imagenes = Object.entries(modulos)
+    .filter(([ruta]) => ruta.includes(`/galeria/${definicion.carpeta}/`))
+    .sort(([rutaA], [rutaB]) => rutaA.localeCompare(rutaB, undefined, { numeric: true }))
+    .map(([, modulo]) => modulo.default);
+
+  const coleccion = { ...definicion, imagenes, indiceInicial };
+  indiceInicial += imagenes.length;
+  return coleccion;
+});
+
+const totalImagenes = colecciones.reduce((total, coleccion) => total + coleccion.imagenes.length, 0);
+---
+
+<Layout title="Galería">
+  <section class="w-full bg-[#EFE9E3] px-6 py-16 md:py-24">
+    <div class="mx-auto max-w-6xl">
+      <header class="mx-auto max-w-2xl text-center">
+        <p class="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-[#7A756D] md:text-sm">
+          Colecciones
+        </p>
+        <h1 class="font-script text-5xl font-normal text-[#3D3A36] md:text-7xl">Galería</h1>
+        <p class="mt-4 text-base leading-relaxed text-[#7A756D] md:text-lg">
+          Historias familiares, momentos únicos y recuerdos para volver a mirar.
+        </p>
+      </header>
+
+      <div class="mt-14 space-y-16 md:mt-20 md:space-y-24">
+        {colecciones.map((coleccion, coleccionIndex) => (
+          <section aria-labelledby={`coleccion-${coleccion.carpeta}`}>
+            <div class="mb-7 text-center md:mb-10">
+              <p class="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#7A756D]">
+                Colección {String(coleccionIndex + 1).padStart(2, '0')}
+              </p>
+              <h2 id={`coleccion-${coleccion.carpeta}`} class="text-2xl font-semibold text-[#3D3A36] md:text-4xl">
+                {coleccion.titulo}
+              </h2>
+            </div>
+
+            {coleccion.imagenes.length > 0 ? (
+              <div class="gallery-carousel relative" data-carousel>
+                <div class="gallery-track flex snap-x snap-mandatory gap-4 overflow-x-auto pb-5 scrollbar-hide md:overflow-hidden">
+                  {coleccion.imagenes.map((imagen, imagenIndex) => (
+                    <button
+                      type="button"
+                      class="gallery-item group relative aspect-[4/3] w-[82vw] shrink-0 snap-center overflow-hidden rounded-2xl bg-white shadow-md md:w-[31%]"
+                      data-index={coleccion.indiceInicial + imagenIndex}
+                      aria-label={`Ampliar foto ${imagenIndex + 1} de ${coleccion.titulo}`}
+                    >
+                      <img
+                        src={imagen.src}
+                        alt={`${coleccion.titulo}, foto ${imagenIndex + 1}`}
+                        width={imagen.width}
+                        height={imagen.height}
+                        loading={imagenIndex === 0 ? 'eager' : 'lazy'}
+                        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </button>
+                  ))}
+                </div>
+
+                <button
+                  type="button"
+                  class="gallery-prev absolute left-0 top-1/2 hidden h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-3xl leading-none text-[#3D3A36]/70 shadow-md transition-colors hover:text-[#3D3A36] md:flex"
+                  aria-label={`Ver fotos anteriores de ${coleccion.titulo}`}
+                >
+                  ‹
+                </button>
+                <button
+                  type="button"
+                  class="gallery-next absolute right-0 top-1/2 hidden h-11 w-11 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-3xl leading-none text-[#3D3A36]/70 shadow-md transition-colors hover:text-[#3D3A36] md:flex"
+                  aria-label={`Ver fotos siguientes de ${coleccion.titulo}`}
+                >
+                  ›
+                </button>
+              </div>
+            ) : (
+              <div class="flex min-h-32 items-center justify-center rounded-2xl border border-dashed border-[#A99A8A]/60 bg-white/35 px-6 text-center text-sm text-[#7A756D]">
+                Próximamente nuevas fotos de esta colección.
+              </div>
+            )}
+          </section>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {totalImagenes > 0 && (
+    <div
+      id="gallery-lightbox"
+      class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/85 p-4 md:p-10"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Imagen ampliada"
+    >
+      <button
+        type="button"
+        id="gallery-close"
+        class="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-2xl text-white transition-colors hover:bg-white/20 md:right-6 md:top-6"
+        aria-label="Cerrar imagen ampliada"
+      >
+        ×
+      </button>
+      <button
+        type="button"
+        id="gallery-lightbox-prev"
+        class="absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-3xl text-white transition-colors hover:bg-white/20 md:left-6"
+        aria-label="Ver imagen anterior"
+      >
+        ‹
+      </button>
+      <img id="gallery-lightbox-image" src="" alt="" class="max-h-full max-w-full rounded-xl object-contain shadow-2xl" />
+      <button
+        type="button"
+        id="gallery-lightbox-next"
+        class="absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-3xl text-white transition-colors hover:bg-white/20 md:right-6"
+        aria-label="Ver imagen siguiente"
+      >
+        ›
+      </button>
+    </div>
+  )}
+</Layout>
+
+{totalImagenes > 0 && (
+  <script>
+    const carousels = Array.from(document.querySelectorAll<HTMLElement>('[data-carousel]'));
+    const items = Array.from(document.querySelectorAll<HTMLButtonElement>('.gallery-item'));
+    const lightbox = document.querySelector<HTMLElement>('#gallery-lightbox');
+    const lightboxImage = document.querySelector<HTMLImageElement>('#gallery-lightbox-image');
+    const close = document.querySelector<HTMLButtonElement>('#gallery-close');
+    const lightboxPrevious = document.querySelector<HTMLButtonElement>('#gallery-lightbox-prev');
+    const lightboxNext = document.querySelector<HTMLButtonElement>('#gallery-lightbox-next');
+    let currentIndex = 0;
+
+    carousels.forEach((carousel) => {
+      const track = carousel.querySelector<HTMLElement>('.gallery-track');
+      const previous = carousel.querySelector<HTMLButtonElement>('.gallery-prev');
+      const next = carousel.querySelector<HTMLButtonElement>('.gallery-next');
+      previous?.addEventListener('click', () => track?.scrollBy({ left: -track.clientWidth * 0.8, behavior: 'smooth' }));
+      next?.addEventListener('click', () => track?.scrollBy({ left: track.clientWidth * 0.8, behavior: 'smooth' }));
+    });
+
+    function showImage(index: number) {
+      currentIndex = (index + items.length) % items.length;
+      const image = items[currentIndex]?.querySelector('img');
+      if (!image || !lightboxImage) return;
+      lightboxImage.src = image.currentSrc || image.src;
+      lightboxImage.alt = image.alt;
+    }
+
+    function openLightbox(index: number) {
+      showImage(index);
+      lightbox?.classList.remove('hidden');
+      lightbox?.classList.add('flex');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeLightbox() {
+      lightbox?.classList.add('hidden');
+      lightbox?.classList.remove('flex');
+      document.body.classList.remove('overflow-hidden');
+    }
+
+    items.forEach((item) => item.addEventListener('click', () => openLightbox(Number(item.dataset.index))));
+    close?.addEventListener('click', closeLightbox);
+    lightboxPrevious?.addEventListener('click', () => showImage(currentIndex - 1));
+    lightboxNext?.addEventListener('click', () => showImage(currentIndex + 1));
+    lightbox?.addEventListener('click', (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (lightbox?.classList.contains('hidden')) return;
+      if (event.key === 'Escape') closeLightbox();
+      if (event.key === 'ArrowLeft') showImage(currentIndex - 1);
+      if (event.key === 'ArrowRight') showImage(currentIndex + 1);
+    });
+  </script>
+)}
