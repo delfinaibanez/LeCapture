@@ -13,6 +13,8 @@ const sesionesEspeciales = defineCollection({
     whatsappTexto: z.string(),
     slug: z.string(),
     descripcion: z.string(),
+    preventa: z.string().optional(),
+    videoUrl: z.string().url().optional(),
     galeria: z.array(image()).optional(),
     videoEmbed: z.string().optional(),
     packs: z.array(z.object({

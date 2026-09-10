@@ -60,14 +60,14 @@ const especialesArchivadas = especialesVisibles.filter((s) => !s.data.activa);
               <>
                 <div class="border-t border-choco/10 my-1"></div>
                 <p class="px-5 pt-1 pb-1 text-[10px] font-bold uppercase tracking-widest text-choco/40">
-                  Especiales
+                  Sesiones especiales
                 </p>
                 {especialesActivas.map((especial) => (
                   <a
                     href={`/sesiones-especiales/${especial.data.slug}`}
                     class="block px-5 py-2.5 text-base text-[#8B3A3A] font-semibold hover:bg-[#F5EFE0] transition-colors"
                   >
-                    {especial.data.titulo}
+                    {especial.data.slug === 'dia-de-la-madre-2026' ? 'Día de la Madre 2026' : especial.data.titulo}
                   </a>
                 ))}
               </>
@@ -130,14 +130,14 @@ const especialesArchivadas = especialesVisibles.filter((s) => !s.data.activa);
           {especialesActivas.length > 0 && (
             <>
               <p class="pl-4 pt-2 pb-1 text-[10px] font-bold uppercase tracking-widest text-choco/40">
-                Especiales
+                Sesiones especiales
               </p>
               {especialesActivas.map((especial) => (
                 <a
                   href={`/sesiones-especiales/${especial.data.slug}`}
                   class="text-sm text-[#8B3A3A] font-semibold py-2 pl-4"
                 >
-                  {especial.data.titulo}
+                  {especial.data.slug === 'dia-de-la-madre-2026' ? 'Día de la Madre 2026' : especial.data.titulo}
                 </a>
               ))}
             </>
