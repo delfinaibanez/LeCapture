@@ -29,7 +29,7 @@ const activa = todas.find((s: (typeof todas)[number]) => s.data.activa);
             </div>
             <!-- Etiqueta colgante -->
             <div class="absolute top-4 right-6 md:right-10 rounded-sm px-3 py-1.5 shadow-md rotate-[8deg] text-xs font-semibold flex items-center gap-1.5 text-[#7A756D]" style="background-color: #F9F8F6; border: 1px solid rgba(122,117,109,0.2);">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 shrink-0"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/><path d="M12 22v-3"/></svg>
+             
               LeCapture
             </div>
           </div>
@@ -46,8 +46,7 @@ const activa = todas.find((s: (typeof todas)[number]) => s.data.activa);
               {activa.data.subtitulo}
             </p>
             <a
-              href={`https://wa.me/549XXXXXXXXXX?text=${encodeURIComponent(activa.data.whatsappTexto)}`}
-              target="_blank"
+              href="/sesiones-especiales/dia-de-la-madre-2026"
               style="background-color: #A99A8A; color: white;"
               class="inline-flex items-center px-7 py-3.5 rounded-full font-semibold shadow-sm hover:opacity-90 hover:scale-105 transition-transform duration-300"
             >
