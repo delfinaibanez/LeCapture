@@ -1,9 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const whatsapp = '549XXXXXXXXXX'; // reemplazar por el real
-const email = 'contacto@lecapture.com'; // reemplazar por el real
-const zona = 'Luján de Cuyo, Mendoza, Argentina';
+const whatsapp = '5492615788997';
+const email = 'lecapturefotografia@gmail.com';
+const zona = 'Ciudad de Mendoza, Mendoza, Argentina';
+const googleMapsQuery = 'Ciudad de Mendoza';
+const googleMapsExactLink = 'https://maps.app.goo.gl/xZ5PbHVNVAx6KJQL9?g_st=iw';
 ---
 
 <Layout title="Contacto">
@@ -19,7 +21,8 @@ const zona = 'Luján de Cuyo, Mendoza, Argentina';
       </p>
     </div>
   </section>
-<!-- CARTEL / NOTA (con cinta adhesiva simulada) -->
+
+  <!-- CARTEL / NOTA (con cinta adhesiva simulada) -->
   <div class="relative z-20 max-w-2xl mx-auto px-6 -mt-2 md:-mt-8 mb-16 md:mb-16">
     <div class="relative rotate-[-1.5deg]">
 
@@ -94,7 +97,12 @@ const zona = 'Luján de Cuyo, Mendoza, Argentina';
         </a>
 
         <!-- Ubicación -->
-        <div class="rounded-2xl p-4 flex items-center gap-4 shadow-sm" style="background-color: #EFE9E3; border: 1px solid rgba(61,58,54,0.08);">
+        <a
+          href={googleMapsExactLink}
+          target="_blank"
+          class="group rounded-2xl p-4 flex items-center gap-4 transition-all duration-300 hover:-translate-y-0.5 shadow-sm hover:shadow-md"
+          style="background-color: #EFE9E3; border: 1px solid rgba(61,58,54,0.08);"
+        >
           <div class="w-14 h-14 md:w-12 md:h-12 shrink-0 rounded-xl flex items-center justify-center shadow-inner" style="background-color: #A99A8A;">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 md:w-6 md:h-6 shrink-0" style="color: #F9F8F6;"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
           </div>
@@ -102,25 +110,37 @@ const zona = 'Luján de Cuyo, Mendoza, Argentina';
             <p class="text-[10px] font-bold uppercase tracking-widest mb-0.5" style="color: #7A756D;">
               Zona
             </p>
-            <p class="font-bold text-[15px]" style="color: #3D3A36;">{zona}</p>
+            <p class="font-bold text-[15px] transition-colors group-hover:opacity-75 flex items-center gap-1.5" style="color: #3D3A36;">
+              {zona}
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 opacity-75"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </p>
           </div>
-        </div>
+        </a>
 
       </div>
 
       <!-- Columna derecha: mapa -->
-      <div class="w-full md:w-3/5">
+      <div class="w-full md:w-3/5 flex flex-col gap-3">
         <div class="rounded-[1.5rem] overflow-hidden shadow-[0_0_0_6px_#F9F8F6]">
           <iframe
-            src={`https://www.google.com/maps?q=${encodeURIComponent(zona)}&z=12&output=embed`}
+            src={`https://www.google.com/maps?q=${encodeURIComponent(googleMapsQuery)}&z=13&output=embed`}
             width="100%"
-            height="340"
+            height="310"
             style="border:0; display: block;"
             allowfullscreen={false}
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>
+        <!-- Botón complementario debajo del mapa -->
+        <a
+          href={googleMapsExactLink}
+          target="_blank"
+          class="text-center text-xs font-semibold py-2.5 px-4 rounded-xl transition-all duration-300 hover:opacity-80 shadow-sm"
+          style="background-color: #EFE9E3; color: #3D3A36; border: 1px solid rgba(61,58,54,0.08);"
+        >
+          Abrir ubicación exacta en Google Maps
+        </a>
       </div>
 
     </div>
